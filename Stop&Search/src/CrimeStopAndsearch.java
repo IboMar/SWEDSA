@@ -2,7 +2,7 @@
 
 public class CrimeStopAndsearch {
 
-	public String csv;
+	public final String SEP = ",";
 	public String type;
 	public String Date;
 	public String month;
@@ -22,37 +22,32 @@ public class CrimeStopAndsearch {
 
 	public String toCSVString() {
 
-		return type + " " + Date + " " + month + " " + Part_of_a_policing_operation + " " + Policing_operation + " "
+		return type + ", " + Date + ", " + month + ", " + Part_of_a_policing_operation + ", " + Policing_operation + ", "
 				+ latitude + " " + longitude + " " + Age_range + " " + Self_defined_ethnicity + " "
-				+ Officer_defined_ethnicity + " " + Legislation + " " + Object_of_search + " " + Outcome + " "
-				+ Outcome_linked_to_object_of_search + " " + Removal_of_more_than_just_outer_clothing;
+				+ Officer_defined_ethnicity + ", " + Legislation + ", " + Object_of_search + ", " + Outcome + ", "
+				+ Outcome_linked_to_object_of_search + ", " + Removal_of_more_than_just_outer_clothing;
 
 	}
 
 	public CrimeStopAndsearch(String csv) {
-		String[] split = csv.split(",", 15);
-		for (int i = 0; i < split.length;) {
-			if (split[i] == null || split[i] == "" || split[i].isEmpty()) {
+		String[] csvParts = csv.split(SEP, -1);
+		int i = 0;
 
-				split[i] = "TBD";
-			}
-			i++;
-		}
-		type = split[0];
-		Date = split[1];
-		month = split[2];
-		Part_of_a_policing_operation = split[3];
-		Policing_operation = split[4];
-		latitude = split[5];
-		longitude = split[6];
-		Age_range = split[7];
-		Self_defined_ethnicity = split[8];
-		Officer_defined_ethnicity = split[9];
-		Legislation = split[10];
-		Object_of_search = split[11];
-		Outcome = split[12];
-		Outcome_linked_to_object_of_search = split[13];
-		Removal_of_more_than_just_outer_clothing = split[14];
+		type = csvParts[i++];
+		Date = csvParts[i++];
+		Part_of_a_policing_operation = csvParts[i++];
+		Policing_operation = csvParts[i++];
+		latitude = csvParts[i++];
+		longitude = csvParts[i++];
+		Gender = csvParts[i++];
+		Age_range = csvParts[i++];
+		Self_defined_ethnicity = csvParts[i++];
+		Officer_defined_ethnicity = csvParts[i++];
+		Legislation = csvParts[i++];
+		Object_of_search = csvParts[i++];
+		Outcome = csvParts[i++];
+		Outcome_linked_to_object_of_search = csvParts[i++];
+		Removal_of_more_than_just_outer_clothing = csvParts[i++];
 	}
 
 }

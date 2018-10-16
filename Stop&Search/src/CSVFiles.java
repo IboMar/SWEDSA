@@ -6,11 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CSVFiles {
-	
-	
-	
 
-	
 	public static  void readInFilesDir() throws IOException {	
 		
 	FileReader fr = new FileReader("Data//ExcelDIR.txt");

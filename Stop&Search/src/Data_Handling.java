@@ -9,44 +9,40 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Data_Handling {
+	public static ArrayList<CrimeStopAndsearch> StopandSearch = new ArrayList<>();
 	
-	public static ArrayList<CrimeStopAndsearch> readFile(String filename) throws FileNotFoundException {
-		ArrayList<CrimeStopAndsearch> StopandSearch = new ArrayList<>();
+	public static void readFile(String filename) throws FileNotFoundException {
+		//StopandSearch = new ArrayList<CrimeStopAndsearch>();
+		
 		File csvFile = new File(filename);
 		Scanner csvScan = new Scanner(csvFile);
 
-		csvScan.nextLine(); // read header
+		CrimeStopAndsearch StopandSearchtemp = null;
+		//csvScan.nextLine(); // read header
 		while (csvScan.hasNextLine()) {
 			String line = csvScan.nextLine();
-			CrimeStopAndsearch StopandSearchtemp = new CrimeStopAndsearch(line);
+			StopandSearchtemp = new CrimeStopAndsearch(line);
 			StopandSearch.add(StopandSearchtemp);
 		}
+		StopandSearch.add(StopandSearchtemp);
 
+		
 		csvScan.close();
-		return StopandSearch;
+		//return StopandSearch;
 	}
 
-	static void outputCrimes(ArrayList<CrimeStopAndsearch> StopandSearch) {
-		int underInvestigation = 0, other = 0, unsolved = 0;
-		for (int i = 0; i < StopandSearch.size(); i++) {
-			CrimeStopAndsearch currentCrime = StopandSearch.get(i);
-			if (currentCrime != null) {
-				if (currentCrime.Outcome.startsWith("Under invest"))
-					underInvestigation++;
-				else if (currentCrime.Outcome.startsWith("Investigation complete; no"))
-					unsolved++;
-				else
-					other++;
-
-				System.out.println(currentCrime.type + ": (" + currentCrime.Legislation + ") " + currentCrime.Policing_operation
-						+ " --> " + currentCrime.Outcome);
-			}
+	static void outputCrimes() {
+		List<String> xd = FolderReader.getbasicStop_Search();
+		/*for(String temp : xd) {
+			System.out.println(" File Name: " + temp);
+			System.out.println(currentFile.toCSVString());
+			}*/
+		
+		
+		for(CrimeStopAndsearch currentFile : StopandSearch) {
+			System.out.println(currentFile.toCSVString());
 		}
-		System.out.println("There are " + StopandSearch.size() + " recorded crimes; ");
-		System.out.println(
-				underInvestigation + " are under investigation - " + percent(underInvestigation, StopandSearch.size()));
-		System.out.println(unsolved + " have been investigated, but are unsolved - " + percent(unsolved, StopandSearch.size()));
-		System.out.println(other + " other -" + percent(other, StopandSearch.size()));
+
 	}
 
 	private static String percent(int num, int div) {

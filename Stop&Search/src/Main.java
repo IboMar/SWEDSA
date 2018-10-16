@@ -10,18 +10,17 @@ import java.util.Scanner;
 
 public class Main {
 
-
 	public static void main(String[] args) throws IOException {
 		ArrayList<CrimeStopAndsearch> CrimeStopAndsearch = new ArrayList();
-		
+
 		CSVFiles.readInFilesDir();
 		List<String> xd = FolderReader.getbasicStop_Search();
-		for(String temp : xd) {
-			
-			CrimeStopAndsearch = Data_Handling.readFile(temp);
+		for (String temp : xd) {
+			Data_Handling.readFile(temp);
 		}
 
-		//ArrayList<Crime> crime = Data_Handling.readFile("Data\\crimedata-full-month.csv");
+		// ArrayList<Crime> crime =
+		// Data_Handling.readFile("Data\\crimedata-full-month.csv");
 		Scanner scan = new Scanner(System.in);
 		System.out.println("a. By Crime type (lexicographic order)\r\n"
 				+ "b. By Last outcome category (again, lexicographic order)\r\n"
@@ -30,18 +29,18 @@ public class Main {
 
 		switch (Menu) {
 		case "a":
-			//Data_Manipulation.crime_Lexicographic_order(CrimeStopAndsearch);
-			Data_Handling.outputCrimes(CrimeStopAndsearch);
+			// Data_Manipulation.crime_Lexicographic_order(CrimeStopAndsearch);
+			Data_Handling.outputCrimes();
 			break;
 
 		case "b":
-			//Data_Manipulation.category_Lexicographic_order(CrimeStopAndsearch);
-			Data_Handling.outputCrimes(CrimeStopAndsearch);
+			// Data_Manipulation.category_Lexicographic_order(CrimeStopAndsearch);
+			Data_Handling.outputCrimes();
 			break;
 
 		case "c":
-			//Data_Manipulation.LSOA_Name(CrimeStopAndsearch);
-			Data_Handling.outputCrimes(CrimeStopAndsearch);
+			// Data_Manipulation.LSOA_Name(CrimeStopAndsearch);
+			Data_Handling.outputCrimes();
 			break;
 
 		}

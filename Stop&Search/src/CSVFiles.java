@@ -21,7 +21,7 @@ public class CSVFiles {
      while((tempdata=br.readLine()) != null ){
     	 
     	 File xd = new File(tempdata);
-    	 FolderReader.FolderReader(xd);
+    	 FolderReader.readFolder(xd);
          i++;
      }
 

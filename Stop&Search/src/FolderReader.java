@@ -11,11 +11,11 @@ public class FolderReader {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static void FolderReader(final File folder) {
+	public static void readFolder(final File folder) {
 		
 	    for (final File fileEntry : folder.listFiles()) {
 	        if (fileEntry.isDirectory()) {
-	        	FolderReader(fileEntry);
+	        	readFolder(fileEntry);
 	        	
 	        	
 	        	

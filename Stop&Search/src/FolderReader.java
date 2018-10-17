@@ -24,15 +24,15 @@ public class FolderReader {
 	        	if(fileEntry.getName().contains("stop-and-search")) {
 	        		//System.out.println(fileEntry.getName());
 	        		Stop_Search.add(folder.toPath() + "\\" + fileEntry.getName());
-	        	}else {
-	        		//System.out.println(fileEntry.getName());
-	        	basicCrimesCVS.add(folder.toPath() + "\\" + fileEntry.getName());
-	        	}
+//	        	}else {
+//	        		//System.out.println(fileEntry.getName());
+//	        	basicCrimesCVS.add(folder.toPath() + "\\" + fileEntry.getName());
+//	        	}
 	        	
 	        	
 	        	
 	     
-	            
+	        	}
 	        }
 	    }
 	}
@@ -46,6 +46,8 @@ public class FolderReader {
 	       return Stop_Search;
 	   }
 
+	
+	
 	/*
 	 * for(FolderReader instanceFiles : Files) { for (final File fileEntry :
 	 * folder.listFiles()) { if (fileEntry.isDirectory()) {

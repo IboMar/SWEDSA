@@ -12,7 +12,7 @@ import java.util.TreeMap;
 public class Data_Handling {
 	public TreeMap<Integer, String> tmap = new TreeMap<Integer, String>();
 
-	public ArrayList<StopAndSearchFiles> fileList = new ArrayList<>();
+	private ArrayList<StopAndSearchFiles> fileList = new ArrayList<>();
 
 	public void readFile(String filename) throws FileNotFoundException {
 		ArrayList<CrimeStopAndsearch> StopandSearch = new ArrayList<>();
@@ -33,17 +33,43 @@ public class Data_Handling {
 		csvScan.close();
 	}
 
-	 void outputCrimes() {
-		List<String> xd = FolderReader.getbasicStop_Search();
-		for (StopAndSearchFiles file : fileList) {
-			for(String temp: xd) {
-			System.out.println(temp);
-			for (CrimeStopAndsearch currentFile : file.getStopAndSearchFiles()) {
-				System.out.println(currentFile.toCSVString());
-			}
+	void outputCrimes() {
+		List<String> fileName = FolderReader.getbasicStop_Search();
+		int successfu_Search = 0, successfu_NotPlannedSearch = 0, other = 0, unsolved = 0, unsucessful = 0;
+		int i = 0;
+		while (i < fileName.size()) {
+			for (StopAndSearchFiles file : fileList) {
+				System.out.println(fileName.get(i));
+				i++;
+				for (CrimeStopAndsearch currentCrime : file.getStopAndSearchFiles()) {
+					if (currentCrime != null) {
+						if ((currentCrime.Outcome.startsWith("Suspect arrested")
+								|| currentCrime.Outcome.startsWith("Offender cautioned")
+								|| currentCrime.Outcome.startsWith("Offender given penalty notice"))
+								&& currentCrime.Outcome_linked_to_object_of_search) {
+							successfu_Search++;
+						}
+						if ((currentCrime.Outcome.startsWith("Suspect arrested")
+								|| currentCrime.Outcome.startsWith("Offender cautioned")
+								|| currentCrime.Outcome.startsWith("Offender given penalty notice"))
+								&& !currentCrime.Outcome_linked_to_object_of_search) {
+							successfu_NotPlannedSearch++;
+						}
+						if (currentCrime.Outcome.startsWith("Nothing found - no further action")) {
+							unsucessful++;
+						}
+					System.out.println(currentCrime.toCSVString());
+				}
+				}
+						System.out.println("There are " + file.getListSize() + " recorded crimes; ");
+						System.out
+								.println(successfu_Search + " Successful Searches - " + percent(successfu_Search, file.getListSize()));
+						System.out.println(successfu_NotPlannedSearch + " successfu not Planned search - "
+								+ percent(successfu_NotPlannedSearch, file.getListSize()));
+						System.out.println(unsucessful + " unsucessful seach -"
+								+ percent(unsucessful, file.getListSize()));
 			}
 		}
-
 	}
 
 	private static String percent(int num, int div) {

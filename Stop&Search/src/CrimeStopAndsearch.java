@@ -5,7 +5,7 @@ public class CrimeStopAndsearch {
 	public final String SEP = ",";
 	public String type;
 	public String Date;
-	public String month;
+	//public String month;
 	public String Part_of_a_policing_operation;
 	public String Policing_operation;
 	public String latitude;
@@ -17,12 +17,12 @@ public class CrimeStopAndsearch {
 	public String Legislation;
 	public String Object_of_search;
 	public String Outcome;
-	public String Outcome_linked_to_object_of_search;
+	public boolean Outcome_linked_to_object_of_search;
 	public String Removal_of_more_than_just_outer_clothing;
 
 	public String toCSVString() {
 
-		return type + ", " + Date + ", " + month + ", " + Part_of_a_policing_operation + ", " + Policing_operation + ", "
+		return type + ", " + Date + ", " + Part_of_a_policing_operation + ", " + Policing_operation + ", "
 				+ latitude + " " + longitude + " " + Age_range + " " + Self_defined_ethnicity + " "
 				+ Officer_defined_ethnicity + ", " + Legislation + ", " + Object_of_search + ", " + Outcome + ", "
 				+ Outcome_linked_to_object_of_search + ", " + Removal_of_more_than_just_outer_clothing;
@@ -46,7 +46,7 @@ public class CrimeStopAndsearch {
 		Legislation = csvParts[i++];
 		Object_of_search = csvParts[i++];
 		Outcome = csvParts[i++];
-		Outcome_linked_to_object_of_search = csvParts[i++];
+		Outcome_linked_to_object_of_search = Boolean.valueOf(csvParts[i++]);
 		Removal_of_more_than_just_outer_clothing = csvParts[i++];
 	}
 

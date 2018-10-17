@@ -7,40 +7,41 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Data_Handling {
-	public static ArrayList<CrimeStopAndsearch> StopandSearch = new ArrayList<>();
-	
-	public static void readFile(String filename) throws FileNotFoundException {
-		//StopandSearch = new ArrayList<CrimeStopAndsearch>();
-		
+	public TreeMap<Integer, String> tmap = new TreeMap<Integer, String>();
+
+	public ArrayList<StopAndSearchFiles> fileList = new ArrayList<>();
+
+	public void readFile(String filename) throws FileNotFoundException {
+		ArrayList<CrimeStopAndsearch> StopandSearch = new ArrayList<>();
+
 		File csvFile = new File(filename);
 		Scanner csvScan = new Scanner(csvFile);
-
 		CrimeStopAndsearch StopandSearchtemp = null;
-		//csvScan.nextLine(); // read header
+		// csvScan.nextLine(); // read header
 		while (csvScan.hasNextLine()) {
 			String line = csvScan.nextLine();
 			StopandSearchtemp = new CrimeStopAndsearch(line);
 			StopandSearch.add(StopandSearchtemp);
+			// StopAndSearchFiles File = new StopAndSearchFiles(StopandSearch);
 		}
-		StopandSearch.add(StopandSearchtemp);
+		StopAndSearchFiles File = new StopAndSearchFiles(StopandSearch);
+		fileList.add(File);
 
-		
 		csvScan.close();
-		//return StopandSearch;
 	}
 
-	static void outputCrimes() {
+	 void outputCrimes() {
 		List<String> xd = FolderReader.getbasicStop_Search();
-		/*for(String temp : xd) {
-			System.out.println(" File Name: " + temp);
-			System.out.println(currentFile.toCSVString());
-			}*/
-		
-		
-		for(CrimeStopAndsearch currentFile : StopandSearch) {
-			System.out.println(currentFile.toCSVString());
+		for (StopAndSearchFiles file : fileList) {
+			for(String temp: xd) {
+			System.out.println(temp);
+			for (CrimeStopAndsearch currentFile : file.getStopAndSearchFiles()) {
+				System.out.println(currentFile.toCSVString());
+			}
+			}
 		}
 
 	}

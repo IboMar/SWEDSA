@@ -12,11 +12,14 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		ArrayList<CrimeStopAndsearch> CrimeStopAndsearch = new ArrayList();
-
-		CSVFiles.readInFilesDir();
+		CSVFiles ReadCsv = new CSVFiles();
+		ReadCsv.readInFilesDir();
 		List<String> xd = FolderReader.getbasicStop_Search();
+		
+		Data_Handling allTheFiles = new Data_Handling();
+		
 		for (String temp : xd) {
-			Data_Handling.readFile(temp);
+			allTheFiles.readFile(temp);
 		}
 
 		// ArrayList<Crime> crime =
@@ -30,17 +33,17 @@ public class Main {
 		switch (Menu) {
 		case "a":
 			// Data_Manipulation.crime_Lexicographic_order(CrimeStopAndsearch);
-			Data_Handling.outputCrimes();
+			allTheFiles.outputCrimes();
 			break;
 
 		case "b":
 			// Data_Manipulation.category_Lexicographic_order(CrimeStopAndsearch);
-			Data_Handling.outputCrimes();
+			allTheFiles.outputCrimes();
 			break;
 
 		case "c":
 			// Data_Manipulation.LSOA_Name(CrimeStopAndsearch);
-			Data_Handling.outputCrimes();
+			allTheFiles.outputCrimes();
 			break;
 
 		}

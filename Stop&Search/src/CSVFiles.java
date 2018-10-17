@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CSVFiles {
 
-	public static  void readInFilesDir() throws IOException {	
+	public void readInFilesDir() throws IOException {	
 		
 	FileReader fr = new FileReader("Data//ExcelDIR.txt");
 	 BufferedReader br=new BufferedReader(fr);

@@ -34,7 +34,14 @@ public class Main {
 			break;
 
 		case "c":
-			allTheFiles.outputCrimes();
+			Data_Handling getFiles = new Data_Handling();
+			ArrayList<StopAndSearchFiles> fieList = getFiles.getFileList();
+			
+			for (StopAndSearchFiles file : fieList) {
+				System.out.println("do we make it");
+				Data_Manipulation SendFile = new Data_Manipulation();
+				SendFile.HighestlegislationForEachMonth(file.getStopAndSearchFiles());
+			}
 			break;
 
 		}

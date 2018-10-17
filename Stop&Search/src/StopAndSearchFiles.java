@@ -11,7 +11,7 @@ public class StopAndSearchFiles {
 		OneStopAndSearchFiles = new ArrayList<CrimeStopAndsearch>(stopandSearch);
 	}
 
-	public  List<CrimeStopAndsearch> getStopAndSearchFiles()
+	public List<CrimeStopAndsearch> getStopAndSearchFiles()
 	{
 		return OneStopAndSearchFiles;
 	}

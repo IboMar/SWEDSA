@@ -33,6 +33,10 @@ public class Data_Handling {
 		csvScan.close();
 	}
 
+	public ArrayList<StopAndSearchFiles> getFileList() {
+		return fileList;
+	}
+
 	void outputCrimes() {
 		List<String> fileName = FolderReader.getbasicStop_Search();
 		int successfu_Search = 0, successfu_NotPlannedSearch = 0, other = 0, unsolved = 0, unsucessful = 0;

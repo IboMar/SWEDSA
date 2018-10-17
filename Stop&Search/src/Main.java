@@ -11,19 +11,13 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		ArrayList<CrimeStopAndsearch> CrimeStopAndsearch = new ArrayList();
-		CSVFiles ReadCsv = new CSVFiles();
-		ReadCsv.readInFilesDir();
-		List<String> xd = FolderReader.getbasicStop_Search();
-		
-		Data_Handling allTheFiles = new Data_Handling();
-		
-		for (String temp : xd) {
-			allTheFiles.readFile(temp);
+		CSVFiles fileDIR = new CSVFiles();
+		fileDIR.readInFilesDir();
+		List<String> fileDIRList = FolderReader.getbasicStop_Search();
+		Data_Handling allTheFiles = new Data_Handling();	
+		for (String file : fileDIRList) {
+			allTheFiles.readFile(file);
 		}
-
-		// ArrayList<Crime> crime =
-		// Data_Handling.readFile("Data\\crimedata-full-month.csv");
 		Scanner scan = new Scanner(System.in);
 		System.out.println("a. By Crime type (lexicographic order)\r\n"
 				+ "b. By Last outcome category (again, lexicographic order)\r\n"
@@ -32,17 +26,14 @@ public class Main {
 
 		switch (Menu) {
 		case "a":
-			// Data_Manipulation.crime_Lexicographic_order(CrimeStopAndsearch);
 			allTheFiles.outputCrimes();
 			break;
 
 		case "b":
-			// Data_Manipulation.category_Lexicographic_order(CrimeStopAndsearch);
 			allTheFiles.outputCrimes();
 			break;
 
 		case "c":
-			// Data_Manipulation.LSOA_Name(CrimeStopAndsearch);
 			allTheFiles.outputCrimes();
 			break;
 

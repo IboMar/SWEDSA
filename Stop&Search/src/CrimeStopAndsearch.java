@@ -1,11 +1,14 @@
 
 
+
 public class CrimeStopAndsearch {
 
+
+	
 	public final String SEP = ",";
 	public String type;
 	public String Date;
-	//public String month;
+	// public String month;
 	public String Part_of_a_policing_operation;
 	public String Policing_operation;
 	public String latitude;
@@ -14,7 +17,7 @@ public class CrimeStopAndsearch {
 	public String Age_range;
 	public String Self_defined_ethnicity;
 	public String Officer_defined_ethnicity;
-	public String Legislation;
+	public LegislationType Legislation;
 	public String Object_of_search;
 	public String Outcome;
 	public boolean Outcome_linked_to_object_of_search;
@@ -22,9 +25,9 @@ public class CrimeStopAndsearch {
 
 	public String toCSVString() {
 
-		return type + ", " + Date + ", " + Part_of_a_policing_operation + ", " + Policing_operation + ", "
-				+ latitude + " " + longitude + " " + Age_range + " " + Self_defined_ethnicity + " "
-				+ Officer_defined_ethnicity + ", " + Legislation + ", " + Object_of_search + ", " + Outcome + ", "
+		return type + ", " + Date + ", " + Part_of_a_policing_operation + ", " + Policing_operation + ", " + latitude
+				+ " " + longitude + " " + Age_range + " " + Self_defined_ethnicity + " " + Officer_defined_ethnicity
+				+ ", " + Legislation.getStr() + ", " + Object_of_search + ", " + Outcome + ", "
 				+ Outcome_linked_to_object_of_search + ", " + Removal_of_more_than_just_outer_clothing;
 
 	}
@@ -43,11 +46,20 @@ public class CrimeStopAndsearch {
 		Age_range = csvParts[i++];
 		Self_defined_ethnicity = csvParts[i++];
 		Officer_defined_ethnicity = csvParts[i++];
-		Legislation = csvParts[i++];
+		String temp = csvParts[i++];
+		if(temp.equalsIgnoreCase(null) || temp.equals("")) {
+			Legislation = LegislationType.getFrom("TBD");
+		}else {
+		Legislation = LegislationType.getFrom(temp);
+		}
 		Object_of_search = csvParts[i++];
 		Outcome = csvParts[i++];
 		Outcome_linked_to_object_of_search = Boolean.valueOf(csvParts[i++]);
 		Removal_of_more_than_just_outer_clothing = csvParts[i++];
 	}
+	
+	
+	
+	
 
 }

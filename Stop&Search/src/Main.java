@@ -11,17 +11,18 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
+		Data_Manipulation changeData = new Data_Manipulation();
 		CSVFiles fileDIR = new CSVFiles();
 		fileDIR.readInFilesDir();
 		List<String> fileDIRList = FolderReader.getbasicStop_Search();
-		Data_Handling allTheFiles = new Data_Handling();	
+		Data_Handling allTheFiles = new Data_Handling();
 		for (String file : fileDIRList) {
 			allTheFiles.readFile(file);
 		}
 		Scanner scan = new Scanner(System.in);
-		System.out.println("a. By Crime type (lexicographic order)\r\n"
-				+ "b. By Last outcome category (again, lexicographic order)\r\n"
-				+ "c. By LSOA Name (this is as presented in the file)" + "");
+		System.out.println("a. Out Put All Crimes\r\n"
+				+ "b. Highest Legislation Type For A Specific Month \r\n"
+				+ "c. idk" + "");
 		String Menu = scan.nextLine();
 
 		switch (Menu) {
@@ -30,18 +31,26 @@ public class Main {
 			break;
 
 		case "b":
-			allTheFiles.outputCrimes();
+			List<String> fileName = FolderReader.getbasicStop_Search();
+			int i = 0;
+			System.out.println("Please pick a Month:");
+			while (i < fileName.size()) {
+				System.out.println( i + ":" + fileName.get(i));
+				i++;
+			}
+			int choice = scan.nextInt();
+			StopAndSearchFiles temp = allTheFiles.getFileList().get(choice);
+			changeData.LegislationHighest(temp);
+			
 			break;
 
 		case "c":
-			Data_Handling getFiles = new Data_Handling();
-			ArrayList<StopAndSearchFiles> fieList = getFiles.getFileList();
-			
-			for (StopAndSearchFiles file : fieList) {
-				System.out.println("do we make it");
-				Data_Manipulation SendFile = new Data_Manipulation();
-				SendFile.HighestlegislationForEachMonth(file.getStopAndSearchFiles());
+			for(StopAndSearchFiles oneFile : allTheFiles.getFileList()) {
+				for(CrimeStopAndsearch currentCrime : oneFile.getStopAndSearchFiles()) {
+					System.out.println(currentCrime.toCSVString());
+				}
 			}
+	
 			break;
 
 		}

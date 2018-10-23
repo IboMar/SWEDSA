@@ -7,23 +7,20 @@ import java.util.List;
 
 public class CSVFiles {
 
-	public void readInFilesDir() throws IOException {	
-		
-	FileReader fr = new FileReader("Data//ExcelDIR.txt");
-	 BufferedReader br=new BufferedReader(fr);
-     String tempdata;
-     int i = 0;
+	public void readInFilesDir() throws IOException {
 
-     while((tempdata=br.readLine()) != null ){
-    	 
-    	 File xd = new File(tempdata);
-    	 FolderReader.readFolder(xd);
-         i++;
-     }
+		FileReader fr = new FileReader("Data//ExcelDIR.txt");
+		BufferedReader br = new BufferedReader(fr);
+		String tempdata;
+		int i = 0;
 
-     
+		while ((tempdata = br.readLine()) != null) {
+
+			File xd = new File(tempdata);
+			FolderReader.readFolder(xd);
+			i++;
+		}
+
 	}
-	
-	
-}
 
+}

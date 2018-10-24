@@ -4,66 +4,53 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
 // This class will be used to sort insert and modify the data
 public class Data_Manipulation {
-
 	public void LegislationHighest(StopAndSearchFiles temp) {
-		Data_Handling instance = new Data_Handling();
-		// HashMap<LegislationType, Integer> map = new HashMap<LegislationType,
-		// Integer>();
-		int legislation27 = 0, legislation23 = 0, legislation1 = 0, legislation2 = 0, legislation47 = 0,
-				legislation60 = 0;
-		//int successfu_Search = 0, successfu_Partial = 0, unsucessful = 0;
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<Map<String, Integer>, Integer> mapinc = new HashMap<Map<String, Integer>, Integer>();
 		for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
+			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equalsIgnoreCase(null)) {
+				int count = map.containsKey("Unspecified") ? map.get("Unspecified") : 0;
+				map.put("Unspecified", count + 1);
+			} else {
+				int count = map.containsKey(currentCrime.Legislation) ? map.get(currentCrime.Legislation) : 0;
+				map.put(currentCrime.Legislation, count + 1);
 
-			if (currentCrime != null) {
-				switch (currentCrime.Legislation) {
-				case SECTION1:
-					legislation1++;
-					break;
-				case SECTION2:
-					legislation2++;
-					break;
-				case SECTION23:
-					legislation23++;
-					break;
-				case SECTION27:
-					legislation27++;
-					break;
-				case SECTION47:
-					legislation47++;
-					break;
-				case SECTION60:
-					legislation60++;
-					break;
-				case BLANK:
-					break;
-
-				}
 			}
 		}
-		LegislationHigh[] Legislations = new LegislationHigh[LegislationType.values().length - 1];
-		LegislationHigh Legislations1 = new LegislationHigh(LegislationType.SECTION1.getStr(), legislation1);
-		LegislationHigh Legislations2 = new LegislationHigh(LegislationType.SECTION2.getStr(), legislation2);
-		LegislationHigh Legislations23 = new LegislationHigh(LegislationType.SECTION23.getStr(), legislation23);
-		LegislationHigh Legislations27 = new LegislationHigh(LegislationType.SECTION27.getStr(), legislation27);
-		LegislationHigh Legislations47 = new LegislationHigh(LegislationType.SECTION47.getStr(), legislation47);
-		LegislationHigh Legislations60 = new LegislationHigh(LegislationType.SECTION60.getStr(), legislation60);
-		Legislations[0] = Legislations1;
-		Legislations[1] = Legislations2;
-		Legislations[2] = Legislations23;
-		Legislations[3] = Legislations27;
-		Legislations[4] = Legislations47;
-		Legislations[5] = Legislations60;
-		Arrays.sort(Legislations, Collections.reverseOrder());
+		print_largest_hashmap(map);
 
-		for (LegislationHigh p : Legislations) {
-			System.out.println("Law: " + p.getLegName() + ", Crimes Commited : " + p.getLegHigh());
+	}
+
+	public void print_all_hashmap(Map<String, Integer> map) {
+
+		for (String name : map.keySet()) {
+			String key = name;
+			String value = map.get(name).toString();
+			System.out.println(value + " " + key);
+
 		}
-		System.out.println("Crimes Commited this month:" + temp.getStopAndSearchFiles().size());
+
+	}
+
+	public void print_largest_hashmap(Map<String, Integer> map) {
+		Integer big = null;
+		String biggestLeg = null;
+		for (String name : map.keySet()) {
+			String key = name;
+			String value = map.get(name).toString();
+			Integer storage = map.get(name);
+			if (big == null || big < map.get(name)) {
+				big = map.get(name);
+				biggestLeg = key;
+			}
+		}
+		System.out.println(biggestLeg + " " + big);
 	}
 
 }

@@ -63,7 +63,6 @@ public class Data_Handling {
 				System.out.println(unsucessful + " unsucessful seach -" + percent(unsucessful, file.getListSize()));
 			}
 		}
-
 	}
 
 	private static String percent(int num, int div) {

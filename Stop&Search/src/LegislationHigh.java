@@ -5,7 +5,6 @@ public class LegislationHigh implements Comparable<LegislationHigh>{
 	public int increment;
 
 	public LegislationHigh(String legislationNum, int increment) {
-		super();
 		this.legislationNum = legislationNum;
 		this.increment = increment;
 	}

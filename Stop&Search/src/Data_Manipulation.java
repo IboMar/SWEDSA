@@ -13,6 +13,7 @@ public class Data_Manipulation {
 	public void LegislationHighest(StopAndSearchFiles temp) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		Map<Map<String, Integer>, Integer> mapinc = new HashMap<Map<String, Integer>, Integer>();
+		
 		for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
 			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equalsIgnoreCase(null)) {
 				int count = map.containsKey("Unspecified") ? map.get("Unspecified") : 0;
@@ -20,6 +21,7 @@ public class Data_Manipulation {
 			} else {
 				int count = map.containsKey(currentCrime.Legislation) ? map.get(currentCrime.Legislation) : 0;
 				map.put(currentCrime.Legislation, count + 1);
+				
 
 			}
 		}

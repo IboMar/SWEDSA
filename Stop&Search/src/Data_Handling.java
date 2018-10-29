@@ -74,11 +74,15 @@ public class Data_Handling {
 	public int[] SuccessfulSearch(String outcome, boolean Outcome_linked_to_object_of_search) {
 		int successfu_Search = 0, successfu_Partial = 0, unsucessful = 0;
 
-		if ((outcome.toLowerCase().contains("arrest") || outcome.toLowerCase().startsWith("caution")
-				|| outcome.toLowerCase().contains("penalty") || outcome.toLowerCase().contains("offender")
-				|| outcome.toLowerCase().contains("penalty") || outcome.toLowerCase().contains("penalty")
-				|| outcome.toLowerCase().contains("summons") || outcome.toLowerCase().contains("article")
-				|| outcome.toLowerCase().contains("community") || outcome.toLowerCase().contains("khat or cannabis")
+		if ((outcome.toLowerCase().contains("arrest") 
+				|| outcome.toLowerCase().startsWith("caution")
+				|| outcome.toLowerCase().contains("penalty") 
+				|| outcome.toLowerCase().contains("offender")
+				|| outcome.toLowerCase().contains("penalty")
+				|| outcome.toLowerCase().contains("summons") 
+				|| outcome.toLowerCase().contains("article")
+				|| outcome.toLowerCase().contains("community") 
+				|| outcome.toLowerCase().contains("khat or cannabis")
 				|| outcome.toLowerCase().contains("drugs"))) {
 			if (Outcome_linked_to_object_of_search) {
 				successfu_Search++;
@@ -88,7 +92,7 @@ public class Data_Handling {
 			}
 		}
 		if (outcome.toLowerCase().contains("no further") || outcome.toLowerCase().contains("nothing found")
-				|| outcome.toLowerCase().contains("nothing found") || outcome.toLowerCase().contains("resolution")) {
+				|| outcome.toLowerCase().contains("nothing found") || outcome.toLowerCase().contains("resolution") || outcome.equals(null) || outcome.equals("")) {
 			unsucessful++;
 		}
 		int[] intArray = new int[3];

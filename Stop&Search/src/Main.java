@@ -41,7 +41,6 @@ public class Main {
 			int choice = scan.nextInt();
 			StopAndSearchFiles temp = allTheFiles.getFileList().get(choice);
 			changeData.LegislationHighest(temp);
-			
 			break;
 
 		case "c":

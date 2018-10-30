@@ -10,9 +10,9 @@ import java.util.TreeSet;
 
 // This class will be used to sort insert and modify the data
 public class Data_Manipulation {
+	
 	public void LegislationHighest(StopAndSearchFiles temp) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
-		Map<Map<String, Integer>, Integer> mapinc = new HashMap<Map<String, Integer>, Integer>();
 
 		for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
 			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equalsIgnoreCase(null)) {
@@ -72,14 +72,66 @@ public class Data_Manipulation {
 		System.out.println(biggestLeg + " " + big);
 	}
 
-	public void outPutOneObjectOfSearch(StopAndSearchFiles temp,String objectOfSearchTemp) {
+	public void print_largest_hashmapObj(Map<Object, Integer> map) {
+
+	}
+
+	public void outPutOneObjectOfSearch(StopAndSearchFiles temp, String objectOfSearchTemp) {
 
 		for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
-			if(currentCrime.Object_of_search.contains(objectOfSearchTemp)){
+			if (currentCrime.Object_of_search.contains(objectOfSearchTemp)) {
 				System.out.println(currentCrime.toCSVString());
 			}
 
 		}
 	}
+	
+	public void LegislationHighestSucessful(StopAndSearchFiles temp) {
+		Map<Object, Integer> objmap = new HashMap<Object, Integer>();
 
+		objectStorage HighestSucessful;
+		List<String> tempList = new ArrayList<>();
+		int[] counter;
+		
+		for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
+			counter = Data_Handling.SuccessfulSearch(currentCrime.Object_of_search);
+			if (currentCrime.Legislation.equalsIgnoreCase("")
+					|| currentCrime.Legislation.equalsIgnoreCase(null)) {
+			} else {
+				tempList.add(currentCrime.Legislation);
+			}
+		}
+		objectStorage hello = new objectStorage();
+		Set<String> uniqueLegislation = new HashSet<String>(tempList);
+		System.out.println("Unique Object_of_search count: " + uniqueLegislation.size());
+		for (String Legislation : uniqueLegislation) {
+			System.out.println(Legislation);
+		}
+		
+		
+		
+		print_largest_hashmapObj(objmap);
+
+	}
+
+}
+
+class objectStorage {
+	private int sucessful;
+	private int parial;
+	private int unsucessful;
+	private String val;
+
+	public String toString() {
+		return val + " " + sucessful + " " + parial + " " + unsucessful;
+	}
+
+	public objectStorage(String temp, int[] tempData) {
+		val = temp;
+		sucessful = tempData[0];
+		parial = tempData[1];
+		unsucessful = tempData[2];
+	}
+	
+	
 }

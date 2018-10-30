@@ -21,42 +21,54 @@ public class Main {
 			allTheFiles.readFile(file);
 		}
 		Scanner scan = new Scanner(System.in);
-		System.out.println("a. Out Put All Crimes\r\n"
-				+ "b. Highest Legislation Type For A Specific Month \r\n"
-				+ "c. List of all the possible Objects of Search" + "");
-		String Menu = scan.nextLine();
+		
+		String Menu = "";
+		do {
+		System.out.println("A. Out Put All Crimes\r\n" + "B. Highest Legislation Type For A Specific Month \r\n"
+				+ "C. List of all the possible Objects of Search"
+				+ "D. Highest Sucessful Legislation Type For A Specific Month \r\n" + "Q. -Quit- \r\n");
+		Menu = scan.nextLine().toUpperCase();
 
 		switch (Menu) {
-		case "a":
+		case "A":
 			allTheFiles.outputCrimes();
 			break;
 
-		case "b":
+		case "B":
 			int choice = FolderReader.ListAllFiles();
-			
+
 			StopAndSearchFiles temp = allTheFiles.getFileList().get(choice);
 			changeData.LegislationHighest(temp);
 			break;
 
-		case "c":
+		case "C":
 			choice = FolderReader.ListAllFiles();
 			temp = allTheFiles.getFileList().get(choice);
 			Set<String> uniqueobjectOfSearch = changeData.objectOfSearch(temp);
 			System.out.println("Do you want to carry out a obeject of search on this File?: \r\n Y/N");
 			String yesno = scan.nextLine();
-			if(yesno.equalsIgnoreCase("Y")) {
+			if (yesno.equalsIgnoreCase("Y")) {
 				System.out.println("Please Select a object of search");
 				String pickObjectOfSearch = scan.nextLine();
-						for(String uniqueSeach : uniqueobjectOfSearch){
-							if (pickObjectOfSearch.equals(uniqueSeach)) {
-								changeData.outPutOneObjectOfSearch(temp,pickObjectOfSearch);
-							}
-				        }
-						
-				
+				for (String uniqueSeach : uniqueobjectOfSearch) {
+					if (pickObjectOfSearch.equals(uniqueSeach)) {
+						changeData.outPutOneObjectOfSearch(temp, pickObjectOfSearch);
+					}
+				}
+
 			}
+			break;
+		case "D":
+
+			choice = FolderReader.ListAllFiles();
+			temp = allTheFiles.getFileList().get(choice);
+			changeData.LegislationHighest(temp);
+
 			break;
 
 		}
+		
+		}while(!(Menu.equals("Q")));
+		scan.close();
 	}
 }

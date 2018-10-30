@@ -41,26 +41,22 @@ public class Data_Handling {
 		int i = 0;
 		while (i < fileName.size()) {
 			for (StopAndSearchFiles file : fileList) {
-				int successfu_Search = 0, successfu_Partial = 0, unsucessful = 0;
+				int successful = 0, unsuccessful = 0;
 				System.out.println(fileName.get(i));
 				i++;
 				for (CrimeStopAndsearch currentCrime : file.getStopAndSearchFiles()) {
 
-					if (currentCrime != null) {
-						int[] temp = SuccessfulSearch(currentCrime.Outcome,
-								currentCrime.Outcome_linked_to_object_of_search);
-						successfu_Search = successfu_Search + temp[0];
-						successfu_Partial = successfu_Partial + temp[1];
-						unsucessful = unsucessful + temp[2];
+					
+						int[] temp = SuccessfulSearch(currentCrime.Outcome_linked_to_object_of_search);
+						successful = successful + temp[0];
+						unsuccessful = unsuccessful + temp[1];
 						System.out.println(currentCrime.toCSVString());
-					}
+					
 				}
 				System.out.println("There are " + file.getListSize() + " recorded crimes; ");
 				System.out.println(
-						successfu_Search + " Successful Searches - " + percent(successfu_Search, file.getListSize()));
-				System.out.println(successfu_Partial + " Successful not Planned search - "
-						+ percent(successfu_Partial, file.getListSize()));
-				System.out.println(unsucessful + " unsucessful seach -" + percent(unsucessful, file.getListSize()));
+						successful + " Successful Searches - " + percent(successful, file.getListSize()));
+				System.out.println(unsuccessful + " Unsuccessful Searches -" + percent(unsuccessful, file.getListSize()));
 			}
 		}
 	}
@@ -71,34 +67,21 @@ public class Data_Handling {
 		return String.format(" %.1f%%", perc);
 	}
 
-	public int[] SuccessfulSearch(String outcome, boolean Outcome_linked_to_object_of_search) {
-		int successfu_Search = 0, successfu_Partial = 0, unsucessful = 0;
-
-		if ((outcome.toLowerCase().contains("arrest") 
-				|| outcome.toLowerCase().startsWith("caution")
-				|| outcome.toLowerCase().contains("penalty") 
-				|| outcome.toLowerCase().contains("offender")
-				|| outcome.toLowerCase().contains("penalty")
-				|| outcome.toLowerCase().contains("summons") 
-				|| outcome.toLowerCase().contains("article")
-				|| outcome.toLowerCase().contains("community") 
-				|| outcome.toLowerCase().contains("khat or cannabis")
-				|| outcome.toLowerCase().contains("drugs"))) {
+	public int[] SuccessfulSearch (Boolean Outcome_linked_to_object_of_search) {
+		int successful = 0, unsuccessful = 0;
+		
 			if (Outcome_linked_to_object_of_search) {
-				successfu_Search++;
+			
+				successful++;
 			}
-			if (!Outcome_linked_to_object_of_search) {
-				successfu_Partial++;
+			if(!Outcome_linked_to_object_of_search) {
+				unsuccessful++;
 			}
-		}
-		if (outcome.toLowerCase().contains("no further") || outcome.toLowerCase().contains("nothing found")
-				|| outcome.toLowerCase().contains("nothing found") || outcome.toLowerCase().contains("resolution") || outcome.equals(null) || outcome.equals("")) {
-			unsucessful++;
-		}
-		int[] intArray = new int[3];
-		intArray[0] = successfu_Search;
-		intArray[1] = successfu_Partial;
-		intArray[2] = unsucessful;
+		
+	
+		int[] intArray = new int[2];
+		intArray[0] = successful;
+		intArray[1] = unsuccessful;
 		return intArray;
 
 	}

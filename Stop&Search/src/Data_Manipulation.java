@@ -13,7 +13,7 @@ public class Data_Manipulation {
 	public void LegislationHighest(StopAndSearchFiles temp) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		Map<Map<String, Integer>, Integer> mapinc = new HashMap<Map<String, Integer>, Integer>();
-		
+
 		for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
 			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equalsIgnoreCase(null)) {
 				int count = map.containsKey("Unspecified") ? map.get("Unspecified") : 0;
@@ -21,12 +21,29 @@ public class Data_Manipulation {
 			} else {
 				int count = map.containsKey(currentCrime.Legislation) ? map.get(currentCrime.Legislation) : 0;
 				map.put(currentCrime.Legislation, count + 1);
-				
 
 			}
 		}
 		print_largest_hashmap(map);
 
+	}
+
+	public Set<String> objectOfSearch(StopAndSearchFiles temp) {
+
+		List<String> tempList = new ArrayList<>();
+		for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
+			if (currentCrime.Object_of_search.equalsIgnoreCase("")
+					|| currentCrime.Object_of_search.equalsIgnoreCase(null)) {
+			} else {
+				tempList.add(currentCrime.Object_of_search);
+			}
+		}
+		Set<String> uniqueobjectOfSearch = new HashSet<String>(tempList);
+		System.out.println("Unique Object_of_search count: " + uniqueobjectOfSearch.size());
+		for (String uniqueSeach : uniqueobjectOfSearch) {
+			System.out.println(uniqueSeach);
+		}
+		return uniqueobjectOfSearch;
 	}
 
 	public void print_all_hashmap(Map<String, Integer> map) {
@@ -53,6 +70,16 @@ public class Data_Manipulation {
 			}
 		}
 		System.out.println(biggestLeg + " " + big);
+	}
+
+	public void outPutOneObjectOfSearch(StopAndSearchFiles temp,String objectOfSearchTemp) {
+
+		for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
+			if(currentCrime.Object_of_search.contains(objectOfSearchTemp)){
+				System.out.println(currentCrime.toCSVString());
+			}
+
+		}
 	}
 
 }

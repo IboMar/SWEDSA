@@ -49,7 +49,15 @@ public class CrimeStopAndsearch {
 		Legislation = csvParts[i++]; 
 		Object_of_search = csvParts[i++];
 		Outcome = csvParts[i++];
-		Outcome_linked_to_object_of_search = Boolean.valueOf(csvParts[i++]);
+		if(csvParts[i].equalsIgnoreCase("true") || csvParts[i].equalsIgnoreCase("false")) 
+		{
+			Outcome_linked_to_object_of_search = true;
+			
+		}else if(csvParts[i] == null) {
+			Outcome_linked_to_object_of_search = false;
+			
+		}
+		i++;
 		Removal_of_more_than_just_outer_clothing = csvParts[i++];
 	}
 	

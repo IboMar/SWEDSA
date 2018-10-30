@@ -25,7 +25,7 @@ public class Main {
 		String Menu = "";
 		do {
 		System.out.println("A. Out Put All Crimes\r\n" + "B. Highest Legislation Type For A Specific Month \r\n"
-				+ "C. List of all the possible Objects of Search"
+				+ "C. List of all the possible Objects of Search \r\n"
 				+ "D. Highest Sucessful Legislation Type For A Specific Month \r\n" + "Q. -Quit- \r\n");
 		Menu = scan.nextLine().toUpperCase();
 
@@ -62,7 +62,7 @@ public class Main {
 
 			choice = FolderReader.ListAllFiles();
 			temp = allTheFiles.getFileList().get(choice);
-			changeData.LegislationHighest(temp);
+			changeData.LegislationHighestSucessful(temp);
 
 			break;
 

@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -10,7 +12,7 @@ import java.util.TreeSet;
 
 // This class will be used to sort insert and modify the data
 public class Data_Manipulation {
-	
+
 	public void LegislationHighest(StopAndSearchFiles temp) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 
@@ -85,53 +87,53 @@ public class Data_Manipulation {
 
 		}
 	}
-	
-	public void LegislationHighestSucessful(StopAndSearchFiles temp) {
-		Map<Object, Integer> objmap = new HashMap<Object, Integer>();
 
-		objectStorage HighestSucessful;
+	public void LegislationHighestSucessful(StopAndSearchFiles temp) {
+		List<objectStorage> myList = new ArrayList<>();
+		objectStorage storage = null;
+		Map<Object, Integer> objmap = new HashMap<Object, Integer>();
+		Data_Handling instance = new Data_Handling();
 		List<String> tempList = new ArrayList<>();
-		int[] counter;
-		
 		for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
-			counter = Data_Handling.SuccessfulSearch(currentCrime.Object_of_search);
-			if (currentCrime.Legislation.equalsIgnoreCase("")
-					|| currentCrime.Legislation.equalsIgnoreCase(null)) {
+			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equalsIgnoreCase(null)) {
 			} else {
 				tempList.add(currentCrime.Legislation);
 			}
 		}
-		objectStorage hello = new objectStorage();
 		Set<String> uniqueLegislation = new HashSet<String>(tempList);
-		System.out.println("Unique Object_of_search count: " + uniqueLegislation.size());
 		for (String Legislation : uniqueLegislation) {
-			System.out.println(Legislation);
+			int successful = 0, unsuccessful = 0, partial = 0;
+			for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
+
+				if(Legislation.equals(currentCrime.Legislation)) {
+				int[] counter = instance.SuccessfulSearch(currentCrime.Outcome_linked_to_object_of_search);
+				successful = successful + counter[0];
+				unsuccessful = unsuccessful + counter[1];
+				partial = partial + counter[2];
+				}
+			}
+			storage = new objectStorage(Legislation,successful,unsuccessful,partial);
+			myList.add(storage);
+		}
+		
+		Collections.sort(myList, new Comparator<objectStorage>() {
+		    @Override
+		    public int compare(objectStorage z1, objectStorage z2) {
+		        if (z1.getSuccessful() < z2.getSuccessful())
+		            return 1;
+		        if (z1.getSuccessful() > z2.getSuccessful())
+		            return -1;
+		        return 0;
+		    }
+		});
+		
+		for(objectStorage j : myList) {
+			System.out.println(j.toString());
 		}
 		
 		
 		
-		print_largest_hashmapObj(objmap);
-
-	}
 
 }
-
-class objectStorage {
-	private int sucessful;
-	private int parial;
-	private int unsucessful;
-	private String val;
-
-	public String toString() {
-		return val + " " + sucessful + " " + parial + " " + unsucessful;
-	}
-
-	public objectStorage(String temp, int[] tempData) {
-		val = temp;
-		sucessful = tempData[0];
-		parial = tempData[1];
-		unsucessful = tempData[2];
-	}
-	
-	
 }
+

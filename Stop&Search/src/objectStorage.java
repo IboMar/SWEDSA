@@ -5,12 +5,24 @@ class objectStorage{
 	public int partially_successful;
 	public int unsuccessful;
 	public String val;
+	public String ethic;
 
 	public String toString() {
-		return "Legislation: " + val + " Successful: " + Successful + " partially successful: " + partially_successful + " unsuccessful: " + unsuccessful;
+		return "" + val + " Successful: " + Successful + " partially successful: " + partially_successful + " unsuccessful: " + unsuccessful;
+	}
+	public String toString2() {
+		return ethic+  " : " + val + " Successful: " + Successful + " partially successful: " + partially_successful + " unsuccessful: " + unsuccessful;
 	}
 
 	public objectStorage(String temp, int successfultemp, int unsuccessfultemp, int partialtemp) {
+		val = temp;
+		Successful = successfultemp;
+		partially_successful = partialtemp;
+		unsuccessful = unsuccessfultemp;
+	}
+	
+	public objectStorage(String ethictemp, String temp, int successfultemp, int unsuccessfultemp, int partialtemp) {
+		ethic=ethictemp;
 		val = temp;
 		Successful = successfultemp;
 		partially_successful = partialtemp;

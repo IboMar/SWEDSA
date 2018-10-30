@@ -91,7 +91,6 @@ public class Data_Manipulation {
 	public void LegislationHighestSucessful(StopAndSearchFiles temp) {
 		List<objectStorage> myList = new ArrayList<>();
 		objectStorage storage = null;
-		Map<Object, Integer> objmap = new HashMap<Object, Integer>();
 		Data_Handling instance = new Data_Handling();
 		List<String> tempList = new ArrayList<>();
 		for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
@@ -105,35 +104,129 @@ public class Data_Manipulation {
 			int successful = 0, unsuccessful = 0, partial = 0;
 			for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
 
-				if(Legislation.equals(currentCrime.Legislation)) {
-				int[] counter = instance.SuccessfulSearch(currentCrime.Outcome_linked_to_object_of_search);
-				successful = successful + counter[0];
-				unsuccessful = unsuccessful + counter[1];
-				partial = partial + counter[2];
+				if (Legislation.equals(currentCrime.Legislation)) {
+					int[] counter = instance.SuccessfulSearch(currentCrime.Outcome_linked_to_object_of_search);
+					successful = successful + counter[0];
+					unsuccessful = unsuccessful + counter[1];
+					partial = partial + counter[2];
 				}
 			}
-			storage = new objectStorage(Legislation,successful,unsuccessful,partial);
+			storage = new objectStorage(Legislation, successful, unsuccessful, partial);
 			myList.add(storage);
 		}
-		
 		Collections.sort(myList, new Comparator<objectStorage>() {
-		    @Override
-		    public int compare(objectStorage z1, objectStorage z2) {
-		        if (z1.getSuccessful() < z2.getSuccessful())
-		            return 1;
-		        if (z1.getSuccessful() > z2.getSuccessful())
-		            return -1;
-		        return 0;
-		    }
+			@Override
+			public int compare(objectStorage z1, objectStorage z2) {
+				if (z1.getSuccessful() < z2.getSuccessful())
+					return 1;
+				if (z1.getSuccessful() > z2.getSuccessful())
+					return -1;
+				return 0;
+			}
 		});
-		
-		for(objectStorage j : myList) {
+
+		for (objectStorage j : myList) {
 			System.out.println(j.toString());
 		}
-		
-		
-		
+	}
+
+	public void ethnic(StopAndSearchFiles temp) {
+		List<objectStorage> myList = new ArrayList<>();
+		objectStorage storage = null;
+		Data_Handling instance = new Data_Handling();
+		List<String> tempList = new ArrayList<>();
+		for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
+			if (currentCrime.Self_defined_ethnicity.equalsIgnoreCase("")
+					|| currentCrime.Self_defined_ethnicity.equalsIgnoreCase(null)) {
+			} else {
+				tempList.add(currentCrime.Self_defined_ethnicity);
+			}
+		}
+		Set<String> uniqueSelfEthnic = new HashSet<String>(tempList);
+		for (String Ethnic : uniqueSelfEthnic) {
+			int successful = 0, unsuccessful = 0, partial = 0;
+			for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
+
+				if (Ethnic.equals(currentCrime.Self_defined_ethnicity)) {
+					int[] counter = instance.SuccessfulSearch(currentCrime.Outcome_linked_to_object_of_search);
+					successful = successful + counter[0];
+					unsuccessful = unsuccessful + counter[1];
+					partial = partial + counter[2];
+				}
+			}
+			storage = new objectStorage(Ethnic, successful, unsuccessful, partial);
+			myList.add(storage);
+		}
+		Collections.sort(myList, new Comparator<objectStorage>() {
+			@Override
+			public int compare(objectStorage z1, objectStorage z2) {
+				if (z1.getSuccessful() < z2.getSuccessful())
+					return 1;
+				if (z1.getSuccessful() > z2.getSuccessful())
+					return -1;
+				return 0;
+			}
+		});
+
+		for (objectStorage j : myList) {
+			System.out.println(j.toString());
+		}
+	}
+
+	public void ethnicForLeg(StopAndSearchFiles temp) {
+		List<objectStorage> myList = new ArrayList<>();
+		objectStorage storage = null;
+		Data_Handling instance = new Data_Handling();
+		List<String> tempList = new ArrayList<>();
+		List<String> tempList2 = new ArrayList<>();
+		for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
+			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equalsIgnoreCase(null)) {
+			} else {
+				tempList.add(currentCrime.Legislation);
+			}
+			if (currentCrime.Self_defined_ethnicity.equalsIgnoreCase("")
+					|| currentCrime.Self_defined_ethnicity.equalsIgnoreCase(null)) {
+			} else {
+				tempList2.add(currentCrime.Self_defined_ethnicity);
+			}
+		}
+		Set<String> uniqueSelfEthnic = new HashSet<String>(tempList2);
+		Set<String> uniqueLeg = new HashSet<String>(tempList);
+		for (String Ethnic : uniqueSelfEthnic) {
+			int successful = 0, unsuccessful = 0, partial = 0;
+			String legistration = "";
+			for (String leg : uniqueLeg) {
+
+				for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
+
+					if (leg.equals(currentCrime.Legislation)) {
+						if (Ethnic.equals(currentCrime.Self_defined_ethnicity)) {
+							int[] counter = instance.SuccessfulSearch(currentCrime.Outcome_linked_to_object_of_search);
+							successful = successful + counter[0];
+							unsuccessful = unsuccessful + counter[1];
+							partial = partial + counter[2];
+							legistration = leg;
+						}
+					}
+				}
+			}
+			storage = new objectStorage(Ethnic, legistration, successful, unsuccessful, partial);
+			myList.add(storage);
+
+		}
+		Collections.sort(myList, new Comparator<objectStorage>() {
+			@Override
+			public int compare(objectStorage z1, objectStorage z2) {
+				if (z1.getSuccessful() < z2.getSuccessful())
+					return 1;
+				if (z1.getSuccessful() > z2.getSuccessful())
+					return -1;
+				return 0;
+			}
+		});
+		for (objectStorage j : myList) {
+			System.out.println(j.toString2());
+		}
+	}
 
 }
-}
-

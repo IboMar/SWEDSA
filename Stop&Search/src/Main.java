@@ -26,7 +26,7 @@ public class Main {
 		do {
 		System.out.println("A. Out Put All Crimes\r\n" + "B. Highest Legislation Type For A Specific Month \r\n"
 				+ "C. List of all the possible Objects of Search \r\n"
-				+ "D. Highest Sucessful Legislation Type For A Specific Month \r\n" + "Q. -Quit- \r\n");
+				+ "D. Highest Sucessful Legislation Type For A Specific Month \r\n" + "E. Ethnic \r\n" + "F. Ethnic For Each Leg \r\n" + "Q. -Quit- \r\n");
 		Menu = scan.nextLine().toUpperCase();
 
 		switch (Menu) {
@@ -63,6 +63,23 @@ public class Main {
 			choice = FolderReader.ListAllFiles();
 			temp = allTheFiles.getFileList().get(choice);
 			changeData.LegislationHighestSucessful(temp);
+
+			break;
+			
+			
+		case "E":
+
+			choice = FolderReader.ListAllFiles();
+			temp = allTheFiles.getFileList().get(choice);
+			changeData.ethnic(temp);
+
+			break;
+			
+		case "F":
+
+			choice = FolderReader.ListAllFiles();
+			temp = allTheFiles.getFileList().get(choice);
+			changeData.ethnicForLeg(temp);
 
 			break;
 

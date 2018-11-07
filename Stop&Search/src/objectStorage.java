@@ -32,6 +32,10 @@ class objectStorage{
 	public int getSuccessful() {
 		return Successful;
 	}
+	
+	public int getTotal() {
+		return Successful + unsuccessful + partially_successful;
+	}
 
 	public void setSuccessful(int successful) {
 		Successful = successful;

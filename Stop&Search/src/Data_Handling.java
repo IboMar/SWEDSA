@@ -12,7 +12,7 @@ import java.util.TreeMap;
 public class Data_Handling {
 
 	private ArrayList<StopAndSearchFiles> fileList = new ArrayList<>();
-
+	private ArrayList<CrimeStopAndsearch> mergedFiles = new ArrayList<>();
 	public void readFile(String filename) throws FileNotFoundException {
 		ArrayList<CrimeStopAndsearch> StopandSearch = new ArrayList<>();
 
@@ -23,11 +23,12 @@ public class Data_Handling {
 		while (csvScan.hasNextLine()) {
 			String line = csvScan.nextLine();
 			StopandSearchtemp = new CrimeStopAndsearch(line);
-			StopandSearch.add(StopandSearchtemp);
-
+			mergedFiles.add(StopandSearchtemp);
+			
 		}
-		StopAndSearchFiles File = new StopAndSearchFiles(StopandSearch);
-		fileList.add(File);
+
+//		StopAndSearchFiles File = new StopAndSearchFiles(StopandSearch);
+//		fileList.add(File);
 
 		csvScan.close();
 	}
@@ -36,6 +37,11 @@ public class Data_Handling {
 		return fileList;
 	}
 
+	public ArrayList<CrimeStopAndsearch> getmergedFiles() {
+		return mergedFiles;
+	}
+
+	
 	void outputCrimes() {
 		List<String> fileName = FolderReader.getbasicStop_Search();
 		int i = 0;
@@ -63,7 +69,47 @@ public class Data_Handling {
 			}
 		}
 	}
+	
+	void alloutputCrimes() {
+		ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
+		int successful = 0, unsuccessful = 0, partial = 0;
+			for (CrimeStopAndsearch line : mergedFiles) {
+				
+				
 
+					
+						int[] temp = SuccessfulSearch(line.Outcome_linked_to_object_of_search);
+						successful = successful + temp[0];
+						unsuccessful = unsuccessful + temp[1];
+						partial = partial + temp[2];
+						System.out.println(line.toCSVString());
+					
+				}
+				System.out.println("There are " + mergedFiles.size() + " recorded crimes; ");
+				System.out.println(
+						successful + " Successful Searches - " + percent(successful, mergedFiles.size()));
+				System.out.println(partial + " Partial Successful Searches -" + percent(partial, mergedFiles.size()));
+				System.out.println(unsuccessful + " Unsuccessful Searches -" + percent(unsuccessful, mergedFiles.size()));
+				
+			}
+		
+	
+	
+	
+	void testOutput() {
+		ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
+		int i = 0;
+		System.out.println("2222");
+		
+			for(CrimeStopAndsearch line : mergedFiles) {
+			System.out.print(line.toCSVString() + "\n");
+			}
+			
+			
+			
+		
+	}
+	
 	private static String percent(int num, int div) {
 		double perc = ((double) num / div);
 		perc *= 100;

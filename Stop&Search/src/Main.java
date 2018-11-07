@@ -12,6 +12,7 @@ import java.util.Set;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
+		ArrayList<CrimeStopAndsearch> temp = null;
 		Data_Manipulation changeData = new Data_Manipulation();
 		CSVFiles fileDIR = new CSVFiles();
 		fileDIR.readInFilesDir();
@@ -31,19 +32,21 @@ public class Main {
 
 		switch (Menu) {
 		case "A":
-			allTheFiles.outputCrimes();
+			allTheFiles.alloutputCrimes();
 			break;
 
 		case "B":
-			int choice = FolderReader.ListAllFiles();
-
-			StopAndSearchFiles temp = allTheFiles.getFileList().get(choice);
-			changeData.LegislationHighest(temp);
+			temp = allTheFiles.getmergedFiles();
+			changeData.uniqueDate(temp);
+			System.out.println("Please choose a date");
+			String pickDate = scan.nextLine();
+			ArrayList<CrimeStopAndsearch> dates = changeData.outPutOneDate(temp, pickDate);
+			changeData.highestTotal(dates);
 			break;
 
 		case "C":
-			choice = FolderReader.ListAllFiles();
-			temp = allTheFiles.getFileList().get(choice);
+			
+			temp = allTheFiles.getmergedFiles();
 			Set<String> uniqueobjectOfSearch = changeData.objectOfSearch(temp);
 			System.out.println("Do you want to carry out a obeject of search on this File?: \r\n Y/N");
 			String yesno = scan.nextLine();
@@ -59,27 +62,48 @@ public class Main {
 			}
 			break;
 		case "D":
-
-			choice = FolderReader.ListAllFiles();
-			temp = allTheFiles.getFileList().get(choice);
-			changeData.LegislationHighestSucessful(temp);
+			temp = allTheFiles.getmergedFiles();
+			changeData.uniqueDate(temp);
+			System.out.println("Please choose a date");
+			pickDate = scan.nextLine();
+			dates = changeData.outPutOneDate(temp, pickDate);
+			changeData.allFilesLegislationHighestSucessful(dates);
+			
+			
+			
+//			changeData.LegislationHighestSucessful(temp);
 
 			break;
 			
 			
 		case "E":
-
-			choice = FolderReader.ListAllFiles();
-			temp = allTheFiles.getFileList().get(choice);
-			changeData.ethnic(temp);
+//			
+//			System.out.println("View highest number of crimes commited by ethnicgroup based on: \n1: based on that recorded for a specific month and police force \n2: based on that recorded for a specific legislation");
+//			int choice = scan.nextInt();
+//			switch(choice) {
+//			case 1:
+//				temp = allTheFiles.getmergedFiles();
+//				changeData.uniqueDate(temp);
+//				System.out.println("Please choose a date");
+//				pickDate = scan.nextLine();
+//				dates = changeData.outPutOneDate(temp, pickDate);
+//				changeData.uniquePoliceForce(dates);
+//				break;
+//			case 2:
+//				
+//				break;
+//			}
+//			choice = FolderReader.ListAllFiles();
+//			temp = allTheFiles.getFileList().get(choice);
+//			changeData.ethnic(temp);
 
 			break;
 			
 		case "F":
 
-			choice = FolderReader.ListAllFiles();
-			temp = allTheFiles.getFileList().get(choice);
-			changeData.ethnicForLeg(temp);
+//			choice = FolderReader.ListAllFiles();
+//			temp = allTheFiles.getFileList().get(choice);
+//			changeData.ethnicForLeg(temp);
 
 			break;
 

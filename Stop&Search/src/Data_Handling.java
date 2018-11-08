@@ -13,6 +13,8 @@ public class Data_Handling {
 
 	private ArrayList<StopAndSearchFiles> fileList = new ArrayList<>();
 	private ArrayList<CrimeStopAndsearch> mergedFiles = new ArrayList<>();
+	
+	
 	public void readFile(String filename) throws FileNotFoundException {
 		ArrayList<CrimeStopAndsearch> StopandSearch = new ArrayList<>();
 
@@ -74,10 +76,7 @@ public class Data_Handling {
 		ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
 		int successful = 0, unsuccessful = 0, partial = 0;
 			for (CrimeStopAndsearch line : mergedFiles) {
-				
-				
 
-					
 						int[] temp = SuccessfulSearch(line.Outcome_linked_to_object_of_search);
 						successful = successful + temp[0];
 						unsuccessful = unsuccessful + temp[1];

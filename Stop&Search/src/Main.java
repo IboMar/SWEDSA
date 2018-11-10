@@ -59,15 +59,13 @@ public class Main {
 				allTheFiles.alloutputCrimes();
 
 			case "D":
-				temp = allTheFiles.getmergedFiles();
-				String pickDate = allTheFiles.GetDate(temp);
-				changeData.highestTotal(temp,pickDate);
+				String pickDate = allTheFiles.GetDate();
+				changeData.highestTotal(allTheFiles.getmergedFiles(),pickDate);
 				break;
 
 			case "E":
-				temp = allTheFiles.getmergedFiles();
-				pickDate = allTheFiles.GetDate(temp);
-				changeData.allFilesLegislationHighestSucessful(temp, pickDate);
+				pickDate = allTheFiles.GetDate();
+				changeData.allFilesLegislationHighestSucessful(allTheFiles.getmergedFiles(), pickDate);
 				break;
 
 			case "F":

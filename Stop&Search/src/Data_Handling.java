@@ -115,11 +115,11 @@ public class Data_Handling {
 
 	}
 
-	public String GetDate(ArrayList<CrimeStopAndsearch> temp) {
+	public String GetDate() {
+		//ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
 		Data_Manipulation changeData = new Data_Manipulation();
 		Scanner scan = new Scanner(System.in);
-		Set<String> dates = changeData.uniqueDate(temp);
-		System.out.println("Please choose a date");
+		Set<String> dates = changeData.uniqueDate(mergedFiles);
 		int choice = scan.nextInt();
 		scan.nextLine();
 		String pickDate = null;

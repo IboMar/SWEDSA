@@ -97,10 +97,6 @@ public class Data_Manipulation {
 		System.out.println(biggestLeg + " " + big);
 	}
 
-	public void print_largest_hashmapObj(Map<Object, Integer> map) {
-
-	}
-
 	public void outPutOneObjectOfSearch(ArrayList<CrimeStopAndsearch> temp, String objectOfSearchTemp) {
 
 		for (CrimeStopAndsearch currentCrime : temp) {
@@ -111,24 +107,13 @@ public class Data_Manipulation {
 		}
 	}
 
-	public ArrayList<CrimeStopAndsearch> outPutOneDate(ArrayList<CrimeStopAndsearch> temp, String tempDate) {
-		ArrayList<CrimeStopAndsearch> uniqueDates = new ArrayList<>();
-
-		for (CrimeStopAndsearch currentCrime : temp) {
-			if (currentCrime.Date.contains(tempDate)) {
-				uniqueDates.add(currentCrime);
-			}
-		}
-		return uniqueDates;
-	}
-
-	public void allFilesLegislationHighestSucessful(ArrayList<CrimeStopAndsearch> temp) {
-		List<objectStorage> myList = new ArrayList<>();
-		objectStorage storage = null;
+	public void allFilesLegislationHighestSucessful(ArrayList<CrimeStopAndsearch> temp, String pickDate) {
+		List<CrimeStopAndsearch> myList = new ArrayList<>();
+		CrimeStopAndsearch storage = null;
 		Data_Handling instance = new Data_Handling();
 		List<String> tempList = new ArrayList<>();
 		for (CrimeStopAndsearch currentCrime : temp) {
-			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equalsIgnoreCase(null)) {
+			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equals(null)) {
 			} else {
 				tempList.add(currentCrime.Legislation);
 			}
@@ -138,19 +123,19 @@ public class Data_Manipulation {
 			int successful = 0, unsuccessful = 0, partial = 0;
 			for (CrimeStopAndsearch currentCrime : temp) {
 
-				if (Legislation.equals(currentCrime.Legislation)) {
+				if (Legislation.equals(currentCrime.Legislation) && currentCrime.Date.contains(pickDate)) {
 					int[] counter = instance.SuccessfulSearch(currentCrime.Outcome_linked_to_object_of_search);
 					successful = successful + counter[0];
 					unsuccessful = unsuccessful + counter[1];
 					partial = partial + counter[2];
 				}
 			}
-			storage = new objectStorage(Legislation, successful, unsuccessful, partial);
+			storage = new CrimeStopAndsearch(Legislation, successful, unsuccessful, partial);
 			myList.add(storage);
 		}
-		Collections.sort(myList, new Comparator<objectStorage>() {
+		Collections.sort(myList, new Comparator<CrimeStopAndsearch>() {
 			@Override
-			public int compare(objectStorage z1, objectStorage z2) {
+			public int compare(CrimeStopAndsearch z1, CrimeStopAndsearch z2) {
 				if (z1.getSuccessful() < z2.getSuccessful())
 					return 1;
 				if (z1.getSuccessful() > z2.getSuccessful())
@@ -159,14 +144,15 @@ public class Data_Manipulation {
 			}
 		});
 
-		for (objectStorage list : myList) {
-			System.out.println(list.toString());
+		for (CrimeStopAndsearch list : myList) {
+			System.out.println(list.highestSucessLeg());
 			break;
+
 		}
 
 	}
 
-	public void highestTotal(ArrayList<CrimeStopAndsearch> temp) {
+	public void highestTotal(ArrayList<CrimeStopAndsearch> temp, String pickDate) {
 		List<CrimeStopAndsearch> myList = new ArrayList<>();
 		CrimeStopAndsearch storage = null;
 		Data_Handling instance = new Data_Handling();
@@ -182,7 +168,7 @@ public class Data_Manipulation {
 			int total = 0;
 			for (CrimeStopAndsearch currentCrime : temp) {
 
-				if (Legislation.equals(currentCrime.Legislation)) {
+				if (Legislation.equals(currentCrime.Legislation)&& currentCrime.Date.contains(pickDate) ) {
 					total++;
 				}
 			}
@@ -200,15 +186,15 @@ public class Data_Manipulation {
 		});
 
 		for (CrimeStopAndsearch list : myList) {
-			System.out.println(list.toStringTotal());
+			System.out.println(list.highestTotalLeg());
 			break;
 		}
 
 	}
 
 	public void ethnic(StopAndSearchFiles temp) {
-		List<objectStorage> myList = new ArrayList<>();
-		objectStorage storage = null;
+		List<CrimeStopAndsearch> myList = new ArrayList<>();
+		CrimeStopAndsearch storage = null;
 		Data_Handling instance = new Data_Handling();
 		List<String> tempList = new ArrayList<>();
 		for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
@@ -230,12 +216,12 @@ public class Data_Manipulation {
 					partial = partial + counter[2];
 				}
 			}
-			storage = new objectStorage(Ethnic, successful, unsuccessful, partial);
+			storage = new CrimeStopAndsearch(Ethnic, successful, unsuccessful, partial);
 			myList.add(storage);
 		}
-		Collections.sort(myList, new Comparator<objectStorage>() {
+		Collections.sort(myList, new Comparator<CrimeStopAndsearch>() {
 			@Override
-			public int compare(objectStorage z1, objectStorage z2) {
+			public int compare(CrimeStopAndsearch z1, CrimeStopAndsearch z2) {
 				if (z1.getSuccessful() < z2.getSuccessful())
 					return 1;
 				if (z1.getSuccessful() > z2.getSuccessful())
@@ -244,7 +230,7 @@ public class Data_Manipulation {
 			}
 		});
 
-		for (objectStorage j : myList) {
+		for (CrimeStopAndsearch j : myList) {
 			System.out.println(j.toString());
 		}
 	}

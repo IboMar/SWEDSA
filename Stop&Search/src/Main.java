@@ -59,88 +59,18 @@ public class Main {
 				allTheFiles.alloutputCrimes();
 
 			case "D":
-
 				temp = allTheFiles.getmergedFiles();
-				Set<String> dates = changeData.uniqueDate(temp);
-				System.out.println("Please choose a date");
-				int choice = scan.nextInt();
-				String pickDate = null;
-				scan.nextLine();
-				switch (choice) {
-				case 1:
-					int i = 1;
-					for (String date : dates) {
-						if (i == choice) {
-							pickDate = date;
-							System.out.println(pickDate);
-						}
-						i++;
-					}
-					ArrayList<CrimeStopAndsearch> date = changeData.outPutOneDate(temp, pickDate);
-					changeData.highestTotal(date);
-					break;
-					
-				case 2:
-					i = 1;
-					for (String date2 : dates) {
-						if (i == choice) {
-							pickDate = date2;
-						}
-						i++;
-					}
-					ArrayList<CrimeStopAndsearch> date2 = changeData.outPutOneDate(temp, pickDate);
-					changeData.highestTotal(date2);
-					break;
-					
-				case 3:
-					i = 1;
-					for (String date3 : dates) {
-						if (i == choice) {
-							pickDate = date3;
-						}
-						i++;
-					}
-					ArrayList<CrimeStopAndsearch> date3 = changeData.outPutOneDate(temp, pickDate);
-					changeData.highestTotal(date3);
-					break;
-				}
-				
+				String pickDate = allTheFiles.GetDate(temp);
+				changeData.highestTotal(temp,pickDate);
+				break;
 
-//			changeData.LegislationHighestSucessful(temp);
-
-			/*case "E":
+			case "E":
 				temp = allTheFiles.getmergedFiles();
-				changeData.uniqueDate(temp);
-				System.out.println("Please choose a date");
-				pickDate = scan.nextLine();
-				dates = changeData.outPutOneDate(temp, pickDate);
-				changeData.allFilesLegislationHighestSucessful(dates);
-				break;*/
-//			
-//			System.out.println("View highest number of crimes commited by ethnicgroup based on: \n1: based on that recorded for a specific month and police force \n2: based on that recorded for a specific legislation");
-//			int choice = scan.nextInt();
-//			switch(choice) {
-//			case 1:
-//				temp = allTheFiles.getmergedFiles();
-//				changeData.uniqueDate(temp);
-//				System.out.println("Please choose a date");
-//				pickDate = scan.nextLine();
-//				dates = changeData.outPutOneDate(temp, pickDate);
-//				changeData.uniquePoliceForce(dates);
-//				break;
-//			case 2:
-//				
-//				break;
-//			}
-//			choice = FolderReader.ListAllFiles();
-//			temp = allTheFiles.getFileList().get(choice);
-//			changeData.ethnic(temp);
+				pickDate = allTheFiles.GetDate(temp);
+				changeData.allFilesLegislationHighestSucessful(temp, pickDate);
+				break;
 
 			case "F":
-
-//			choice = FolderReader.ListAllFiles();
-//			temp = allTheFiles.getFileList().get(choice);
-//			changeData.ethnicForLeg(temp);
 
 				break;
 

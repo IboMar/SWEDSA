@@ -7,12 +7,10 @@ public class CrimeStopAndsearch {
 	public int Successful;
 	public int partially_successful;
 	public int unsuccessful;
-	public String val;
 	public String ethic;
 	public final String SEP = ",";
 	public String type;
 	public String Date;
-	// public String month;
 	public String Part_of_a_policing_operation;
 	public String Policing_operation;
 	public String latitude;
@@ -68,8 +66,14 @@ public class CrimeStopAndsearch {
 	/**
 	 * This will be the main class that we will use to output and manipulate data
 	 */
-	public CrimeStopAndsearch(String temp, int successfultemp, int unsuccessfultemp, int partialtemp) {
-		val = temp;
+	public CrimeStopAndsearch(String legislationtemp, int temptotal) {
+		Legislation = legislationtemp;
+		total = temptotal;
+	}
+	
+	
+	public CrimeStopAndsearch(String legislationtemp, int successfultemp, int unsuccessfultemp, int partialtemp) {
+		Legislation = legislationtemp;
 		Successful = successfultemp;
 		partially_successful = partialtemp;
 		unsuccessful = unsuccessfultemp;
@@ -78,32 +82,30 @@ public class CrimeStopAndsearch {
 	public CrimeStopAndsearch(String ethictemp, String temp, int successfultemp, int unsuccessfultemp,
 			int partialtemp) {
 		ethic = ethictemp;
-		val = temp;
+		Legislation = temp;
 		Successful = successfultemp;
 		partially_successful = partialtemp;
 		unsuccessful = unsuccessfultemp;
 	}
 
-	public int getSuccessful() {
-		return Successful;
-	}
 
 	public int getTotal() {
 		return total;
 	}
-
-	public String toStringTotal() {
-		return "" + val + " Total: " + total;
+	public String highestTotalLeg() {
+		return Legislation + " : " + " Total: " + total;	
 	}
-
+	public String highestSucessLeg() {
+		return Legislation + " : " + " Successful: " + Successful + " partially successful: " + partially_successful
+				+ " unsuccessful: " + unsuccessful;	
+	}
 	public String toString2() {
-		return ethic + " : " + val + " Successful: " + Successful + " partially successful: " + partially_successful
+		return ethic + " : " + Legislation + " Successful: " + Successful + " partially successful: " + partially_successful
 				+ " unsuccessful: " + unsuccessful;
 	}
-
-	public CrimeStopAndsearch(String temp, int temptotal) {
-		val = temp;
-		total = temptotal;
+	public int getSuccessful() {
+		return Successful;
 	}
+
 
 }

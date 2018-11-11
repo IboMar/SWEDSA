@@ -50,9 +50,7 @@ public class Main {
 							changeData.outPutOneObjectOfSearch(temp, pickObjectOfSearch);
 						}
 					}
-
 				}
-
 				break;
 
 			case "C":
@@ -69,9 +67,11 @@ public class Main {
 				break;
 
 			case "F":
-
+				pickDate = allTheFiles.GetDate();
+				String pickPolice = allTheFiles.GetPoliceForce();
+				System.out.println(pickPolice);
+				changeData.ethnic(allTheFiles.getmergedFiles(), pickDate, pickPolice);
 				break;
-
 			}
 
 		} while (!(Menu.equals("Q")));

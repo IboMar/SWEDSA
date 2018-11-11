@@ -8,23 +8,33 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.StringJoiner;
 import java.util.TreeMap;
 
 public class Data_Handling {
 
-	//private ArrayList<StopAndSearchFiles> fileList = new ArrayList<>();
+	public final String SEP = ",";
+	// private ArrayList<StopAndSearchFiles> fileList = new ArrayList<>();
 	private ArrayList<CrimeStopAndsearch> mergedFiles = new ArrayList<>();
 
 	public void readFile(String filename) throws FileNotFoundException {
-		//ArrayList<CrimeStopAndsearch> StopandSearch = new ArrayList<>();
+		// ArrayList<CrimeStopAndsearch> StopandSearch = new ArrayList<>();
 
 		File csvFile = new File(filename);
+		String[] parts = filename.split("-");
+
 		Scanner csvScan = new Scanner(csvFile);
 		CrimeStopAndsearch StopandSearchtemp = null;
 		csvScan.nextLine(); // read header
 		while (csvScan.hasNextLine()) {
 			String line = csvScan.nextLine();
-			StopandSearchtemp = new CrimeStopAndsearch(line);
+			String[] temp = line.split(SEP, -1);
+			temp[3] = parts[3];
+			//System.out.println(temp[3]);
+			
+			String line2 = String.join(",", temp);
+			
+			StopandSearchtemp = new CrimeStopAndsearch(line2);
 			mergedFiles.add(StopandSearchtemp);
 
 		}
@@ -33,40 +43,35 @@ public class Data_Handling {
 		csvScan.close();
 	}
 
-	/*public ArrayList<StopAndSearchFiles> getFileList() {
-		return fileList;
-	}*/
+	/*
+	 * public ArrayList<StopAndSearchFiles> getFileList() { return fileList; }
+	 */
 
 	public ArrayList<CrimeStopAndsearch> getmergedFiles() {
 		return mergedFiles;
 	}
 
-/*	void outputCrimes() {
-		List<String> fileName = FolderReader.getbasicStop_Search();
-		int i = 0;
-		while (i < fileName.size()) {
-			for (StopAndSearchFiles file : fileList) {
-				int successful = 0, unsuccessful = 0, partial = 0;
-				System.out.println(fileName.get(i));
-				i++;
-				for (CrimeStopAndsearch currentCrime : file.getStopAndSearchFiles()) {
-
-					int[] temp = SuccessfulSearch(currentCrime.Outcome_linked_to_object_of_search);
-					successful = successful + temp[0];
-					unsuccessful = unsuccessful + temp[1];
-					partial = partial + temp[2];
-					System.out.println(currentCrime.toCSVString());
-
-				}
-				System.out.println("There are " + file.getListSize() + " recorded crimes; ");
-				System.out.println(successful + " Successful Searches - " + percent(successful, file.getListSize()));
-				System.out.println(partial + " Partial Successful Searches -" + percent(partial, file.getListSize()));
-				System.out
-						.println(unsuccessful + " Unsuccessful Searches -" + percent(unsuccessful, file.getListSize()));
-
-			}
-		}
-	}*/
+	/*
+	 * void outputCrimes() { List<String> fileName =
+	 * FolderReader.getbasicStop_Search(); int i = 0; while (i < fileName.size()) {
+	 * for (StopAndSearchFiles file : fileList) { int successful = 0, unsuccessful =
+	 * 0, partial = 0; System.out.println(fileName.get(i)); i++; for
+	 * (CrimeStopAndsearch currentCrime : file.getStopAndSearchFiles()) {
+	 * 
+	 * int[] temp =
+	 * SuccessfulSearch(currentCrime.Outcome_linked_to_object_of_search); successful
+	 * = successful + temp[0]; unsuccessful = unsuccessful + temp[1]; partial =
+	 * partial + temp[2]; System.out.println(currentCrime.toCSVString());
+	 * 
+	 * } System.out.println("There are " + file.getListSize() +
+	 * " recorded crimes; "); System.out.println(successful +
+	 * " Successful Searches - " + percent(successful, file.getListSize()));
+	 * System.out.println(partial + " Partial Successful Searches -" +
+	 * percent(partial, file.getListSize())); System.out .println(unsuccessful +
+	 * " Unsuccessful Searches -" + percent(unsuccessful, file.getListSize()));
+	 * 
+	 * } } }
+	 */
 
 	void alloutputCrimes() {
 		ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
@@ -116,7 +121,7 @@ public class Data_Handling {
 	}
 
 	public String GetDate() {
-		//ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
+		// ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
 		Data_Manipulation changeData = new Data_Manipulation();
 		Scanner scan = new Scanner(System.in);
 		Set<String> dates = changeData.uniqueDate(mergedFiles);
@@ -143,5 +148,34 @@ public class Data_Handling {
 		}
 		return pickDate;
 	}
+	public String GetPoliceForce() {
+		Data_Manipulation changeData = new Data_Manipulation();
+		Scanner scan = new Scanner(System.in);
+		Set<String> policeForce = changeData.uniquePolice(mergedFiles);
+		int choice = scan.nextInt();
+		scan.nextLine();
+		String policeOP = null;
+		int i = 1;
+		for (String police : policeForce) {
+			if (i == choice) {
+				policeOP = police;
+			}
+			i++;
+		}
+		while (policeOP == null) {
+			System.out.println("Please eneter a Correct Police Force");
+			choice = scan.nextInt();
+			scan.nextLine();
+			for (String police : policeForce) {
+				if (i == choice) {
+					policeOP = police;
+				}
+				i++;
+			}
+		}
+		return policeOP;
+	}
+	
+	
 
 }

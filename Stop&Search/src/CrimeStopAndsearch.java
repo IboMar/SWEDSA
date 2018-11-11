@@ -4,10 +4,11 @@
  */
 public class CrimeStopAndsearch {
 
+	public String totalTempString;
 	public int Successful;
 	public int partially_successful;
 	public int unsuccessful;
-	public String ethic;
+	public String ethnic;
 	public final String SEP = ",";
 	public String type;
 	public String Date;
@@ -25,7 +26,7 @@ public class CrimeStopAndsearch {
 	public String Outcome_linked_to_object_of_search;
 	public String Removal_of_more_than_just_outer_clothing;
 	public int total;
-
+	
 	public String toCSVString() {
 
 		return type + ", " + Date + ", " + Part_of_a_policing_operation + ", " + Policing_operation + ", " + latitude
@@ -66,8 +67,8 @@ public class CrimeStopAndsearch {
 	/**
 	 * This will be the main class that we will use to output and manipulate data
 	 */
-	public CrimeStopAndsearch(String legislationtemp, int temptotal) {
-		Legislation = legislationtemp;
+	public CrimeStopAndsearch(String totalTemp, int temptotal) {
+		totalTempString = totalTemp;
 		total = temptotal;
 	}
 	
@@ -81,7 +82,7 @@ public class CrimeStopAndsearch {
 
 	public CrimeStopAndsearch(String ethictemp, String temp, int successfultemp, int unsuccessfultemp,
 			int partialtemp) {
-		ethic = ethictemp;
+		ethnic = ethictemp;
 		Legislation = temp;
 		Successful = successfultemp;
 		partially_successful = partialtemp;
@@ -93,14 +94,18 @@ public class CrimeStopAndsearch {
 		return total;
 	}
 	public String highestTotalLeg() {
-		return Legislation + " : " + " Total: " + total;	
+		return totalTempString + " : " + " Total: " + total;	
 	}
+	public String highestTotalethnic() {
+		return totalTempString + " : " + " Total: " + total;	
+	}
+	
 	public String highestSucessLeg() {
 		return Legislation + " : " + " Successful: " + Successful + " partially successful: " + partially_successful
 				+ " unsuccessful: " + unsuccessful;	
 	}
 	public String toString2() {
-		return ethic + " : " + Legislation + " Successful: " + Successful + " partially successful: " + partially_successful
+		return ethnic + " : " + Legislation + " Successful: " + Successful + " partially successful: " + partially_successful
 				+ " unsuccessful: " + unsuccessful;
 	}
 	public int getSuccessful() {

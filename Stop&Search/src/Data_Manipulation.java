@@ -70,6 +70,25 @@ public class Data_Manipulation {
 
 		return uniqueDates;
 	}
+	
+	public Set<String> uniquePolice(List<CrimeStopAndsearch> temp) {
+
+		List<String> tempList = new ArrayList<>();
+		for (CrimeStopAndsearch currentCrime : temp) {
+			if (currentCrime.Policing_operation.equalsIgnoreCase("") || currentCrime.Policing_operation.equalsIgnoreCase(null)) {
+			} else {
+				tempList.add(currentCrime.Policing_operation);
+			}
+
+		}
+		Set<String> uniquepolice = new HashSet<String>(tempList);
+		int i = 1;
+		for (String police : uniquepolice) {
+			System.out.println(i++ + ". " + police);
+		}
+
+		return uniquepolice;
+	}
 
 	public void print_all_hashmap(Map<String, Integer> map) {
 
@@ -168,7 +187,7 @@ public class Data_Manipulation {
 			int total = 0;
 			for (CrimeStopAndsearch currentCrime : temp) {
 
-				if (Legislation.equals(currentCrime.Legislation)&& currentCrime.Date.contains(pickDate) ) {
+				if (Legislation.equals(currentCrime.Legislation) && currentCrime.Date.contains(pickDate)) {
 					total++;
 				}
 			}
@@ -192,12 +211,13 @@ public class Data_Manipulation {
 
 	}
 
-	public void ethnic(StopAndSearchFiles temp) {
+	public void ethnic(ArrayList<CrimeStopAndsearch> temp, String pickDate, String policeForce) {
 		List<CrimeStopAndsearch> myList = new ArrayList<>();
 		CrimeStopAndsearch storage = null;
 		Data_Handling instance = new Data_Handling();
 		List<String> tempList = new ArrayList<>();
-		for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
+		
+		for (CrimeStopAndsearch currentCrime : temp) {
 			if (currentCrime.Self_defined_ethnicity.equalsIgnoreCase("")
 					|| currentCrime.Self_defined_ethnicity.equalsIgnoreCase(null)) {
 			} else {
@@ -206,32 +226,30 @@ public class Data_Manipulation {
 		}
 		Set<String> uniqueSelfEthnic = new HashSet<String>(tempList);
 		for (String Ethnic : uniqueSelfEthnic) {
-			int successful = 0, unsuccessful = 0, partial = 0;
-			for (CrimeStopAndsearch currentCrime : temp.getStopAndSearchFiles()) {
+			int total = 0;
+			for (CrimeStopAndsearch currentCrime : temp) {
 
-				if (Ethnic.equals(currentCrime.Self_defined_ethnicity)) {
-					int[] counter = instance.SuccessfulSearch(currentCrime.Outcome_linked_to_object_of_search);
-					successful = successful + counter[0];
-					unsuccessful = unsuccessful + counter[1];
-					partial = partial + counter[2];
+				if (Ethnic.equals(currentCrime.Self_defined_ethnicity) && currentCrime.Date.contains(pickDate)
+						&& currentCrime.Policing_operation.contains(policeForce)) {
+					total++;
 				}
 			}
-			storage = new CrimeStopAndsearch(Ethnic, successful, unsuccessful, partial);
+			storage = new CrimeStopAndsearch(Ethnic, total);
 			myList.add(storage);
 		}
 		Collections.sort(myList, new Comparator<CrimeStopAndsearch>() {
 			@Override
 			public int compare(CrimeStopAndsearch z1, CrimeStopAndsearch z2) {
-				if (z1.getSuccessful() < z2.getSuccessful())
+				if (z1.getTotal() < z2.getTotal())
 					return 1;
-				if (z1.getSuccessful() > z2.getSuccessful())
+				if (z1.getTotal() > z2.getTotal())
 					return -1;
 				return 0;
 			}
 		});
 
 		for (CrimeStopAndsearch j : myList) {
-			System.out.println(j.toString());
+			System.out.println(j.highestTotalethnic());
 		}
 	}
 

@@ -177,5 +177,37 @@ public class Data_Handling {
 	}
 	
 	
+	public String GetLeg() {
+		Data_Manipulation changeData = new Data_Manipulation();
+		Scanner scan = new Scanner(System.in);
+		Set<String> legislation = changeData.uniqueLeg(mergedFiles);
+		int choice = scan.nextInt();
+		scan.nextLine();
+		String leg = null;
+		int i = 1;
+		for (String legislationtemp : legislation) {
+			if (i == choice) {
+				leg = legislationtemp;
+			}
+			i++;
+		}
+		while (leg == null) {
+			System.out.println("Please eneter a Correct legislation");
+			choice = scan.nextInt();
+			scan.nextLine();
+			for (String police : legislation) {
+				if (i == choice) {
+					leg = police;
+				}
+				i++;
+			}
+		}
+		return leg;
+	}
+	
+	
+	
+	
+	
 
 }

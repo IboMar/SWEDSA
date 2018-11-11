@@ -57,20 +57,29 @@ public class Main {
 				allTheFiles.alloutputCrimes();
 
 			case "D":
+				System.out.println("Please pick a date");
 				String pickDate = allTheFiles.GetDate();
 				changeData.highestTotal(allTheFiles.getmergedFiles(),pickDate);
 				break;
 
 			case "E":
+				System.out.println("Please pick a date");
 				pickDate = allTheFiles.GetDate();
 				changeData.allFilesLegislationHighestSucessful(allTheFiles.getmergedFiles(), pickDate);
 				break;
 
 			case "F":
+				System.out.println("Please pick a date");
 				pickDate = allTheFiles.GetDate();
+				System.out.println("Please pick a police force");
 				String pickPolice = allTheFiles.GetPoliceForce();
 				System.out.println(pickPolice);
 				changeData.ethnic(allTheFiles.getmergedFiles(), pickDate, pickPolice);
+				
+				System.out.println("================================================");
+				System.out.println("Please pick a legislation");
+				String pickLegislation = allTheFiles.GetLeg();
+				changeData.ethnicLeg(allTheFiles.getmergedFiles(), pickDate, pickPolice, pickLegislation);
 				break;
 			}
 

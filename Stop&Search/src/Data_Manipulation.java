@@ -89,6 +89,28 @@ public class Data_Manipulation {
 
 		return uniquepolice;
 	}
+	
+	public Set<String> uniqueLeg(List<CrimeStopAndsearch> temp) {
+
+		List<String> tempList = new ArrayList<>();
+		for (CrimeStopAndsearch currentCrime : temp) {
+			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equalsIgnoreCase(null)) {
+			} else {
+				tempList.add(currentCrime.Legislation);
+			}
+
+		}
+		Set<String> uniqueLeg = new HashSet<String>(tempList);
+		int i = 1;
+		for (String leg : uniqueLeg) {
+			System.out.println(i++ + ". " + leg);
+		}
+
+		return uniqueLeg;
+	}
+	
+	
+	
 
 	public void print_all_hashmap(Map<String, Integer> map) {
 
@@ -252,6 +274,50 @@ public class Data_Manipulation {
 			System.out.println(j.highestTotalethnic());
 		}
 	}
+	
+	public void ethnicLeg(ArrayList<CrimeStopAndsearch> temp, String pickDate, String policeForce,String pickLegislation) {
+		List<CrimeStopAndsearch> myList = new ArrayList<>();
+		CrimeStopAndsearch storage = null;
+		Data_Handling instance = new Data_Handling();
+		List<String> tempList = new ArrayList<>();
+		
+		for (CrimeStopAndsearch currentCrime : temp) {
+			if (currentCrime.Self_defined_ethnicity.equalsIgnoreCase("")
+					|| currentCrime.Self_defined_ethnicity.equalsIgnoreCase(null)) {
+			} else {
+				tempList.add(currentCrime.Self_defined_ethnicity);
+			}
+		}
+		Set<String> uniqueSelfEthnic = new HashSet<String>(tempList);
+		for (String Ethnic : uniqueSelfEthnic) {
+			int total = 0;
+			for (CrimeStopAndsearch currentCrime : temp) {
+
+				if (Ethnic.equals(currentCrime.Self_defined_ethnicity) && currentCrime.Date.contains(pickDate)
+						&& currentCrime.Policing_operation.contains(policeForce)&& currentCrime.Legislation.contains(pickLegislation)) {
+					total++;
+				}
+			}
+			storage = new CrimeStopAndsearch(Ethnic, total);
+			myList.add(storage);
+		}
+		Collections.sort(myList, new Comparator<CrimeStopAndsearch>() {
+			@Override
+			public int compare(CrimeStopAndsearch z1, CrimeStopAndsearch z2) {
+				if (z1.getTotal() < z2.getTotal())
+					return 1;
+				if (z1.getTotal() > z2.getTotal())
+					return -1;
+				return 0;
+			}
+		});
+
+		for (CrimeStopAndsearch j : myList) {
+			System.out.println(j.highestTotalethnic());
+		}
+	}
+	
+	
 
 	public void ethnicForLeg(ArrayList<CrimeStopAndsearch> temp) {
 		List<CrimeStopAndsearch> myList = new ArrayList<>();

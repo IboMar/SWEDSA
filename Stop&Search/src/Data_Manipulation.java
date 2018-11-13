@@ -232,12 +232,33 @@ public class Data_Manipulation {
 		}
 
 	}
+	
+	public void  chronoLogicalOrder(List<CrimeStopAndsearch> policedateArray) {
+		
+		
+		Comparator<CrimeStopAndsearch> cmp = Comparator.comparing(CrimeStopAndsearch::getDate);
+		Collections.sort(policedateArray, cmp.reversed());
+		
 
-	public void ethnic(ArrayList<CrimeStopAndsearch> temp, String pickDate, String policeForce) {
+	      // sort the list
+	     
+
+		for(CrimeStopAndsearch currentCrime: policedateArray) {
+			
+			System.out.println(currentCrime.toCSVString());
+		}
+		
+		
+	}
+
+	public List<CrimeStopAndsearch> ethnic(ArrayList<CrimeStopAndsearch> temp, String pickDate, String policeForce) {
 		List<CrimeStopAndsearch> myList = new ArrayList<>();
 		CrimeStopAndsearch storage = null;
 		Data_Handling instance = new Data_Handling();
 		List<String> tempList = new ArrayList<>();
+		List<CrimeStopAndsearch> chronoArray = new ArrayList<>();
+		
+		
 		
 		for (CrimeStopAndsearch currentCrime : temp) {
 			if (currentCrime.Self_defined_ethnicity.equalsIgnoreCase("")
@@ -253,29 +274,25 @@ public class Data_Manipulation {
 
 				if (Ethnic.equals(currentCrime.Self_defined_ethnicity) && currentCrime.Date.contains(pickDate)
 						&& currentCrime.Policing_operation.contains(policeForce)) {
+					chronoArray.add(currentCrime);;
 					total++;
 				}
 			}
 			storage = new CrimeStopAndsearch(Ethnic, total);
 			myList.add(storage);
 		}
-		Collections.sort(myList, new Comparator<CrimeStopAndsearch>() {
-			@Override
-			public int compare(CrimeStopAndsearch z1, CrimeStopAndsearch z2) {
-				if (z1.getTotal() < z2.getTotal())
-					return 1;
-				if (z1.getTotal() > z2.getTotal())
-					return -1;
-				return 0;
-			}
-		});
-
+		
+		
 		for (CrimeStopAndsearch j : myList) {
+			
 			System.out.println(j.highestTotalethnic());
 		}
+		
+		
+		return chronoArray;
 	}
 	
-	public void ethnicLeg(ArrayList<CrimeStopAndsearch> temp, String pickDate, String policeForce,String pickLegislation) {
+	public void ethnicLeg(ArrayList<CrimeStopAndsearch> temp,String pickLegislation) {
 		List<CrimeStopAndsearch> myList = new ArrayList<>();
 		CrimeStopAndsearch storage = null;
 		Data_Handling instance = new Data_Handling();
@@ -293,8 +310,8 @@ public class Data_Manipulation {
 			int total = 0;
 			for (CrimeStopAndsearch currentCrime : temp) {
 
-				if (Ethnic.equals(currentCrime.Self_defined_ethnicity) && currentCrime.Date.contains(pickDate)
-						&& currentCrime.Policing_operation.contains(policeForce)&& currentCrime.Legislation.contains(pickLegislation)) {
+				if (Ethnic.equals(currentCrime.Self_defined_ethnicity)&& currentCrime.Legislation.contains(pickLegislation)) {
+						
 					total++;
 				}
 			}
@@ -315,6 +332,7 @@ public class Data_Manipulation {
 		for (CrimeStopAndsearch j : myList) {
 			System.out.println(j.highestTotalethnic());
 		}
+		
 	}
 	
 	

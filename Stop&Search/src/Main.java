@@ -12,6 +12,7 @@ import java.util.Set;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
+		List<CrimeStopAndsearch> policedateArray = null;
 		ArrayList<CrimeStopAndsearch> temp = null;
 		Data_Manipulation changeData = new Data_Manipulation();
 		CSVFiles fileDIR = new CSVFiles();
@@ -69,19 +70,44 @@ public class Main {
 				break;
 
 			case "F":
+				System.out.println("1: based on that recorded for a specific month and police force.\n"
+						+ "2. based on that recorded for a specific legislation");
+				String select = scan.nextLine();
+				switch(select) {
+				case "1":
 				System.out.println("Please pick a date");
 				pickDate = allTheFiles.GetDate();
 				System.out.println("Please pick a police force");
 				String pickPolice = allTheFiles.GetPoliceForce();
 				System.out.println(pickPolice);
+				policedateArray =
 				changeData.ethnic(allTheFiles.getmergedFiles(), pickDate, pickPolice);
-				
+				break;
+				case "2":
 				System.out.println("================================================");
 				System.out.println("Please pick a legislation");
 				String pickLegislation = allTheFiles.GetLeg();
-				changeData.ethnicLeg(allTheFiles.getmergedFiles(), pickDate, pickPolice, pickLegislation);
+			
+				changeData.ethnicLeg(allTheFiles.getmergedFiles(), pickLegislation);
+				break;
+				}
+				break;
+			case "G":
+				if(policedateArray !=null) {
+					
+					changeData.chronoLogicalOrder(policedateArray);
+				}
+				else{
+					System.out.println("Please use (F. Find which (self-determined) ethnic group has the highest number of recorded stop and search events)\nbefore listing in chronological order.");
+				}
+				break;
+			
+			case "H":
+				//TODO feature
+				
 				break;
 			}
+			
 
 		} while (!(Menu.equals("Q")));
 		scan.close();

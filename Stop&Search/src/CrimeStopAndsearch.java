@@ -14,17 +14,17 @@ public class CrimeStopAndsearch {
 	public String Date;
 	public String Part_of_a_policing_operation;
 	public String Policing_operation;
-	public String latitude;
-	public String longitude;
+	public Float latitude;
+	public Float longitude;
 	public String Gender;
 	public String Age_range;
 	public String Self_defined_ethnicity;
 	public String Officer_defined_ethnicity;
 	public String Legislation;
 	public String Object_of_search;
-	public String Outcome;
+	public Boolean Outcome;
 	public String Outcome_linked_to_object_of_search;
-	public String Removal_of_more_than_just_outer_clothing;
+	public Boolean Removal_of_more_than_just_outer_clothing;
 	public int total;
 	
 	public String toCSVString() {
@@ -51,17 +51,27 @@ public class CrimeStopAndsearch {
 		Date = csvParts[i++];
 		Part_of_a_policing_operation = csvParts[i++];
 		Policing_operation = csvParts[i++];
-		latitude = csvParts[i++];
-		longitude = csvParts[i++];
+		if(csvParts[i] !=null && csvParts[i].length()>0) {
+			
+		latitude = Float.parseFloat(csvParts[i++]);}
+		else {latitude = null; i++;}
+		if(csvParts[i] !=null && csvParts[i].length()>0) {
+			longitude = Float.parseFloat(csvParts[i++]);}
+		else {longitude = null; i++;}
 		Gender = csvParts[i++];
 		Age_range = csvParts[i++];
 		Self_defined_ethnicity = csvParts[i++];
 		Officer_defined_ethnicity = csvParts[i++];
 		Legislation = csvParts[i++];
 		Object_of_search = csvParts[i++];
-		Outcome = csvParts[i++];
+		if(csvParts[i] !=null && csvParts[i].length()>0) {
+		Outcome = Boolean.parseBoolean(csvParts[i++]);
+		}else {Outcome = null; i++;}
+		
 		Outcome_linked_to_object_of_search = csvParts[i++];
-		Removal_of_more_than_just_outer_clothing = csvParts[i++];
+		if(csvParts[i] !=null && csvParts[i].length()>0) {
+		Removal_of_more_than_just_outer_clothing = Boolean.parseBoolean(csvParts[i++]);
+		}else {Removal_of_more_than_just_outer_clothing =null; i++;}
 	}
 
 	/**
@@ -107,6 +117,10 @@ public class CrimeStopAndsearch {
 	public String toString2() {
 		return ethnic + " : " + Legislation + " Successful: " + Successful + " partially successful: " + partially_successful
 				+ " unsuccessful: " + unsuccessful;
+	}
+	
+	public String getDate() {
+		return Date;
 	}
 	public int getSuccessful() {
 		return Successful;

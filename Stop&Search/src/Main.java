@@ -104,6 +104,14 @@ public class Main {
 			
 			case "H":
 				//TODO feature
+				System.out.println("Please pick a gender");
+				String pickGender = allTheFiles.getGender();
+				System.out.println("Please pick an ethnicity");
+				String pickEthnic = allTheFiles.getEthnic();
+				
+				changeData.sortByEthnicity(allTheFiles.getmergedFiles(), pickGender, pickEthnic);
+				
+				
 				
 				break;
 			}

@@ -136,7 +136,7 @@ public class Data_Handling {
 			i++;
 		}
 		while (pickDate == null) {
-			System.out.println("Please eneter a Correct Date");
+			System.out.println("Please select a valid option");
 			choice = scan.nextInt();
 			scan.nextLine();
 			for (String date : dates) {
@@ -148,6 +148,60 @@ public class Data_Handling {
 		}
 		return pickDate;
 	}
+	
+	public String getGender() {
+		// ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
+		Data_Manipulation changeData = new Data_Manipulation();
+		Scanner scan = new Scanner(System.in);
+		Set<String> genders = changeData.uniqueGender(mergedFiles);
+		
+		String pickGender = null;
+		int i = 1;
+		
+		
+		while (pickGender == null) {
+		
+			int choice = scan.nextInt();
+			scan.nextLine();
+			for (String gender: genders) {
+				if (i == choice) {
+					pickGender = gender;
+					return pickGender;
+					
+				}	
+				i++;
+			}
+			System.out.println("Please select a valid option");
+		}
+		return pickGender;
+		
+	}
+	public String getEthnic() {
+		// ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
+		Data_Manipulation changeData = new Data_Manipulation();
+		Scanner scan = new Scanner(System.in);
+		Set<String> ethnics = changeData.uniqueEthnic(mergedFiles);
+		
+		String pickEthnic = null;
+		int i = 1;
+		
+		while (pickEthnic == null) {
+		
+			int choice = scan.nextInt();
+			scan.nextLine();
+			for (String ethnic: ethnics) {
+				if (i == choice) {
+					pickEthnic = ethnic;
+					return pickEthnic;
+				}	
+				i++;
+			}
+			System.out.println("Please select a valid option");
+		}
+		return pickEthnic;
+	}
+	
+	
 	public String GetPoliceForce() {
 		Data_Manipulation changeData = new Data_Manipulation();
 		Scanner scan = new Scanner(System.in);

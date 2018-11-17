@@ -2,12 +2,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * 
+ *	Contains {@link #readFolder} method.
+ */
 public class FolderReader {
 
 	public static List<String> basicCrimesCVS = new ArrayList<String>();
 	public static List<String> Stop_Search = new ArrayList<String>();
-	
+	/**
+	 * 
+	 * @param folder 
+	 */
 	public static void readFolder(final File folder) {
 		
 	    for (final File fileEntry : folder.listFiles()) {
@@ -44,20 +50,7 @@ public class FolderReader {
 	   }
 	
 	
-	public static int ListAllFiles() {
-		Data_Handling allTheFiles = new Data_Handling();
-		Scanner scan = new Scanner(System.in);
-		List<String> fileName = FolderReader.getbasicStop_Search();
-		int i = 0;
-		System.out.println("Please pick a Month:");
-		while (i < fileName.size()) {
-			System.out.println( i + ":" + fileName.get(i));
-			i++;
-		}
-		int choice = scan.nextInt();
-		return choice;
-		
-		}
+	
 }
 
 	

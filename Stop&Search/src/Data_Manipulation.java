@@ -70,6 +70,42 @@ public class Data_Manipulation {
 
 		return uniqueDates;
 	}
+	public Set<String> uniqueGender(List<CrimeStopAndsearch> temp) {
+
+		List<String> tempList = new ArrayList<>();
+		for (CrimeStopAndsearch currentCrime : temp) {
+			if (currentCrime.Gender.equalsIgnoreCase("") || currentCrime.Gender == null) {
+			} else {
+				
+				tempList.add(currentCrime.Gender);
+			}
+
+		}
+		Set<String> uniqueGender = new HashSet<String>(tempList);
+		int i = 1;
+		for (String gender : uniqueGender) {
+			System.out.println(i++ + ". " + gender);
+		}
+
+		return uniqueGender;
+	}
+	
+	public Set<String> uniqueEthnic(List<CrimeStopAndsearch> temp) {
+
+		List<String> tempList = new ArrayList<>();
+		for (CrimeStopAndsearch currentCrime : temp) {
+			if (currentCrime.Self_defined_ethnicity != null && !currentCrime.Self_defined_ethnicity.equalsIgnoreCase("")) {
+				tempList.add(currentCrime.Self_defined_ethnicity);
+			} 
+		}
+		Set<String> uniqueEthnic = new HashSet<String>(tempList);
+		int i = 1;
+		for (String ethnic : uniqueEthnic) {
+			System.out.println(i++ + ". " + ethnic);
+		}
+
+		return uniqueEthnic;
+	}
 	
 	public Set<String> uniquePolice(List<CrimeStopAndsearch> temp) {
 
@@ -292,6 +328,42 @@ public class Data_Manipulation {
 		return chronoArray;
 	}
 	
+	public void sortByEthnicity(ArrayList<CrimeStopAndsearch> temp, String pickGender, String pickEthnic) {
+		List<CrimeStopAndsearch> myList = new ArrayList<>();
+		CrimeStopAndsearch storage = null;
+		Data_Handling instance = new Data_Handling();
+		
+		List<CrimeStopAndsearch> tempList = new ArrayList<>();
+		
+		
+		
+		
+		
+		
+			for (CrimeStopAndsearch currentCrime : temp) {
+
+				if (currentCrime.Gender.equals(pickGender) && currentCrime.Self_defined_ethnicity.equals(pickEthnic))
+						 {
+					tempList.add(currentCrime);;
+					
+				}
+			}
+		
+		
+			Comparator<CrimeStopAndsearch> cmp = Comparator.comparing(CrimeStopAndsearch::getLegislation);
+			Collections.sort(tempList, cmp);
+			
+		for (CrimeStopAndsearch j : tempList) {
+			
+			System.out.println(j.toCSVString());
+		}
+		
+		
+		
+			}
+	
+	
+	
 	public void ethnicLeg(ArrayList<CrimeStopAndsearch> temp,String pickLegislation) {
 		List<CrimeStopAndsearch> myList = new ArrayList<>();
 		CrimeStopAndsearch storage = null;
@@ -334,63 +406,7 @@ public class Data_Manipulation {
 		}
 		
 	}
-	
-	
-
-	public void ethnicForLeg(ArrayList<CrimeStopAndsearch> temp) {
-		List<CrimeStopAndsearch> myList = new ArrayList<>();
-		CrimeStopAndsearch storage = null;
-		Data_Handling instance = new Data_Handling();
-		List<String> tempList = new ArrayList<>();
-		List<String> tempList2 = new ArrayList<>();
-		for (CrimeStopAndsearch currentCrime : temp) {
-			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equalsIgnoreCase(null)) {
-			} else {
-				tempList.add(currentCrime.Legislation);
-			}
-			if (currentCrime.Self_defined_ethnicity.equalsIgnoreCase("")
-					|| currentCrime.Self_defined_ethnicity.equalsIgnoreCase(null)) {
-			} else {
-				tempList2.add(currentCrime.Self_defined_ethnicity);
-			}
-		}
-		Set<String> uniqueSelfEthnic = new HashSet<String>(tempList2);
-		Set<String> uniqueLeg = new HashSet<String>(tempList);
-		for (String Ethnic : uniqueSelfEthnic) {
-			int successful = 0, unsuccessful = 0, partial = 0;
-			String legistration = "";
-			for (String leg : uniqueLeg) {
-
-				for (CrimeStopAndsearch currentCrime : temp) {
-
-					if (leg.equals(currentCrime.Legislation)) {
-						if (Ethnic.equals(currentCrime.Self_defined_ethnicity)) {
-							int[] counter = instance.SuccessfulSearch(currentCrime.Outcome_linked_to_object_of_search);
-							successful = successful + counter[0];
-							unsuccessful = unsuccessful + counter[1];
-							partial = partial + counter[2];
-							legistration = leg;
-						}
-					}
-				}
-			}
-			storage = new CrimeStopAndsearch(Ethnic, legistration, successful, unsuccessful, partial);
-			myList.add(storage);
-
-		}
-		Collections.sort(myList, new Comparator<CrimeStopAndsearch>() {
-			@Override
-			public int compare(CrimeStopAndsearch z1, CrimeStopAndsearch z2) {
-				if (z1.getSuccessful() < z2.getSuccessful())
-					return 1;
-				if (z1.getSuccessful() > z2.getSuccessful())
-					return -1;
-				return 0;
-			}
-		});
-		for (CrimeStopAndsearch j : myList) {
-			System.out.println(j.toString2());
-		}
-	}
-
 }
+	
+	
+

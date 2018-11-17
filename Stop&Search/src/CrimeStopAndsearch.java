@@ -4,7 +4,7 @@
  */
 public class CrimeStopAndsearch {
 
-	public String totalTempString;
+	public String CrimeType;
 	public int Successful;
 	public int partially_successful;
 	public int unsuccessful;
@@ -28,11 +28,16 @@ public class CrimeStopAndsearch {
 	public int total;
 	
 	public String toCSVString() {
-
-		return type + ", " + Date + ", " + Part_of_a_policing_operation + ", " + Policing_operation + ", " + latitude
+		
+		
+		String unfilteredCSV = type + ", " + Date + ", " + Gender + ", " + Part_of_a_policing_operation + ", " + Policing_operation + ", " + latitude
 				+ " " + longitude + " " + Age_range + " " + Self_defined_ethnicity + " " + Officer_defined_ethnicity
 				+ ", " + Legislation + ", " + Object_of_search + ", " + Outcome + ", "
 				+ Outcome_linked_to_object_of_search + ", " + Removal_of_more_than_just_outer_clothing;
+		 String filteredCSV = unfilteredCSV.replace("null", "Unspecified").replace(", ,", ", Unspecified,");
+		
+		
+		return filteredCSV;
 
 	}
 
@@ -75,25 +80,24 @@ public class CrimeStopAndsearch {
 	}
 
 	/**
-	 * This will be the main class that we will use to output and manipulate data
+	 * This constructor is used to create an object for the highest legislation.
+	 * @param crime
+	 * @param Counter
 	 */
-	public CrimeStopAndsearch(String totalTemp, int temptotal) {
-		totalTempString = totalTemp;
-		total = temptotal;
+	public CrimeStopAndsearch(String Crime, int Counter) {
+		CrimeType = Crime;
+		total = Counter;
 	}
 	
-	
+	/**
+	 * This constructor is used to construct an object for the highest successful legislation.
+	 * @param legislationtemp
+	 * @param successfultemp
+	 * @param unsuccessfultemp
+	 * @param partialtemp
+	 */
 	public CrimeStopAndsearch(String legislationtemp, int successfultemp, int unsuccessfultemp, int partialtemp) {
 		Legislation = legislationtemp;
-		Successful = successfultemp;
-		partially_successful = partialtemp;
-		unsuccessful = unsuccessfultemp;
-	}
-
-	public CrimeStopAndsearch(String ethictemp, String temp, int successfultemp, int unsuccessfultemp,
-			int partialtemp) {
-		ethnic = ethictemp;
-		Legislation = temp;
 		Successful = successfultemp;
 		partially_successful = partialtemp;
 		unsuccessful = unsuccessfultemp;
@@ -104,20 +108,17 @@ public class CrimeStopAndsearch {
 		return total;
 	}
 	public String highestTotalLeg() {
-		return totalTempString + " : " + " Total: " + total;	
+		return CrimeType + " : " + " Total: " + total;	
 	}
 	public String highestTotalethnic() {
-		return totalTempString + " : " + " Total: " + total;	
+		return CrimeType + " : " + " Total: " + total;	
 	}
 	
 	public String highestSucessLeg() {
 		return Legislation + " : " + " Successful: " + Successful + " partially successful: " + partially_successful
 				+ " unsuccessful: " + unsuccessful;	
 	}
-	public String toString2() {
-		return ethnic + " : " + Legislation + " Successful: " + Successful + " partially successful: " + partially_successful
-				+ " unsuccessful: " + unsuccessful;
-	}
+	
 	
 	public String getDate() {
 		return Date;
@@ -125,6 +126,8 @@ public class CrimeStopAndsearch {
 	public int getSuccessful() {
 		return Successful;
 	}
-
+	public String getLegislation() {
+		return Legislation;
+	}
 
 }

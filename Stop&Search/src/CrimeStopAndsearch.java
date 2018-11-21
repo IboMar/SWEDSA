@@ -57,7 +57,6 @@ public class CrimeStopAndsearch {
 		Part_of_a_policing_operation = csvParts[i++];
 		Policing_operation = csvParts[i++];
 		if(csvParts[i] !=null && csvParts[i].length()>0) {
-			
 		latitude = Float.parseFloat(csvParts[i++]);}
 		else {latitude = null; i++;}
 		if(csvParts[i] !=null && csvParts[i].length()>0) {

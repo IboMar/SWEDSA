@@ -23,8 +23,11 @@ public class Main {
 			allTheFiles.readFile(file);
 		}
 		Scanner scan = new Scanner(System.in);
-
 		String Menu = "";
+		
+		
+		
+		
 		do {
 			System.out.println("A. List all distinct search purposes and searches for a specified purpose\r\n"
 					+ "C. Determine how many Stop and Searches met the following criteria \r\n"

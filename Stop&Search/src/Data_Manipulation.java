@@ -318,10 +318,21 @@ public class Data_Manipulation {
 			myList.add(storage);
 		}
 		
+		Collections.sort(myList, new Comparator<CrimeStopAndsearch>() {
+			@Override
+			public int compare(CrimeStopAndsearch z1, CrimeStopAndsearch z2) {
+				if (z1.getTotal() < z2.getTotal())
+					return 1;
+				if (z1.getTotal() > z2.getTotal())
+					return -1;
+				return 0;
+			}
+		});
 		
 		for (CrimeStopAndsearch j : myList) {
 			
 			System.out.println(j.highestTotalethnic());
+			break;
 		}
 		
 		

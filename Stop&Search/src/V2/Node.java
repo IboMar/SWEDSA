@@ -56,7 +56,7 @@ class AVLTree {
 
      return height(N.left) - height(N.right); 
  } 
-
+// Breaks on null values because left and right dont have a value
  Node insert(Node node, CrimeStopAndsearch key) { 
 
      /* 1.  Perform the normal BST insertion */
@@ -76,9 +76,13 @@ class AVLTree {
      }
      node.height = 1 + max(height(node.left), 
                            height(node.right)); 
-     int balance = getBalance(node); 
-     if(key != null && node.right.key != null) {
+     int balance = getBalance(node);
+     
+     // https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
+     // I am using the code from this website to try understanding more
+     if(key != null && node.right != null && node.left != null) {   	 
      if(key.Legislation != null && node.right.key.Legislation != null) {
+    	 
      int var2 = key.Legislation.compareTo(node.left.key.Legislation);
      int var3 = key.Legislation.compareTo(node.right.key.Legislation); 
      if(balance > 1 && var2 < 0) {

@@ -43,7 +43,7 @@ public class Main {
 
 			case "A":
 				temp = allTheFiles.getmergedFiles();
-				Set<String> uniqueobjectOfSearch = changeData.objectOfSearch(temp);
+				List<String> uniqueobjectOfSearch = changeData.objectOfSearch(temp);
 				System.out.println("Do you want to carry out a obeject of search on this File?: \r\n Y/N");
 				String yesno = scan.nextLine();
 				if (yesno.equalsIgnoreCase("Y")) {

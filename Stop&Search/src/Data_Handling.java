@@ -180,7 +180,7 @@ public class Data_Handling {
 		// ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
 		Data_Manipulation changeData = new Data_Manipulation();
 		Scanner scan = new Scanner(System.in);
-		Set<String> ethnics = changeData.uniqueEthnic(mergedFiles);
+		List<String> ethnics = changeData.uniqueEthnic(mergedFiles);
 		
 		String pickEthnic = null;
 		int i = 1;
@@ -205,7 +205,7 @@ public class Data_Handling {
 	public String GetPoliceForce() {
 		Data_Manipulation changeData = new Data_Manipulation();
 		Scanner scan = new Scanner(System.in);
-		Set<String> policeForce = changeData.uniquePolice(mergedFiles);
+		List<String> policeForce = changeData.uniquePolice(mergedFiles);
 		int choice = scan.nextInt();
 		scan.nextLine();
 		String policeOP = null;
@@ -234,7 +234,7 @@ public class Data_Handling {
 	public String GetLeg() {
 		Data_Manipulation changeData = new Data_Manipulation();
 		Scanner scan = new Scanner(System.in);
-		Set<String> legislation = changeData.uniqueLeg(mergedFiles);
+		List<String> legislation = changeData.uniqueLeg(mergedFiles);
 		int choice = scan.nextInt();
 		scan.nextLine();
 		String leg = null;

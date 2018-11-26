@@ -32,22 +32,23 @@ public class Data_Manipulation {
 
 	}
 
-	public Set<String> objectOfSearch(ArrayList<CrimeStopAndsearch> temp) {
+	public List<String> objectOfSearch(ArrayList<CrimeStopAndsearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
 		for (CrimeStopAndsearch currentCrime : temp) {
 			if (currentCrime.Object_of_search.equalsIgnoreCase("")
 					|| currentCrime.Object_of_search.equalsIgnoreCase(null)) {
 			} else {
+				if(!tempList.contains(currentCrime.Object_of_search)) {
 				tempList.add(currentCrime.Object_of_search);
+				}
 			}
 		}
-		Set<String> uniqueobjectOfSearch = new HashSet<String>(tempList);
-		System.out.println("Unique Object_of_search count: " + uniqueobjectOfSearch.size());
-		for (String uniqueSeach : uniqueobjectOfSearch) {
+		System.out.println("Unique Object_of_search count: " + tempList.size());
+		for (String uniqueSeach : tempList) {
 			System.out.println(uniqueSeach);
 		}
-		return uniqueobjectOfSearch;
+		return tempList;
 	}
 
 	public List<String> uniqueDate(List<CrimeStopAndsearch> temp) {
@@ -93,59 +94,60 @@ public class Data_Manipulation {
 		return tempList;
 	}
 	
-	public Set<String> uniqueEthnic(List<CrimeStopAndsearch> temp) {
+	public List<String> uniqueEthnic(List<CrimeStopAndsearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
 		for (CrimeStopAndsearch currentCrime : temp) {
 			if (currentCrime.Self_defined_ethnicity != null && !currentCrime.Self_defined_ethnicity.equalsIgnoreCase("")) {
+				if(!tempList.contains(currentCrime.Self_defined_ethnicity)) {
 				tempList.add(currentCrime.Self_defined_ethnicity);
+				}
 			} 
 		}
-		Set<String> uniqueEthnic = new HashSet<String>(tempList);
 		int i = 1;
-		for (String ethnic : uniqueEthnic) {
+		for (String ethnic : tempList) {
 			System.out.println(i++ + ". " + ethnic);
 		}
 
-		return uniqueEthnic;
+		return tempList;
 	}
 	
-	public Set<String> uniquePolice(List<CrimeStopAndsearch> temp) {
+	public List<String> uniquePolice(List<CrimeStopAndsearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
 		for (CrimeStopAndsearch currentCrime : temp) {
 			if (currentCrime.Policing_operation.equalsIgnoreCase("") || currentCrime.Policing_operation.equalsIgnoreCase(null)) {
 			} else {
+				if(!tempList.contains(currentCrime.Policing_operation))
 				tempList.add(currentCrime.Policing_operation);
 			}
 
 		}
-		Set<String> uniquepolice = new HashSet<String>(tempList);
 		int i = 1;
-		for (String police : uniquepolice) {
+		for (String police : tempList) {
 			System.out.println(i++ + ". " + police);
 		}
 
-		return uniquepolice;
+		return tempList;
 	}
 	
-	public Set<String> uniqueLeg(List<CrimeStopAndsearch> temp) {
+	public List<String> uniqueLeg(List<CrimeStopAndsearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
 		for (CrimeStopAndsearch currentCrime : temp) {
 			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equalsIgnoreCase(null)) {
 			} else {
+				if(!tempList.contains(currentCrime.Legislation))
 				tempList.add(currentCrime.Legislation);
 			}
 
 		}
-		Set<String> uniqueLeg = new HashSet<String>(tempList);
 		int i = 1;
-		for (String leg : uniqueLeg) {
+		for (String leg : tempList) {
 			System.out.println(i++ + ". " + leg);
 		}
 
-		return uniqueLeg;
+		return tempList;
 	}
 	
 	
@@ -195,11 +197,11 @@ public class Data_Manipulation {
 		for (CrimeStopAndsearch currentCrime : temp) {
 			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equals(null)) {
 			} else {
+				if(!tempList.contains(currentCrime.Legislation))
 				tempList.add(currentCrime.Legislation);
 			}
 		}
-		Set<String> uniqueLegislation = new HashSet<String>(tempList);
-		for (String Legislation : uniqueLegislation) {
+		for (String Legislation : tempList) {
 			int successful = 0, unsuccessful = 0, partial = 0;
 			for (CrimeStopAndsearch currentCrime : temp) {
 
@@ -240,11 +242,11 @@ public class Data_Manipulation {
 		for (CrimeStopAndsearch currentCrime : temp) {
 			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equalsIgnoreCase(null)) {
 			} else {
+				if(!tempList.contains(currentCrime.Legislation))
 				tempList.add(currentCrime.Legislation);
 			}
 		}
-		Set<String> uniqueLegislation = new HashSet<String>(tempList);
-		for (String Legislation : uniqueLegislation) {
+		for (String Legislation : tempList) {
 			int total = 0;
 			for (CrimeStopAndsearch currentCrime : temp) {
 
@@ -303,11 +305,11 @@ public class Data_Manipulation {
 			if (currentCrime.Self_defined_ethnicity.equalsIgnoreCase("")
 					|| currentCrime.Self_defined_ethnicity.equalsIgnoreCase(null)) {
 			} else {
+				if(!tempList.contains(currentCrime.Self_defined_ethnicity))
 				tempList.add(currentCrime.Self_defined_ethnicity);
 			}
 		}
-		Set<String> uniqueSelfEthnic = new HashSet<String>(tempList);
-		for (String Ethnic : uniqueSelfEthnic) {
+		for (String Ethnic : tempList) {
 			int total = 0;
 			for (CrimeStopAndsearch currentCrime : temp) {
 
@@ -388,11 +390,11 @@ public class Data_Manipulation {
 			if (currentCrime.Self_defined_ethnicity.equalsIgnoreCase("")
 					|| currentCrime.Self_defined_ethnicity.equalsIgnoreCase(null)) {
 			} else {
+				if(!currentCrime.Self_defined_ethnicity.contains(currentCrime.Self_defined_ethnicity))
 				tempList.add(currentCrime.Self_defined_ethnicity);
 			}
 		}
-		Set<String> uniqueSelfEthnic = new HashSet<String>(tempList);
-		for (String Ethnic : uniqueSelfEthnic) {
+		for (String Ethnic : tempList) {
 			int total = 0;
 			for (CrimeStopAndsearch currentCrime : temp) {
 

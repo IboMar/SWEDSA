@@ -15,7 +15,10 @@ class Node {
 class AVLTree { 
 
  Node root; 
- int height(Node N) { 
+ public Node getRoot() {
+	return root;
+}
+int height(Node N) { 
      if (N == null) 
          return 0; 
 
@@ -80,9 +83,7 @@ class AVLTree {
      
      // https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
      // I am using the code from this website to try understanding more
-     if(key != null && node.right != null && node.left != null) {   	 
-     if(key.Legislation != null && node.right.key.Legislation != null) {
-    	 
+     if(key != null && node.right != null && node.left != null) {   	 	 
      int var2 = key.Legislation.compareTo(node.left.key.Legislation);
      int var3 = key.Legislation.compareTo(node.right.key.Legislation); 
      if(balance > 1 && var2 < 0) {
@@ -99,16 +100,16 @@ class AVLTree {
          return leftRotate(node);  
      }
      }
-     }
      return node;
  }
  void preOrder(Node node) { 
      if (node != null) { 
-         System.out.print(node.key + " "); 
+         System.out.println(node.key.Legislation + " "); 
          preOrder(node.left); 
          preOrder(node.right); 
      } 
      
- } 
+ }
+ 
 }
  

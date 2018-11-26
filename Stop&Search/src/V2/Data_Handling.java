@@ -1,18 +1,12 @@
 package V2;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.StringJoiner;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
 
 public class Data_Handling {
 
@@ -48,4 +42,59 @@ public class Data_Handling {
 		
 	}
 	
+	public void doOtherStuff()
+	{
+		TreeMap<String, List<CrimeStopAndsearch>> legislationTree = new TreeMap<>();
+		Map<String, List<CrimeStopAndsearch>> objectOfSearchTree = new HashMap<>();
+		
+		for(CrimeStopAndsearch e: mergedFiles) {
+			
+			List<CrimeStopAndsearch> legList = legislationTree.get(e.Legislation);
+			if (legList == null)
+			{
+				legList = new ArrayList<>();
+				legislationTree.put(e.Legislation, legList);
+			}
+			legList.add(e);
+			
+			List<CrimeStopAndsearch> objectSearchList = objectOfSearchTree.get(e.Object_of_search);
+			if (objectSearchList == null)
+			{
+				objectSearchList = new ArrayList<>();
+				objectOfSearchTree.put(e.Object_of_search, objectSearchList);
+			}
+			objectSearchList.add(e);
+			
+			
+			
+			//tree.root = tree.insert(tree.root, e); 
+		}
+		
+		
+		int count = 0;
+		long start = System.currentTimeMillis();
+		List<CrimeStopAndsearch> matches = objectOfSearchTree.get("Controlled drugs");
+		for (CrimeStopAndsearch stop : matches)
+			count++;
+			//System.out.println(stop);
+		long total = System.currentTimeMillis() - start;
+		System.out.println("This took "+total+" to count "+count);
+		
+		long start2 = System.nanoTime();
+
+		int count2 = 0;
+		for (CrimeStopAndsearch stop : mergedFiles)
+			if (stop.Object_of_search.equals("Controlled drugs"))
+			 count2++;
+		long total2 = System.currentTimeMillis() - start2;
+		System.out.println("This took "+total2+" to count "+count2);
+		
+		System.out.println("set size "+mergedFiles.size());
+		
+	}
+	
+	public void printStuff() {
+	
+		tree.preOrder(tree.getRoot());
+	}
 }

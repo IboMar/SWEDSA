@@ -22,7 +22,9 @@ public class Main {
 		for (String file : fileDIRList) {
 			allTheFiles.readFile(file);
 		}
+		allTheFiles.doOtherStuff();
 		allTheFiles.dostuff();
+		allTheFiles.printStuff();
 		Scanner scan = new Scanner(System.in);
 		String Menu = "";
 		do {

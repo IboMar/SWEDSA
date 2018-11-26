@@ -124,7 +124,7 @@ public class Data_Handling {
 		// ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
 		Data_Manipulation changeData = new Data_Manipulation();
 		Scanner scan = new Scanner(System.in);
-		Set<String> dates = changeData.uniqueDate(mergedFiles);
+		List<String> dates = changeData.uniqueDate(mergedFiles);
 		int choice = scan.nextInt();
 		scan.nextLine();
 		String pickDate = null;
@@ -153,7 +153,7 @@ public class Data_Handling {
 		// ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
 		Data_Manipulation changeData = new Data_Manipulation();
 		Scanner scan = new Scanner(System.in);
-		Set<String> genders = changeData.uniqueGender(mergedFiles);
+		List<String> genders = changeData.uniqueGender(mergedFiles);
 		
 		String pickGender = null;
 		int i = 1;

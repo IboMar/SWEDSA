@@ -50,7 +50,7 @@ public class Data_Manipulation {
 		return uniqueobjectOfSearch;
 	}
 
-	public Set<String> uniqueDate(List<CrimeStopAndsearch> temp) {
+	public List<String> uniqueDate(List<CrimeStopAndsearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
 		for (CrimeStopAndsearch currentCrime : temp) {
@@ -58,36 +58,39 @@ public class Data_Manipulation {
 			} else {
 				String substringDate = currentCrime.Date;
 				substringDate = substringDate.substring(0, 7);
+				if(!tempList.contains(substringDate)) {
 				tempList.add(substringDate);
+				}
 			}
 
 		}
-		Set<String> uniqueDates = new HashSet<String>(tempList);
+		//Set<String> uniqueDates = new HashSet<String>(tempList);
 		int i = 1;
-		for (String date : uniqueDates) {
+		for (String date : tempList) {
 			System.out.println(i++ + ". " + date);
 		}
 
-		return uniqueDates;
+		return tempList;
 	}
-	public Set<String> uniqueGender(List<CrimeStopAndsearch> temp) {
+	public List<String> uniqueGender(List<CrimeStopAndsearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
 		for (CrimeStopAndsearch currentCrime : temp) {
 			if (currentCrime.Gender.equalsIgnoreCase("") || currentCrime.Gender == null) {
 			} else {
-				
+				if(!tempList.contains(currentCrime.Gender)) {
 				tempList.add(currentCrime.Gender);
+				}
 			}
 
 		}
-		Set<String> uniqueGender = new HashSet<String>(tempList);
+		//Set<String> uniqueGender = new HashSet<String>(tempList);
 		int i = 1;
-		for (String gender : uniqueGender) {
+		for (String gender : tempList) {
 			System.out.println(i++ + ". " + gender);
 		}
 
-		return uniqueGender;
+		return tempList;
 	}
 	
 	public Set<String> uniqueEthnic(List<CrimeStopAndsearch> temp) {

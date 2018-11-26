@@ -12,43 +12,28 @@ public class Data_Handling {
 
 	public final String SEP = ",";
 	private ArrayList<CrimeStopAndsearch> mergedFiles = new ArrayList<>();
-	//TreeMap<Integer, CrimeStopAndsearch> map = new TreeMap<Integer, CrimeStopAndsearch>();
-	AVLTree tree = new AVLTree();
+	private TreeMap<String, List<CrimeStopAndsearch>> legislationTree = new TreeMap<>();
+	private Map<String, List<CrimeStopAndsearch>> objectOfSearchTree = new HashMap<>();
+	
 
 	public void readFile(String filename) throws FileNotFoundException {
 
 		File csvFile = new File(filename);
 		String[] parts = filename.split("-");
-
 		Scanner csvScan = new Scanner(csvFile);
 		csvScan.nextLine(); // read header
 		while (csvScan.hasNextLine()) {
 			String line = csvScan.nextLine();
 			String[] temp = line.split(SEP, -1);
 			temp[3] = parts[3];
-			//System.out.println(temp[3]);
-			
 			String line2 = String.join(",", temp);
-			//map.put(new CrimeStopAndsearch(line2),i);
 			mergedFiles.add(new CrimeStopAndsearch(line2));
 		}
 		csvScan.close();
 	}
-	
-	public void dostuff() {
-		for(CrimeStopAndsearch e: mergedFiles) {
-			tree.root = tree.insert(tree.root, e); 
-		}
-		
-	}
-	
 	public void doOtherStuff()
-	{
-		TreeMap<String, List<CrimeStopAndsearch>> legislationTree = new TreeMap<>();
-		Map<String, List<CrimeStopAndsearch>> objectOfSearchTree = new HashMap<>();
-		
+	{	
 		for(CrimeStopAndsearch e: mergedFiles) {
-			
 			List<CrimeStopAndsearch> legList = legislationTree.get(e.Legislation);
 			if (legList == null)
 			{
@@ -64,10 +49,6 @@ public class Data_Handling {
 				objectOfSearchTree.put(e.Object_of_search, objectSearchList);
 			}
 			objectSearchList.add(e);
-			
-			
-			
-			//tree.root = tree.insert(tree.root, e); 
 		}
 		
 		
@@ -92,9 +73,10 @@ public class Data_Handling {
 		System.out.println("set size "+mergedFiles.size());
 		
 	}
-	
-	public void printStuff() {
-	
-		tree.preOrder(tree.getRoot());
+	public TreeMap<String, List<CrimeStopAndsearch>> getLegislationTree() {
+		return legislationTree;
+	}
+	public Map<String, List<CrimeStopAndsearch>> getObjectOfSearchTree() {
+		return objectOfSearchTree;
 	}
 }

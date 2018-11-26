@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -23,8 +24,6 @@ public class Main {
 			allTheFiles.readFile(file);
 		}
 		allTheFiles.doOtherStuff();
-		allTheFiles.dostuff();
-		allTheFiles.printStuff();
 		Scanner scan = new Scanner(System.in);
 		String Menu = "";
 		do {
@@ -41,8 +40,24 @@ public class Main {
 			switch (Menu) {
 
 			case "A":
-				
-				System.out.println();
+				Map<String, List<CrimeStopAndsearch>> objectOfSearchTree = allTheFiles.getObjectOfSearchTree();
+				System.out.println("Do you want to carry out a obeject of search on this File?: \r\n Y/N");
+				String yesno = scan.nextLine();
+				for (String uniqueSeach : objectOfSearchTree.keySet()) {
+					System.out.println(uniqueSeach);
+				}
+				if (yesno.equalsIgnoreCase("Y")) {
+					System.out.println("Please Select a object of search:  ");
+					String pickObjectOfSearch = scan.nextLine();
+					for (String uniqueSeach : objectOfSearchTree.keySet()) {
+						if (pickObjectOfSearch.equals(uniqueSeach)) {
+							List<CrimeStopAndsearch> List = objectOfSearchTree.get(pickObjectOfSearch);
+							for(CrimeStopAndsearch looping : List) {
+								System.out.println(looping.toCSVString());
+							}
+						}
+					}
+				}
 			
 				break;
 

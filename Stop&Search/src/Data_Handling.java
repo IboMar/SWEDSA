@@ -136,10 +136,12 @@ public class Data_Handling {
 			i++;
 		}
 		while (pickDate == null) {
+			i=0;
 			System.out.println("Please select a valid option");
 			choice = scan.nextInt();
 			scan.nextLine();
 			for (String date : dates) {
+				
 				if (i == choice) {
 					pickDate = date;
 				}
@@ -160,7 +162,7 @@ public class Data_Handling {
 		
 		
 		while (pickGender == null) {
-		
+			i=0;
 			int choice = scan.nextInt();
 			scan.nextLine();
 			for (String gender: genders) {
@@ -186,7 +188,7 @@ public class Data_Handling {
 		int i = 1;
 		
 		while (pickEthnic == null) {
-		
+			i=0;
 			int choice = scan.nextInt();
 			scan.nextLine();
 			for (String ethnic: ethnics) {
@@ -217,6 +219,7 @@ public class Data_Handling {
 			i++;
 		}
 		while (policeOP == null) {
+			i=0;
 			System.out.println("Please eneter a Correct Police Force");
 			choice = scan.nextInt();
 			scan.nextLine();
@@ -246,6 +249,7 @@ public class Data_Handling {
 			i++;
 		}
 		while (leg == null) {
+			i=0;
 			System.out.println("Please eneter a Correct legislation");
 			choice = scan.nextInt();
 			scan.nextLine();

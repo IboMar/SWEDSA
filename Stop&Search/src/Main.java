@@ -59,6 +59,7 @@ public class Main {
 
 			case "C":
 				allTheFiles.alloutputCrimes();
+				break;
 
 			case "D":
 				System.out.println("Please pick a date");

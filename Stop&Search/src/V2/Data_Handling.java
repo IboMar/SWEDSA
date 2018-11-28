@@ -73,6 +73,58 @@ public class Data_Handling {
 		System.out.println("set size "+mergedFiles.size());
 		
 	}
+	void alloutputCrimes() {
+		ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
+		int successful = 0, unsuccessful = 0, partial = 0;
+		for (CrimeStopAndsearch line : mergedFiles) {
+
+			int[] temp = SuccessfulSearch(line.Outcome_linked_to_object_of_search);
+			successful = successful + temp[0];
+			unsuccessful = unsuccessful + temp[1];
+			partial = partial + temp[2];
+			System.out.println(line.toCSVString());
+
+		}
+		System.out.println("There are " + mergedFiles.size() + " recorded crimes; ");
+		System.out.println(successful + " Successful Searches - " + percent(successful, mergedFiles.size()));
+		System.out.println(partial + " Partial Successful Searches -" + percent(partial, mergedFiles.size()));
+		System.out.println(unsuccessful + " Unsuccessful Searches -" + percent(unsuccessful, mergedFiles.size()));
+
+	}
+	public ArrayList<CrimeStopAndsearch> getmergedFiles() {
+		return mergedFiles;
+	}
+	
+	public int[] SuccessfulSearch(String Outcome_linked_to_object_of_search) {
+		int successful = 0, unsuccessful = 0, partial = 0;
+
+		if (Outcome_linked_to_object_of_search.equalsIgnoreCase("TRUE")) {
+			successful++;
+		}
+		if (Outcome_linked_to_object_of_search.equalsIgnoreCase("FALSE")) {
+			partial++;
+		}
+		if (Outcome_linked_to_object_of_search.equals(null) || Outcome_linked_to_object_of_search.equals("")) {
+			unsuccessful++;
+		}
+
+		int[] intArray = new int[3];
+		intArray[0] = successful;
+		intArray[1] = unsuccessful;
+		intArray[2] = partial;
+
+		return intArray;
+
+	}
+	
+	private static String percent(int num, int div) {
+		double perc = ((double) num / div);
+		perc *= 100;
+		return String.format(" %.1f%%", perc);
+	}
+
+
+	
 	public TreeMap<String, List<CrimeStopAndsearch>> getLegislationTree() {
 		return legislationTree;
 	}

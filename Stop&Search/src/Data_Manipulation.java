@@ -383,15 +383,16 @@ public class Data_Manipulation {
 	public void ethnicLeg(ArrayList<CrimeStopAndsearch> temp,String pickLegislation) {
 		List<CrimeStopAndsearch> myList = new ArrayList<>();
 		CrimeStopAndsearch storage = null;
-		Data_Handling instance = new Data_Handling();
+		//Data_Handling instance = new Data_Handling();
 		List<String> tempList = new ArrayList<>();
 		
 		for (CrimeStopAndsearch currentCrime : temp) {
 			if (currentCrime.Self_defined_ethnicity.equalsIgnoreCase("")
 					|| currentCrime.Self_defined_ethnicity.equalsIgnoreCase(null)) {
 			} else {
-				if(!currentCrime.Self_defined_ethnicity.contains(currentCrime.Self_defined_ethnicity))
+				if(!tempList.contains(currentCrime.Self_defined_ethnicity)) {
 				tempList.add(currentCrime.Self_defined_ethnicity);
+				}
 			}
 		}
 		for (String Ethnic : tempList) {
@@ -419,6 +420,7 @@ public class Data_Manipulation {
 
 		for (CrimeStopAndsearch j : myList) {
 			System.out.println(j.highestTotalethnic());
+			break;
 		}
 		
 	}

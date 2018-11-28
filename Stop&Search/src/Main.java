@@ -91,7 +91,6 @@ public class Main {
 				System.out.println("================================================");
 				System.out.println("Please pick a legislation");
 				String pickLegislation = allTheFiles.GetLeg();
-			
 				changeData.ethnicLeg(allTheFiles.getmergedFiles(), pickLegislation);
 				break;
 				}

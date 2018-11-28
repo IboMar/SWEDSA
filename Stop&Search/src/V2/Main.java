@@ -23,7 +23,7 @@ public class Main {
 		for (String file : fileDIRList) {
 			allTheFiles.readFile(file);
 		}
-		allTheFiles.doOtherStuff();
+		allTheFiles.loadTrees();
 		Scanner scan = new Scanner(System.in);
 		String Menu = "";
 		do {
@@ -66,6 +66,29 @@ public class Main {
 				allTheFiles.alloutputCrimes();
 				break;
 			case "D":
+				
+				Set<String> uniqueDates = allTheFiles.getUniqueAttributes("date");
+				for(String date: uniqueDates) {
+					System.out.println(date);
+				}
+				System.out.println("Please pick a date");
+				Integer selection = scan.nextInt();
+				scan.nextLine();
+//				int i=0;
+//				while (selection == null) {
+//					
+//					System.out.println("Please select a valid option");
+//					choice = scan.nextInt();
+//					scan.nextLine();
+//					for (String date : dates) {
+//						
+//						if (i == choice) {
+//							pickDate = date;
+//						}
+//						i++;
+//					}
+//				changeData.highestTotal(allTheFiles.getmergedFiles(),selection);
+				
 				
 				break;
 			case "E":

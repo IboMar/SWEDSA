@@ -1,11 +1,14 @@
 package V2;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class Data_Handling {
@@ -15,7 +18,9 @@ public class Data_Handling {
 	private TreeMap<String, List<CrimeStopAndsearch>> legislationTree = new TreeMap<>();
 	private Map<String, List<CrimeStopAndsearch>> objectOfSearchTree = new HashMap<>();
 	private Map<String, List<CrimeStopAndsearch>> ethnicSearchTree = new HashMap<>();
-	
+	private Set<String> uniqueDates;
+	private Set<String> uniqueLegislation;
+	private Set<String> uniquePoliceForce;
 
 	public void readFile(String filename) throws FileNotFoundException {
 
@@ -32,56 +37,109 @@ public class Data_Handling {
 		}
 		csvScan.close();
 	}
-	public void loadTrees()
-	{	
-		for(CrimeStopAndsearch e: mergedFiles) {
+
+	public Set<String> getUniqueAttributes(String selection) {
+		
+
+			switch (selection) {
+			case "date":
+				if (uniqueDates == null) {
+					Set<String> uniqueDates = new HashSet<String>();
+					for (CrimeStopAndsearch currentCrime : mergedFiles) {
+						if(currentCrime.Date == null || currentCrime.Date.length()==0) {
+							
+						}else {
+							String substringDate = currentCrime.Date;
+							substringDate = substringDate.substring(0, 7);
+							uniqueDates.add(substringDate);
+							
+						
+						}
+					}
+					return uniqueDates;
+				}
+			case "police":
+				if (uniquePoliceForce == null) {
+					Set<String> uniquePoliceForce = new HashSet<String>();
+					for (CrimeStopAndsearch currentCrime : mergedFiles) {
+						
+						if(currentCrime.Policing_operation == null || currentCrime.Policing_operation.length()==0) {
+							
+						}else {
+							uniquePoliceForce.add(currentCrime.Policing_operation);
+							
+						
+						}
+					}
+					return uniquePoliceForce;
+				}
+				
+			case "legislation":
+				if (uniqueLegislation == null) {
+					Set<String> uniqueLegislation = new HashSet<String>();
+					for (CrimeStopAndsearch currentCrime : mergedFiles) {
+						if(currentCrime.Legislation == null || currentCrime.Legislation.length()==0) {
+						
+						}else {
+							uniqueLegislation.add(currentCrime.Legislation);
+							
+						}
+					}
+					return uniqueLegislation;
+				}
+			default:
+				System.out.println("Set populated.");
+			}
+		
+		return null;
+	}
+
+	public void loadTrees() {
+		for (CrimeStopAndsearch e : mergedFiles) {
 			List<CrimeStopAndsearch> legList = legislationTree.get(e.Legislation);
-			if (legList == null)
-			{
+			if (legList == null) {
 				legList = new ArrayList<>();
 				legislationTree.put(e.Legislation, legList);
 			}
 			legList.add(e);
-			
+
 			List<CrimeStopAndsearch> objectSearchList = objectOfSearchTree.get(e.Object_of_search);
-			if (objectSearchList == null)
-			{
+			if (objectSearchList == null) {
 				objectSearchList = new ArrayList<>();
 				objectOfSearchTree.put(e.Object_of_search, objectSearchList);
 			}
 			objectSearchList.add(e);
 			List<CrimeStopAndsearch> ethnicList = ethnicSearchTree.get(e.ethnic);
-			if (ethnicSearchTree == null)
-			{
+			if (ethnicSearchTree == null) {
 				ethnicList = new ArrayList<>();
 				ethnicSearchTree.put(e.ethnic, ethnicList);
 			}
 			ethnicSearchTree.put(e.ethnic, ethnicList);
-			
+
 		}
-		
-		
+
 		int count = 0;
 		long start = System.currentTimeMillis();
 		List<CrimeStopAndsearch> matches = objectOfSearchTree.get("Controlled drugs");
 		for (CrimeStopAndsearch stop : matches)
 			count++;
-			//System.out.println(stop);
+		// System.out.println(stop);
 		long total = System.currentTimeMillis() - start;
-		System.out.println("This took "+total+" to count "+count);
-		
+		System.out.println("This took " + total + " to count " + count);
+
 		long start2 = System.nanoTime();
 
 		int count2 = 0;
 		for (CrimeStopAndsearch stop : mergedFiles)
 			if (stop.Object_of_search.equals("Controlled drugs"))
-			 count2++;
+				count2++;
 		long total2 = System.currentTimeMillis() - start2;
-		System.out.println("This took "+total2+" to count "+count2);
-		
-		System.out.println("set size "+mergedFiles.size());
-		
+		System.out.println("This took " + total2 + " to count " + count2);
+
+		System.out.println("set size " + mergedFiles.size());
+
 	}
+
 	void alloutputCrimes() {
 		ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
 		int successful = 0, unsuccessful = 0, partial = 0;
@@ -100,10 +158,11 @@ public class Data_Handling {
 		System.out.println(unsuccessful + " Unsuccessful Searches -" + percent(unsuccessful, mergedFiles.size()));
 
 	}
+
 	public ArrayList<CrimeStopAndsearch> getmergedFiles() {
 		return mergedFiles;
 	}
-	
+
 	public int[] SuccessfulSearch(String Outcome_linked_to_object_of_search) {
 		int successful = 0, unsuccessful = 0, partial = 0;
 
@@ -125,18 +184,17 @@ public class Data_Handling {
 		return intArray;
 
 	}
-	
+
 	private static String percent(int num, int div) {
 		double perc = ((double) num / div);
 		perc *= 100;
 		return String.format(" %.1f%%", perc);
 	}
 
-
-	
 	public TreeMap<String, List<CrimeStopAndsearch>> getLegislationTree() {
 		return legislationTree;
 	}
+
 	public Map<String, List<CrimeStopAndsearch>> getObjectOfSearchTree() {
 		return objectOfSearchTree;
 	}

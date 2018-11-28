@@ -14,6 +14,7 @@ public class Data_Handling {
 	private ArrayList<CrimeStopAndsearch> mergedFiles = new ArrayList<>();
 	private TreeMap<String, List<CrimeStopAndsearch>> legislationTree = new TreeMap<>();
 	private Map<String, List<CrimeStopAndsearch>> objectOfSearchTree = new HashMap<>();
+	private Map<String, List<CrimeStopAndsearch>> ethnicSearchTree = new HashMap<>();
 	
 
 	public void readFile(String filename) throws FileNotFoundException {
@@ -31,7 +32,7 @@ public class Data_Handling {
 		}
 		csvScan.close();
 	}
-	public void doOtherStuff()
+	public void loadTrees()
 	{	
 		for(CrimeStopAndsearch e: mergedFiles) {
 			List<CrimeStopAndsearch> legList = legislationTree.get(e.Legislation);
@@ -49,6 +50,14 @@ public class Data_Handling {
 				objectOfSearchTree.put(e.Object_of_search, objectSearchList);
 			}
 			objectSearchList.add(e);
+			List<CrimeStopAndsearch> ethnicList = ethnicSearchTree.get(e.ethnic);
+			if (ethnicSearchTree == null)
+			{
+				ethnicList = new ArrayList<>();
+				ethnicSearchTree.put(e.ethnic, ethnicList);
+			}
+			ethnicSearchTree.put(e.ethnic, ethnicList);
+			
 		}
 		
 		

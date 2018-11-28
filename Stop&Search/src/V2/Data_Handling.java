@@ -56,8 +56,8 @@ public class Data_Handling {
 						
 						}
 					}
-					return uniqueDates;
-				}
+					
+				}return uniqueDates;
 			case "police":
 				if (uniquePoliceForce == null) {
 					Set<String> uniquePoliceForce = new HashSet<String>();
@@ -71,8 +71,8 @@ public class Data_Handling {
 						
 						}
 					}
-					return uniquePoliceForce;
-				}
+					
+				}return uniquePoliceForce;
 				
 			case "legislation":
 				if (uniqueLegislation == null) {
@@ -85,13 +85,12 @@ public class Data_Handling {
 							
 						}
 					}
-					return uniqueLegislation;
-				}
-			default:
-				System.out.println("Set populated.");
-			}
+					
+				}return uniqueLegislation;
 		
-		return null;
+		
+	}
+			return null;
 	}
 
 	public void loadTrees() {

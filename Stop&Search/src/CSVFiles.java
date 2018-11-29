@@ -3,9 +3,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+/** This class gets each unique directory from txt file
+ */
 public class CSVFiles {
 	/**
-	 * This method reads in a single file and passes it to FolderReader
+	 * This Method will read in a txt file and each line will consist of a Directory
+	 * and for each directory it will call read foleder which will read all files in that directory
 	 * @throws IOException
 	 */
 	public void readInFilesDir() throws IOException {

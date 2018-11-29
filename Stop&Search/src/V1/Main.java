@@ -17,10 +17,10 @@ public class Main {
 		//TempArray created for task G where it will use the data from F(i)
 		List<CrimeStopAndsearch> policedateArray = null;
 		//Creates objects to access Classes in a none static way
+		Scanner scan = new Scanner(System.in);
 		Data_Manipulation changeData = new Data_Manipulation();
 		CSVFiles fileDIR = new CSVFiles();
 		Data_Handling allTheFiles = new Data_Handling();
-		Scanner scan = new Scanner(System.in);
 		
 		//Gets all Folders and calls readFolder to read each file in that folder for all folders 
 		//and creates a list which we can access to read each file
@@ -35,6 +35,7 @@ public class Main {
 		//USER MENU
 		String Menu = "";
 		do {
+			scan = new Scanner(System.in);
 			System.out.println("A. List all distinct search purposes and searches for a specified purpose\r\n"
 					+ "C. Determine how many Stop and Searches met the following criteria \r\n"
 					+ "D. Find and report the legislation which produces the highest Stop and Search frequency for a specified month\r\n"

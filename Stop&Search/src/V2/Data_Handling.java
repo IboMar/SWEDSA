@@ -116,8 +116,7 @@ public class Data_Handling {
 			ethnicSearchTree.put(e.ethnic, ethnicList);
 
 		}
-
-		int count = 0;
+		/*int count = 0;
 		long start = System.currentTimeMillis();
 		List<CrimeStopAndsearch> matches = objectOfSearchTree.get("Controlled drugs");
 		for (CrimeStopAndsearch stop : matches)
@@ -135,8 +134,7 @@ public class Data_Handling {
 		long total2 = System.currentTimeMillis() - start2;
 		System.out.println("This took " + total2 + " to count " + count2);
 
-		System.out.println("set size " + mergedFiles.size());
-
+		System.out.println("set size " + mergedFiles.size());*/
 	}
 
 	void alloutputCrimes() {
@@ -197,9 +195,6 @@ public class Data_Handling {
 	public Map<String, List<CrimeStopAndsearch>> getObjectOfSearchTree() {
 		return objectOfSearchTree;
 	}
-	
-	
-	
 	public void userChoice(Map<String, List<CrimeStopAndsearch>> Unique) {
 		int choiceCounter=0;
 		for(String temp : Unique.keySet()) {

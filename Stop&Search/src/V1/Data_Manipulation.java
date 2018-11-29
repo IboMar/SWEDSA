@@ -215,7 +215,7 @@ public class Data_Manipulation {
 		});
 
 		for (CrimeStopAndsearch list : myList) {
-			System.out.println(list.highestTotalLeg());
+			System.out.println(list.highestTotal());
 			break;
 		}
 
@@ -277,7 +277,7 @@ public class Data_Manipulation {
 
 		for (CrimeStopAndsearch j : myList) {
 
-			System.out.println(j.highestTotalethnic());
+			System.out.println(j.highestTotal());
 			break;
 		}
 
@@ -344,7 +344,7 @@ public class Data_Manipulation {
 		});
 
 		for (CrimeStopAndsearch j : myList) {
-			System.out.println(j.highestTotalethnic());
+			System.out.println(j.highestTotal());
 			break;
 		}
 

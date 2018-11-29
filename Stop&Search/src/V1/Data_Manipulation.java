@@ -16,7 +16,7 @@ public class Data_Manipulation {
 	 * @param temp List<CrimeStopAndsearch> of all files
 	 * @return tempList List of all unique Strings for objectOfSearch
 	 */
-	public List<String> objectOfSearch(ArrayList<CrimeStopAndsearch> temp) {
+	public List<String> uniqueObjectOfSearch(ArrayList<CrimeStopAndsearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
 		for (CrimeStopAndsearch currentCrime : temp) {
@@ -28,9 +28,11 @@ public class Data_Manipulation {
 				}
 			}
 		}
-		System.out.println("Unique Object_of_search count: " + tempList.size());
+		//System.out.println("Unique Object_of_search count: " + tempList.size());
+		int i = 0;
 		for (String uniqueSeach : tempList) {
-			System.out.println(uniqueSeach);
+			System.out.println(i + " " +uniqueSeach);
+			i++;
 		}
 		return tempList;
 	}

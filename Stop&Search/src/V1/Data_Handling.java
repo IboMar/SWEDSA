@@ -304,4 +304,41 @@ public class Data_Handling {
 
 		return leg;
 	}
+	
+	/**
+	 * This method will be used as user validation for them to select a unique
+	 * ObjectiveSearch but will collect the unique ObjectiveSearchs from another method called
+	 * uniqueObjectOfSearch();
+	 * 
+	 * @return leg String for the existing unique Legislation in the list
+	 */
+	public String GetObjectiveSearch() {
+		Data_Manipulation changeData = new Data_Manipulation();
+		Scanner scan = new Scanner(System.in);
+		List<String> objectOfSearch = changeData.uniqueObjectOfSearch(mergedFiles);
+		int choice = scan.nextInt();
+		int i = 0;
+		String Search = null;
+		for (String temps : objectOfSearch) {
+			if (i == choice) {
+				Search = temps;
+			}
+			i++;
+		}
+		while (Search == null) {
+			i = 0;
+			System.out.println("Please eneter a Correct legislation");
+			choice = scan.nextInt();
+			scan.nextLine();
+			for (String temps : objectOfSearch) {
+				if (i == choice) {
+					Search = temps;
+				}
+				i++;
+			}
+		}
+
+		return Search;
+	}
+	
 }

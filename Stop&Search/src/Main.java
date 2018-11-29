@@ -1,33 +1,38 @@
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
+
+
+/**
+ * The main purpose of this class will be to call the methods to Read/Save the files
+ * After that is complete this class and method will just be a case switch for the user
+ * options to look at the data 
+ */
 
 public class Main {
 
 	public static void main(String[] args) throws IOException {
+		//TempArray created for task G where it will use the data from F(i)
 		List<CrimeStopAndsearch> policedateArray = null;
-		ArrayList<CrimeStopAndsearch> temp = null;
+		//Creates objects to access Classes in a none static way
 		Data_Manipulation changeData = new Data_Manipulation();
 		CSVFiles fileDIR = new CSVFiles();
-		fileDIR.readInFilesDir();
-		List<String> fileDIRList = FolderReader.getbasicStop_Search();
 		Data_Handling allTheFiles = new Data_Handling();
+		Scanner scan = new Scanner(System.in);
+		
+		//Gets all Folders and calls readFolder to read each file in that folder for all folders 
+		//and creates a list which we can access to read each file
+		fileDIR.readInFilesDir();
+		//Gets the list of all files
+		List<String> fileDIRList = FolderReader.getbasicStop_Search();
+		//Loop around the list for every file read it in
 		for (String file : fileDIRList) {
 			allTheFiles.readFile(file);
 		}
-		Scanner scan = new Scanner(System.in);
+		
+		//USER MENU
 		String Menu = "";
-		
-		
-		
-		
 		do {
 			System.out.println("A. List all distinct search purposes and searches for a specified purpose\r\n"
 					+ "C. Determine how many Stop and Searches met the following criteria \r\n"
@@ -42,7 +47,7 @@ public class Main {
 			switch (Menu) {
 
 			case "A":
-				temp = allTheFiles.getmergedFiles();
+				ArrayList<CrimeStopAndsearch>temp = allTheFiles.getmergedFiles();
 				List<String> uniqueobjectOfSearch = changeData.objectOfSearch(temp);
 				System.out.println("Do you want to carry out a obeject of search on this File?: \r\n Y/N");
 				String yesno = scan.nextLine();
@@ -106,16 +111,11 @@ public class Main {
 				break;
 			
 			case "H":
-				//TODO feature
 				System.out.println("Please pick a gender");
 				String pickGender = allTheFiles.getGender();
 				System.out.println("Please pick an ethnicity");
 				String pickEthnic = allTheFiles.getEthnic();
-				
 				changeData.sortByEthnicity(allTheFiles.getmergedFiles(), pickGender, pickEthnic);
-				
-				
-				
 				break;
 			}
 			

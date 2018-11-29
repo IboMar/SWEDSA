@@ -1,4 +1,5 @@
 package V1;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,6 +10,12 @@ import java.util.List;
  */
 public class Data_Manipulation {
 
+	/**
+	 * This Method will get all the unique objects of search within the merged files
+	 * 
+	 * @param temp List<CrimeStopAndsearch> of all files
+	 * @return tempList List of all unique Strings for objectOfSearch
+	 */
 	public List<String> objectOfSearch(ArrayList<CrimeStopAndsearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
@@ -28,6 +35,12 @@ public class Data_Manipulation {
 		return tempList;
 	}
 
+	/**
+	 * This Method will get all the unique dates within the merged files
+	 * 
+	 * @param temp List<CrimeStopAndsearch> of all files
+	 * @return tempList List of all unique Strings for dates
+	 */
 	public List<String> uniqueDate(List<CrimeStopAndsearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
@@ -50,8 +63,13 @@ public class Data_Manipulation {
 		return tempList;
 	}
 
+	/**
+	 * This Method will get all the unique genders within the merged files
+	 * 
+	 * @param temp List<CrimeStopAndsearch> of all files
+	 * @return tempList List of all unique Strings for gender
+	 */
 	public List<String> uniqueGender(List<CrimeStopAndsearch> temp) {
-
 		List<String> tempList = new ArrayList<>();
 		for (CrimeStopAndsearch currentCrime : temp) {
 			if (currentCrime.Gender.equalsIgnoreCase("") || currentCrime.Gender == null) {
@@ -62,7 +80,6 @@ public class Data_Manipulation {
 			}
 
 		}
-		// Set<String> uniqueGender = new HashSet<String>(tempList);
 		int i = 1;
 		for (String gender : tempList) {
 			System.out.println(i++ + ". " + gender);
@@ -71,6 +88,12 @@ public class Data_Manipulation {
 		return tempList;
 	}
 
+	/**
+	 * This Method will get all the unique Ethnics within the merged files
+	 * 
+	 * @param temp List<CrimeStopAndsearch> of all files
+	 * @return tempList List of all unique Strings for Ethnic
+	 */
 	public List<String> uniqueEthnic(List<CrimeStopAndsearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
@@ -90,6 +113,12 @@ public class Data_Manipulation {
 		return tempList;
 	}
 
+	/**
+	 * This Method will get all the unique Police within the merged files
+	 * 
+	 * @param temp List<CrimeStopAndsearch> of all files
+	 * @return tempList List of all unique Strings for Police
+	 */
 	public List<String> uniquePolice(List<CrimeStopAndsearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
@@ -110,6 +139,12 @@ public class Data_Manipulation {
 		return tempList;
 	}
 
+	/**
+	 * This Method will get all the unique Legislations within the merged files
+	 * 
+	 * @param temp List<CrimeStopAndsearch> of all files
+	 * @return tempList List of all unique Strings for Legislations
+	 */
 	public List<String> uniqueLeg(List<CrimeStopAndsearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
@@ -128,6 +163,12 @@ public class Data_Manipulation {
 
 		return tempList;
 	}
+
+	
+	/** This Method will be used to print out one object of search that the user has selected
+	 * @param temp List<CrimeStopAndsearch>
+	 * @param objectOfSearchTemp String user choice objectOfSearch
+	 */
 	public void outPutOneObjectOfSearch(ArrayList<CrimeStopAndsearch> temp, String objectOfSearchTemp) {
 
 		for (CrimeStopAndsearch currentCrime : temp) {
@@ -137,7 +178,13 @@ public class Data_Manipulation {
 		}
 	}
 
+	
+	/** This method will be used to find the highest successful legislation for a given month
+	 * @param temp List<CrimeStopAndsearch>
+	 * @param pickDate String user choice date
+	 */
 	public void allFilesLegislationHighestSucessful(ArrayList<CrimeStopAndsearch> temp, String pickDate) {
+		// Creates a list to collect all unique legislations 
 		List<CrimeStopAndsearch> myList = new ArrayList<>();
 		CrimeStopAndsearch storage = null;
 		Data_Handling instance = new Data_Handling();
@@ -154,6 +201,7 @@ public class Data_Manipulation {
 			for (CrimeStopAndsearch currentCrime : temp) {
 
 				if (Legislation.equals(currentCrime.Legislation) && currentCrime.Date.contains(pickDate)) {
+					// For each legislation the counter gets reset and if the parameters are met only then the increment takes place
 					int[] counter = instance.SuccessfulSearch(currentCrime.Outcome_linked_to_object_of_search);
 					successful = successful + counter[0];
 					unsuccessful = unsuccessful + counter[1];
@@ -163,6 +211,7 @@ public class Data_Manipulation {
 			storage = new CrimeStopAndsearch(Legislation, successful, unsuccessful, partial);
 			myList.add(storage);
 		}
+		// Orders the list on successful crimes highest to smallest
 		Collections.sort(myList, new Comparator<CrimeStopAndsearch>() {
 			@Override
 			public int compare(CrimeStopAndsearch z1, CrimeStopAndsearch z2) {
@@ -174,6 +223,7 @@ public class Data_Manipulation {
 			}
 		});
 
+		// The list has been ordered now you print the largest item and break which will give you the highest successful value
 		for (CrimeStopAndsearch list : myList) {
 			System.out.println(list.highestSucessLeg());
 			break;
@@ -182,6 +232,10 @@ public class Data_Manipulation {
 
 	}
 
+	/** This method will be used to find the highest total crimes for each legislation for a given month
+	 * @param temp List<CrimeStopAndsearch>
+	 * @param pickDate String user choice date
+	 */
 	public void highestTotal(ArrayList<CrimeStopAndsearch> temp, String pickDate) {
 		List<CrimeStopAndsearch> myList = new ArrayList<>();
 		CrimeStopAndsearch storage = null;
@@ -221,20 +275,26 @@ public class Data_Manipulation {
 
 	}
 
+	
+	/** This method will be used to sort in chronological order list from F(i) and then print the list out
+	 * @param temp List<CrimeStopAndsearch>
+	 */
 	public void chronoLogicalOrder(List<CrimeStopAndsearch> policedateArray) {
 
 		Comparator<CrimeStopAndsearch> cmp = Comparator.comparing(CrimeStopAndsearch::getDate);
 		Collections.sort(policedateArray, cmp.reversed());
-
-		// sort the list
-
 		for (CrimeStopAndsearch currentCrime : policedateArray) {
-
 			System.out.println(currentCrime.toCSVString());
 		}
-
 	}
 
+	
+	/** This method will be used to see total crimes for each ethnic group based on user parameters of date and police
+	 * @param temp List<CrimeStopAndsearch>
+	 * @param pickDate user String date
+	 * @param String user policeForce
+	 * @return chronoArray A list of data we found within this method for the users options will be used to sort in chronological order
+	 */
 	public List<CrimeStopAndsearch> ethnic(ArrayList<CrimeStopAndsearch> temp, String pickDate, String policeForce) {
 		List<CrimeStopAndsearch> myList = new ArrayList<>();
 		CrimeStopAndsearch storage = null;
@@ -284,6 +344,12 @@ public class Data_Manipulation {
 		return chronoArray;
 	}
 
+	
+	/** This method will be used to sort by ethnicity and then print it out
+	 * @param temp List<CrimeStopAndsearch>
+	 * @param pickGender user String gender
+	 * @param pickEthnic user String Ethnic
+	 */
 	public void sortByEthnicity(ArrayList<CrimeStopAndsearch> temp, String pickGender, String pickEthnic) {
 		List<CrimeStopAndsearch> tempList = new ArrayList<>();
 		for (CrimeStopAndsearch currentCrime : temp) {
@@ -304,10 +370,13 @@ public class Data_Manipulation {
 		}
 	}
 
+	/** This method will find the highest total crimes for each ethnicity on a given legislation 
+	 * @param temp List<CrimeStopAndsearch>
+	 * @param pickLegislation user String Legislation
+	 */
 	public void ethnicLeg(ArrayList<CrimeStopAndsearch> temp, String pickLegislation) {
 		List<CrimeStopAndsearch> myList = new ArrayList<>();
 		CrimeStopAndsearch storage = null;
-		// Data_Handling instance = new Data_Handling();
 		List<String> tempList = new ArrayList<>();
 
 		for (CrimeStopAndsearch currentCrime : temp) {

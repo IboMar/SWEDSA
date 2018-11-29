@@ -197,4 +197,32 @@ public class Data_Handling {
 	public Map<String, List<CrimeStopAndsearch>> getObjectOfSearchTree() {
 		return objectOfSearchTree;
 	}
+	
+	
+	
+	public void userChoice(Map<String, List<CrimeStopAndsearch>> Unique) {
+		int choiceCounter=0;
+		for(String temp : Unique.keySet()) {
+			if(temp.isEmpty())
+				System.out.println(choiceCounter +" NULL");
+			else
+			System.out.println(choiceCounter + " " +temp);
+			
+		choiceCounter++;
+		}
+		choiceCounter=0;
+		Scanner scan = new Scanner(System.in);
+		int pickObjectOfSearch = scan.nextInt();
+		for (String uniqueSeach : Unique.keySet()) {
+			if (pickObjectOfSearch == choiceCounter ) {
+				List<CrimeStopAndsearch> List = Unique.get(uniqueSeach);
+				for(CrimeStopAndsearch looping : List) {
+					System.out.println(looping.toCSVString());
+				}
+			}
+			choiceCounter++;
+		}
+	}
+	
+	
 }

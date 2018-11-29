@@ -41,27 +41,14 @@ public class Main {
 
 			case "A":
 				Map<String, List<CrimeStopAndsearch>> objectOfSearchTree = allTheFiles.getObjectOfSearchTree();
-				for (String uniqueSearch : objectOfSearchTree.keySet()) {
-					System.out.println(uniqueSearch);
-				}
 				System.out.println("\nDo you want to carry out a obeject of search on this File?: \r\n1. Yes \r\n2. No");
 				int yesno = scan.nextInt();
 				scan.nextLine();
 				if (yesno == 1) {
 					System.out.println("Please select an object of search:  ");
-					String pickObjectOfSearch = scan.nextLine();
-					for (String uniqueSeach : objectOfSearchTree.keySet()) {
-						if (pickObjectOfSearch.equals(uniqueSeach)) {
-							List<CrimeStopAndsearch> List = objectOfSearchTree.get(pickObjectOfSearch);
-							for(CrimeStopAndsearch looping : List) {
-								System.out.println(looping.toCSVString());
-							}
-						}
-					}
+					allTheFiles.userChoice(objectOfSearchTree);
 				}
-			
 				break;
-
 			case "C":
 				allTheFiles.alloutputCrimes();
 				break;

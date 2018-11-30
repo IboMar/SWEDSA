@@ -1,6 +1,6 @@
 package V2;
 /**
- * This will be the main class that we will use to output and manipulate data
+ * This will be the main class that we will use to output and manipulate data usually will be within an arrayList
  */
 public class CrimeStopAndsearch {
 
@@ -27,9 +27,9 @@ public class CrimeStopAndsearch {
 	public Boolean Removal_of_more_than_just_outer_clothing;
 	public int total;
 	
+	/** This method is used to print out all attributes within the object usually used looping through the list and outputting data
+	 */
 	public String toCSVString() {
-		
-		
 		String unfilteredCSV = type + ", " + Date + ", " + Gender + ", " + Part_of_a_policing_operation + ", " + Policing_operation + ", " + latitude
 				+ " " + longitude + " " + Age_range + " " + Self_defined_ethnicity + " " + Officer_defined_ethnicity
 				+ ", " + Legislation + ", " + Object_of_search + ", " + Outcome + ", "
@@ -103,28 +103,43 @@ public class CrimeStopAndsearch {
 	}
 
 
+	/** used in comparator to compare total crimes
+	 * @return total int counter of crimes
+	 */
 	public int getTotal() {
 		return total;
 	}
-	public String highestTotalLeg() {
-		return CrimeType + " : " + " Total: " + total;	
-	}
-	public String highestTotalethnic() {
+	/** used to print out highest total crimes
+	 * @return CrimeType String of this current crime type, total int counter of crimes
+	 */
+	public String highestTotal() {
 		return CrimeType + " : " + " Total: " + total;	
 	}
 	
+	/** used to print out the highest successful legislation
+	 * @return A String ready to display highest successful Legislation
+	 */
 	public String highestSucessLeg() {
 		return Legislation + " : " + " Successful: " + Successful + " partially successful: " + partially_successful
 				+ " unsuccessful: " + unsuccessful;	
 	}
 	
 	
+	/** used in comparator to compare dates
+	 * @return Date String
+	 */
 	public String getDate() {
 		return Date;
 	}
+	/** used in comparator to compare successful crimes
+	 * @return Successful int
+	 */
 	public int getSuccessful() {
 		return Successful;
 	}
+	/** used in comparator to compare Legislation
+	 * @return Legislation String
+	 */
 	public String getLegislation() {
 		return Legislation;
 	}

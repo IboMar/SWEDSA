@@ -14,6 +14,10 @@ import java.util.TreeMap;
 
 import V1.Data_Manipulation;
 
+/**
+ * This class will be used to read in the files and actually just get unique
+ * items within the file of create counters
+ */
 public class Data_Handling {
 
 	public final String SEP = ",";
@@ -28,6 +32,12 @@ public class Data_Handling {
 	private Set<String> uniqueGender = new HashSet<String>();
 	private Scanner read = new Scanner(System.in);
 
+	/**
+	 * This method accepts a String filename and reads it in for each line a new
+	 * arraylist will be made so in future you can navigate through ever line
+	 * 
+	 * @param filename String FileNames
+	 */
 	public void readFile(String filename) throws FileNotFoundException {
 
 		File csvFile = new File(filename);
@@ -44,6 +54,13 @@ public class Data_Handling {
 		csvScan.close();
 	}
 
+	/**
+	 * The purpose of this method is user validation on picking unique values which
+	 * will get them unique values from a sub method called getUniqueAttributes()
+	 * 
+	 * @param selection String this will be programmers selection to find a certain
+	 *                  set
+	 */
 	public String printAttribute(String selection) {
 		// This method will collect all the unique dates in the merged Array
 		Set<String> uniqueAttributes = getUniqueAttributes(selection);
@@ -71,6 +88,15 @@ public class Data_Handling {
 		return pickAttribute;
 	}
 
+	/**
+	 * The purpose of this method is for the programmer to call this method with a
+	 * String e.g. police which will check if uniquepolice exists if not create it
+	 * and then return
+	 * 
+	 * @param selection String this will be programmers selection to find a certain
+	 *                  set
+	 * @return unique values in for of Set String
+	 */
 	public Set<String> getUniqueAttributes(String selection) {
 		switch (selection) {
 		case "date":
@@ -147,6 +173,10 @@ public class Data_Handling {
 
 	}
 
+	/**
+	 * This method is used to load in all the trees which we can use later on to
+	 * navigate selected values
+	 */
 	public void loadTrees() {
 		for (CrimeStopAndsearch e : mergedFiles) {
 			List<CrimeStopAndsearch> legList = legislationTree.get(e.Legislation);
@@ -189,8 +219,12 @@ public class Data_Handling {
 		 */
 	}
 
+	/**
+	 * This method will be used for printing out all the data and displaying the
+	 * number of crimes successful crimes unsuccessful and partially successful
+	 * crimes counters
+	 */
 	void alloutputCrimes() {
-		ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
 		int successful = 0, unsuccessful = 0, partial = 0;
 		for (CrimeStopAndsearch line : mergedFiles) {
 
@@ -199,7 +233,6 @@ public class Data_Handling {
 			unsuccessful = unsuccessful + temp[1];
 			partial = partial + temp[2];
 			System.out.println(line.toCSVString());
-
 		}
 		System.out.println("There are " + mergedFiles.size() + " recorded crimes; ");
 		System.out.println(successful + " Successful Searches - " + percent(successful, mergedFiles.size()));
@@ -208,10 +241,15 @@ public class Data_Handling {
 
 	}
 
-	public ArrayList<CrimeStopAndsearch> getmergedFiles() {
-		return mergedFiles;
-	}
-
+	/**
+	 * This method will accept a String of Outcome_linked_to_object_of_search to
+	 * calculate if that search was successful,unsuccessful and partial and return
+	 * the values This method will mainly be used for counters
+	 * 
+	 * @param Outcome_linked_to_object_of_search String if true successful, false
+	 *                                           partial else unsuccessful
+	 * @return intArray Array of 3 positions 0=successful 1=unsuccessful 2=partial
+	 */
 	public int[] SuccessfulSearch(String Outcome_linked_to_object_of_search) {
 		int successful = 0, unsuccessful = 0, partial = 0;
 
@@ -234,29 +272,41 @@ public class Data_Handling {
 
 	}
 
+	/**
+	 * This method is used to find the percent
+	 * 
+	 * @param num int num / div
+	 * @param div int num / div
+	 * @return String.format(" %.1f%%", perc);
+	 */
 	private static String percent(int num, int div) {
 		double perc = ((double) num / div);
 		perc *= 100;
 		return String.format(" %.1f%%", perc);
 	}
 
-	public TreeMap<String, List<CrimeStopAndsearch>> getLegislationTree() {
-		return legislationTree;
-	}
-
+	/**
+	 * IDK if this is useful was just to print out all unique objects of search for
+	 * option A before actually selecting
+	 */
 	public Map<String, List<CrimeStopAndsearch>> getObjectOfSearchTree() {
-		int i = 0;
 		for (String temp : objectOfSearchTree.keySet()) {
 			if (temp.isEmpty()) {
-				System.out.println(i + " TBD");
+				System.out.println("TBD");
 			} else {
-				System.out.println(i + " " + temp);
+				System.out.println(temp);
 			}
-			i++;
 		}
 		return objectOfSearchTree;
 	}
 
+	/**
+	 * This method is used for the user to select a unique object of search and then
+	 * print out all the data on that option This method is also kind of pointless
+	 * could be changed beacuse sending values that are accessible within this class
+	 * 
+	 * @param Treemap of object of search
+	 */
 	public String userChoice(Map<String, List<CrimeStopAndsearch>> Unique) {
 		String userChoice = null;
 		int choiceCounter = 0;
@@ -358,7 +408,11 @@ public class Data_Handling {
 		return ListForG;
 	}
 
-
+	/**
+	 * This method is used to find the highest total ethnic for a given legislation
+	 * 
+	 * @param String user legislation
+	 */
 	public void highestTotalEthnicForAGivenMonthAndPolice(String legislation) {
 		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
 		for (String temp : ethnicSearchTree.keySet()) {
@@ -374,25 +428,23 @@ public class Data_Handling {
 		String max = Collections.max(hashMap.entrySet(), (entry1, entry2) -> entry1.getValue() - entry2.getValue())
 				.getKey();
 		int highestCounet = hashMap.get(max);
-		System.out.println(max + "Total Crimes: " + highestCounet);
+		System.out.println(max + " Successful Crimes: " + highestCounet);
 	}
 
-	public Map<String, List<CrimeStopAndsearch>> getEthnicSearchTree() {
-
-		return ethnicSearchTree;
-
-	}
-
+	/**
+	 * This method is used to print out stop and searches on a specfic gender and
+	 * ethnicity and prints it on Legislation
+	 * 
+	 * @param gender    String user choice gender
+	 * @param ethnicity String user choice
+	 */
 	public void EthnicityAndGenderSearch(String gender, String ethnicity) {
-		for (String temp : legislationTree.keySet()) {	
+		for (String temp : legislationTree.keySet()) {
 			List<CrimeStopAndsearch> legList = legislationTree.get(temp);
-			
+
 			for (CrimeStopAndsearch currentCrime : legList) {
 				if (currentCrime.Gender.equals(gender) && currentCrime.Self_defined_ethnicity.equals(ethnicity)) {
-
 					System.out.println(currentCrime.toCSVString());
-				} else {
-
 				}
 			}
 

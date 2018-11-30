@@ -53,7 +53,6 @@ public class Main {
 				allTheFiles.alloutputCrimes();
 				break;
 			case "D":
-				//Set<String> uniqueDates = allTheFiles.getUniqueAttributes("date");
 				String uniqueDate =allTheFiles.printAttribute("date");
 				allTheFiles.highestTotalLegislationForAGivenMonth(uniqueDate, 1);	
 

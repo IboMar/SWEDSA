@@ -53,14 +53,9 @@ public class Main {
 				allTheFiles.alloutputCrimes();
 				break;
 			case "D":
+				allTheFiles.printAttribute("legislation");
 				
-				Set<String> uniqueDates = allTheFiles.getUniqueAttributes("date");
-				for(String date: uniqueDates) {
-					System.out.println(date);
-				}
-				System.out.println("Please pick a date");
-				Integer selection = scan.nextInt();
-				scan.nextLine();
+				
 //				int i=0;
 //				while (selection == null) {
 //					

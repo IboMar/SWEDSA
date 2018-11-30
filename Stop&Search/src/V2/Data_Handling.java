@@ -11,6 +11,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
 
+import V1.Data_Manipulation;
+
 public class Data_Handling {
 
 	public final String SEP = ",";
@@ -18,9 +20,10 @@ public class Data_Handling {
 	private TreeMap<String, List<CrimeStopAndsearch>> legislationTree = new TreeMap<>();
 	private Map<String, List<CrimeStopAndsearch>> objectOfSearchTree = new HashMap<>();
 	private Map<String, List<CrimeStopAndsearch>> ethnicSearchTree = new HashMap<>();
-	private Set<String> uniqueDates;
-	private Set<String> uniqueLegislation;
-	private Set<String> uniquePoliceForce;
+	private Set<String> uniqueDates = new HashSet<String>();
+	private Set<String> uniqueLegislation = new HashSet<String>();
+	private Set<String> uniquePoliceForce = new HashSet<String>();
+	private Scanner read = new Scanner(System.in);
 
 	public void readFile(String filename) throws FileNotFoundException {
 
@@ -38,59 +41,84 @@ public class Data_Handling {
 		csvScan.close();
 	}
 
-	public Set<String> getUniqueAttributes(String selection) {
-		
+	public String printAttribute(String selection) {
+		// This method will collect all the unique dates in the merged Array
+		Set<String> uniqueAttributes = getUniqueAttributes(selection);
+		int x = 1;
+		System.out.println("Please select one of the following options for "+selection); 
+		for (String attribute : uniqueAttributes) {
+			System.out.println(x++ + ". " + attribute);
+		}
+		String pickAttribute = null;
+		int i = 1;
+		while (pickAttribute == null) {
+			int choice = read.nextInt();
+			read.nextLine();
+			for (String attribute : uniqueAttributes) {
 
-			switch (selection) {
-			case "date":
-				if (uniqueDates == null) {
-					Set<String> uniqueDates = new HashSet<String>();
-					for (CrimeStopAndsearch currentCrime : mergedFiles) {
-						if(currentCrime.Date == null || currentCrime.Date.length()==0) {
-							
-						}else {
-							String substringDate = currentCrime.Date;
-							substringDate = substringDate.substring(0, 7);
-							uniqueDates.add(substringDate);
-							
-						
-						}
-					}
-					
-				}return uniqueDates;
-			case "police":
-				if (uniquePoliceForce == null) {
-					Set<String> uniquePoliceForce = new HashSet<String>();
-					for (CrimeStopAndsearch currentCrime : mergedFiles) {
-						
-						if(currentCrime.Policing_operation == null || currentCrime.Policing_operation.length()==0) {
-							
-						}else {
-							uniquePoliceForce.add(currentCrime.Policing_operation);
-							
-						
-						}
-					}
-					
-				}return uniquePoliceForce;
-				
-			case "legislation":
-				if (uniqueLegislation == null) {
-					Set<String> uniqueLegislation = new HashSet<String>();
-					for (CrimeStopAndsearch currentCrime : mergedFiles) {
-						if(currentCrime.Legislation == null || currentCrime.Legislation.length()==0) {
-						
-						}else {
-							uniqueLegislation.add(currentCrime.Legislation);
-							
-						}
-					}
-					
-				}return uniqueLegislation;
-		
-		
+				if (i == choice) {
+					pickAttribute = attribute;
+					return pickAttribute;
+				}
+				i++;
+			}
+			System.out.println("Please select a valid option.");
+		}
+		// Returning a unique date of the users choosing
+		return pickAttribute;
 	}
-			return null;
+
+	public Set<String> getUniqueAttributes(String selection) {
+
+		switch (selection) {
+		case "date":
+			if (uniqueDates.isEmpty()) {
+
+				for (CrimeStopAndsearch currentCrime : mergedFiles) {
+					if (currentCrime.Date == null || currentCrime.Date.length() == 0) {
+
+					} else {
+						String substringDate = currentCrime.Date;
+						substringDate = substringDate.substring(0, 7);
+						uniqueDates.add(substringDate);
+
+					}
+				}
+
+			}
+
+			return uniqueDates;
+		case "police":
+			if (uniquePoliceForce.isEmpty()) {
+				for (CrimeStopAndsearch currentCrime : mergedFiles) {
+
+					if (currentCrime.Policing_operation == null || currentCrime.Policing_operation.length() == 0) {
+
+					} else {
+						uniquePoliceForce.add(currentCrime.Policing_operation);
+
+					}
+				}
+
+			}
+			return uniquePoliceForce;
+
+		case "legislation":
+			if (uniqueLegislation.isEmpty()) {
+				for (CrimeStopAndsearch currentCrime : mergedFiles) {
+					if (currentCrime.Legislation == null || currentCrime.Legislation.length() == 0) {
+
+					} else {
+						uniqueLegislation.add(currentCrime.Legislation);
+
+					}
+				}
+
+			}
+			return uniqueLegislation;
+
+		}
+		return null;
 	}
 
 	public void loadTrees() {
@@ -116,25 +144,23 @@ public class Data_Handling {
 			ethnicSearchTree.put(e.ethnic, ethnicList);
 
 		}
-		/*int count = 0;
-		long start = System.currentTimeMillis();
-		List<CrimeStopAndsearch> matches = objectOfSearchTree.get("Controlled drugs");
-		for (CrimeStopAndsearch stop : matches)
-			count++;
-		// System.out.println(stop);
-		long total = System.currentTimeMillis() - start;
-		System.out.println("This took " + total + " to count " + count);
-
-		long start2 = System.nanoTime();
-
-		int count2 = 0;
-		for (CrimeStopAndsearch stop : mergedFiles)
-			if (stop.Object_of_search.equals("Controlled drugs"))
-				count2++;
-		long total2 = System.currentTimeMillis() - start2;
-		System.out.println("This took " + total2 + " to count " + count2);
-
-		System.out.println("set size " + mergedFiles.size());*/
+		/*
+		 * int count = 0; long start = System.currentTimeMillis();
+		 * List<CrimeStopAndsearch> matches =
+		 * objectOfSearchTree.get("Controlled drugs"); for (CrimeStopAndsearch stop :
+		 * matches) count++; // System.out.println(stop); long total =
+		 * System.currentTimeMillis() - start; System.out.println("This took " + total +
+		 * " to count " + count);
+		 * 
+		 * long start2 = System.nanoTime();
+		 * 
+		 * int count2 = 0; for (CrimeStopAndsearch stop : mergedFiles) if
+		 * (stop.Object_of_search.equals("Controlled drugs")) count2++; long total2 =
+		 * System.currentTimeMillis() - start2; System.out.println("This took " + total2
+		 * + " to count " + count2);
+		 * 
+		 * System.out.println("set size " + mergedFiles.size());
+		 */
 	}
 
 	void alloutputCrimes() {
@@ -195,29 +221,29 @@ public class Data_Handling {
 	public Map<String, List<CrimeStopAndsearch>> getObjectOfSearchTree() {
 		return objectOfSearchTree;
 	}
+
 	public void userChoice(Map<String, List<CrimeStopAndsearch>> Unique) {
-		int choiceCounter=0;
-		for(String temp : Unique.keySet()) {
-			if(temp.isEmpty())
-				System.out.println(choiceCounter +" NULL");
+		int choiceCounter = 0;
+		for (String temp : Unique.keySet()) {
+			if (temp.isEmpty())
+				System.out.println(choiceCounter + " NULL");
 			else
-			System.out.println(choiceCounter + " " +temp);
-			
-		choiceCounter++;
+				System.out.println(choiceCounter + " " + temp);
+
+			choiceCounter++;
 		}
-		choiceCounter=0;
+		choiceCounter = 0;
 		Scanner scan = new Scanner(System.in);
 		int pickObjectOfSearch = scan.nextInt();
 		for (String uniqueSeach : Unique.keySet()) {
-			if (pickObjectOfSearch == choiceCounter ) {
+			if (pickObjectOfSearch == choiceCounter) {
 				List<CrimeStopAndsearch> List = Unique.get(uniqueSeach);
-				for(CrimeStopAndsearch looping : List) {
+				for (CrimeStopAndsearch looping : List) {
 					System.out.println(looping.toCSVString());
 				}
 			}
 			choiceCounter++;
 		}
 	}
-	
-	
+
 }

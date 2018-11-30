@@ -231,7 +231,8 @@ public class Data_Handling {
 		return objectOfSearchTree;
 	}
 
-	public void userChoice(Map<String, List<CrimeStopAndsearch>> Unique) {
+	public String userChoice(Map<String, List<CrimeStopAndsearch>> Unique) {
+		String userChoice = null;
 		int choiceCounter = 0;
 		for (String temp : Unique.keySet()) {
 			if (temp.isEmpty())
@@ -246,6 +247,7 @@ public class Data_Handling {
 		int pickObjectOfSearch = scan.nextInt();
 		for (String uniqueSeach : Unique.keySet()) {
 			if (pickObjectOfSearch == choiceCounter) {
+				userChoice = uniqueSeach;
 				List<CrimeStopAndsearch> List = Unique.get(uniqueSeach);
 				for (CrimeStopAndsearch looping : List) {
 					System.out.println(looping.toCSVString());
@@ -253,6 +255,7 @@ public class Data_Handling {
 			}
 			choiceCounter++;
 		}
+		return userChoice;
 	}
 
 }

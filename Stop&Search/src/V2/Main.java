@@ -53,8 +53,9 @@ public class Main {
 				allTheFiles.alloutputCrimes();
 				break;
 			case "D":
-				allTheFiles.printAttribute("legislation");
-				
+				Map<String, List<CrimeStopAndsearch>> legislationTree = allTheFiles.getLegislationTree();
+				String countTotal = allTheFiles.userChoice(legislationTree);
+				System.out.println("Total Crimes for the given Legislation: " + legislationTree.get(countTotal).size());
 				
 //				int i=0;
 //				while (selection == null) {

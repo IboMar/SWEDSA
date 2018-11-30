@@ -307,8 +307,14 @@ public class Data_Handling {
 		}
 		String max = Collections.max(hashMap.entrySet(), (entry1, entry2) -> entry1.getValue() - entry2.getValue())
 				.getKey();
+		if(selection ==1) {
 		int highestCounet = hashMap.get(max);
 		System.out.println(max + "Total Crimes: " + highestCounet);
+		}
+		if(selection ==2) {
+			int highestCounet = hashMap.get(max);
+			System.out.println(max + "Successful Crimes: " + highestCounet);
+			}
 	}
 
 	/** This method will be used to find the highest stopandsearch on ethnic for a given date and police 

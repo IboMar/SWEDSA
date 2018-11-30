@@ -72,6 +72,10 @@ public class Main {
 					String uniqueMonth =allTheFiles.printAttribute("police");
 					allTheFiles.highestTotalEthnicForAGivenMonthAndPolice(uniqueMonth,uniquePolice);
 				}
+				if (yesno == 2) {
+					String uniqueLegislation =allTheFiles.printAttribute("legislation");
+					allTheFiles.highestTotalEthnicForAGivenMonthAndPolice(uniqueLegislation);
+				}
 				
 				break;
 			case "G":

@@ -339,5 +339,23 @@ public class Data_Handling {
 		int highestCounet = hashMap.get(max);
 		System.out.println(max + "Total Crimes: " + highestCounet);
 	}
+	
+	public void highestTotalEthnicForAGivenMonthAndPolice(String legislation) {
+		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+		for (String temp : ethnicSearchTree.keySet()) {
+			int counter = 0;
+			List<CrimeStopAndsearch> ethnicList = ethnicSearchTree.get(temp);
+			for (CrimeStopAndsearch currentCrime : ethnicList) {
+				if (currentCrime.Legislation.equals(legislation)) {
+					counter++;
+				}
+			}
+			hashMap.put(temp, counter);
+		}
+		String max = Collections.max(hashMap.entrySet(), (entry1, entry2) -> entry1.getValue() - entry2.getValue())
+				.getKey();
+		int highestCounet = hashMap.get(max);
+		System.out.println(max + "Total Crimes: " + highestCounet);
+	}
 
 }

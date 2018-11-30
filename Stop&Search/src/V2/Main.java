@@ -82,6 +82,14 @@ public class Main {
 				break;
 			
 			case "H":
+				System.out.println("Please pick an ethnicity");
+				String uniqueEthnic = allTheFiles.printAttribute("ethnic");
+				System.out.println("Please pick a gender");
+				String uniqueGender = allTheFiles.printAttribute("gender");
+				allTheFiles.EthnicityAndGenderSearch(uniqueGender, uniqueEthnic);
+			
+				
+				
 				break;
 			}
 		} while (!(Menu.equals("Q")));

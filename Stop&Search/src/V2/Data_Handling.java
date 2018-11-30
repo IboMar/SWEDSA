@@ -1,4 +1,4 @@
-	package V2;
+package V2;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,6 +25,7 @@ public class Data_Handling {
 	private Set<String> uniqueLegislation = new HashSet<String>();
 	private Set<String> uniquePoliceForce = new HashSet<String>();
 	private Set<String> uniqueEthnic = new HashSet<String>();
+	private Set<String> uniqueGender = new HashSet<String>();
 	private Scanner read = new Scanner(System.in);
 
 	public void readFile(String filename) throws FileNotFoundException {
@@ -129,6 +130,18 @@ public class Data_Handling {
 
 			}
 			return uniqueEthnic;
+
+		case "gender":
+			if (uniqueGender.isEmpty()) {
+				for (CrimeStopAndsearch currentCrime : mergedFiles) {
+					if (currentCrime.Gender == null || currentCrime.Gender.length() == 0) {
+					} else {
+						uniqueGender.add(currentCrime.Gender);
+					}
+				}
+
+			}
+			return uniqueGender;
 		}
 		return null;
 
@@ -282,44 +295,46 @@ public class Data_Handling {
 		for (String temp : legislationTree.keySet()) {
 			int counter = 0;
 			List<CrimeStopAndsearch> legislationList = legislationTree.get(temp);
-			switch(selection) {
-			case 1:{//for all crimes
-			for (CrimeStopAndsearch currentCrime : legislationList) {
-				if (currentCrime.Date.contains(UserDate)) {
-					counter++;
-				}
-			}
-			break;
-			}
-			case 2:{//for successful crimes
+			switch (selection) {
+			case 1: {// for all crimes
 				for (CrimeStopAndsearch currentCrime : legislationList) {
 					if (currentCrime.Date.contains(UserDate)) {
-						if(currentCrime.Outcome_linked_to_object_of_search.equalsIgnoreCase("TRUE")){	
 						counter++;
+					}
+				}
+				break;
+			}
+			case 2: {// for successful crimes
+				for (CrimeStopAndsearch currentCrime : legislationList) {
+					if (currentCrime.Date.contains(UserDate)) {
+						if (currentCrime.Outcome_linked_to_object_of_search.equalsIgnoreCase("TRUE")) {
+							counter++;
 						}
 					}
 				}
 				break;
 			}
-			
+
 			}
 			hashMap.put(temp, counter);
 		}
 		String max = Collections.max(hashMap.entrySet(), (entry1, entry2) -> entry1.getValue() - entry2.getValue())
 				.getKey();
-		if(selection ==1) {
-		int highestCounet = hashMap.get(max);
-		System.out.println(max + "Total Crimes: " + highestCounet);
+		if (selection == 1) {
+			int highestCounet = hashMap.get(max);
+			System.out.println(max + "Total Crimes: " + highestCounet);
 		}
-		if(selection ==2) {
+		if (selection == 2) {
 			int highestCounet = hashMap.get(max);
 			System.out.println(max + "Successful Crimes: " + highestCounet);
-			}
+		}
 	}
 
-	/** This method will be used to find the highest stopandsearch on ethnic for a given date and police 
+	/**
+	 * This method will be used to find the highest stopandsearch on ethnic for a
+	 * given date and police
 	 * 
-	 * @param police String user police
+	 * @param police   String user police
 	 * @param UserDate String user date
 	 */
 	public void highestTotalEthnicForAGivenMonthAndPolice(String police, String UserDate) {
@@ -339,7 +354,7 @@ public class Data_Handling {
 		int highestCounet = hashMap.get(max);
 		System.out.println(max + "Total Crimes: " + highestCounet);
 	}
-	
+
 	public void highestTotalEthnicForAGivenMonthAndPolice(String legislation) {
 		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
 		for (String temp : ethnicSearchTree.keySet()) {
@@ -356,6 +371,29 @@ public class Data_Handling {
 				.getKey();
 		int highestCounet = hashMap.get(max);
 		System.out.println(max + "Total Crimes: " + highestCounet);
+	}
+
+	public Map<String, List<CrimeStopAndsearch>> getEthnicSearchTree() {
+
+		return ethnicSearchTree;
+
+	}
+
+	public void EthnicityAndGenderSearch(String gender, String ethnicity) {
+		for (String temp : legislationTree.keySet()) {	
+			List<CrimeStopAndsearch> legList = legislationTree.get(temp);
+			
+			for (CrimeStopAndsearch currentCrime : legList) {
+				if (currentCrime.Gender.equals(gender) && currentCrime.Self_defined_ethnicity.equals(ethnicity)) {
+
+					System.out.println(currentCrime.toCSVString());
+				} else {
+
+				}
+			}
+
+		}
+
 	}
 
 }

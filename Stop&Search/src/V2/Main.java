@@ -63,6 +63,15 @@ public class Main {
 				break;
 
 			case "F":
+				System.out.println("Please pick a option \r\n1. F(i) \r\n2. F(ii)");
+				yesno = scan.nextInt();
+				scan.nextLine();
+				if (yesno == 1) {
+					String uniquePolice =allTheFiles.printAttribute("date");
+					String uniqueMonth =allTheFiles.printAttribute("police");
+					allTheFiles.highestTotalEthnicForAGivenMonthAndPolice(uniqueMonth,uniquePolice);
+				}
+				
 				break;
 			case "G":
 				break;

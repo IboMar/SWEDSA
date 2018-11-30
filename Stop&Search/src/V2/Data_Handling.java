@@ -24,6 +24,7 @@ public class Data_Handling {
 	private Set<String> uniqueDates = new HashSet<String>();
 	private Set<String> uniqueLegislation = new HashSet<String>();
 	private Set<String> uniquePoliceForce = new HashSet<String>();
+	private Set<String> uniqueEthnic = new HashSet<String>();
 	private Scanner read = new Scanner(System.in);
 
 	public void readFile(String filename) throws FileNotFoundException {
@@ -46,7 +47,7 @@ public class Data_Handling {
 		// This method will collect all the unique dates in the merged Array
 		Set<String> uniqueAttributes = getUniqueAttributes(selection);
 		int x = 1;
-		System.out.println("Please select one of the following options for "+selection); 
+		System.out.println("Please select one of the following options for " + selection);
 		for (String attribute : uniqueAttributes) {
 			System.out.println(x++ + ". " + attribute);
 		}
@@ -70,7 +71,6 @@ public class Data_Handling {
 	}
 
 	public Set<String> getUniqueAttributes(String selection) {
-
 		switch (selection) {
 		case "date":
 			if (uniqueDates.isEmpty()) {
@@ -117,9 +117,21 @@ public class Data_Handling {
 
 			}
 			return uniqueLegislation;
+		case "ethnic":
+			if (uniqueEthnic.isEmpty()) {
+				for (CrimeStopAndsearch currentCrime : mergedFiles) {
+					if (currentCrime.Self_defined_ethnicity == null
+							|| currentCrime.Self_defined_ethnicity.length() == 0) {
+					} else {
+						uniqueEthnic.add(currentCrime.Self_defined_ethnicity);
+					}
+				}
 
+			}
+			return uniqueEthnic;
 		}
 		return null;
+
 	}
 
 	public void loadTrees() {
@@ -137,12 +149,12 @@ public class Data_Handling {
 				objectOfSearchTree.put(e.Object_of_search, objectSearchList);
 			}
 			objectSearchList.add(e);
-			List<CrimeStopAndsearch> ethnicList = ethnicSearchTree.get(e.ethnic);
-			if (ethnicSearchTree == null) {
+			List<CrimeStopAndsearch> ethnicList = ethnicSearchTree.get(e.Self_defined_ethnicity);
+			if (ethnicList == null) {
 				ethnicList = new ArrayList<>();
-				ethnicSearchTree.put(e.ethnic, ethnicList);
+				ethnicSearchTree.put(e.Self_defined_ethnicity, ethnicList);
 			}
-			ethnicSearchTree.put(e.ethnic, ethnicList);
+			ethnicList.add(e);
 
 		}
 		/*
@@ -220,12 +232,12 @@ public class Data_Handling {
 	}
 
 	public Map<String, List<CrimeStopAndsearch>> getObjectOfSearchTree() {
-		int i =0;
-		for(String temp : objectOfSearchTree.keySet()) {
-			if(temp.isEmpty()) {
+		int i = 0;
+		for (String temp : objectOfSearchTree.keySet()) {
+			if (temp.isEmpty()) {
 				System.out.println(i + " TBD");
-			}else {
-			System.out.println(i + " " +temp);
+			} else {
+				System.out.println(i + " " + temp);
 			}
 			i++;
 		}
@@ -258,26 +270,52 @@ public class Data_Handling {
 		}
 		return userChoice;
 	}
-	
-	
-	/** This method will be used to accept a specific date and then find find the most crimes for each legislation in that given month
+
+	/**
+	 * This method will be used to accept a specific date and then find find the
+	 * most crimes for each legislation in that given month
+	 * 
 	 * @param UserDate String user date
 	 */
 	public void highestTotalLegislationForAGivenMonth(String UserDate) {
 		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
-		for(String temp :legislationTree.keySet()) {
-			int counter =0;
+		for (String temp : legislationTree.keySet()) {
+			int counter = 0;
 			List<CrimeStopAndsearch> legislationList = legislationTree.get(temp);
-			for(CrimeStopAndsearch currentCrime : legislationList) {
-				if(currentCrime.Date.contains(UserDate)) {
+			for (CrimeStopAndsearch currentCrime : legislationList) {
+				if (currentCrime.Date.contains(UserDate)) {
 					counter++;
 				}
 			}
 			hashMap.put(temp, counter);
 		}
-		String max =Collections.max(hashMap.entrySet(), (entry1, entry2) -> entry1.getValue() - entry2.getValue()).getKey();
+		String max = Collections.max(hashMap.entrySet(), (entry1, entry2) -> entry1.getValue() - entry2.getValue())
+				.getKey();
 		int highestCounet = hashMap.get(max);
-		System.out.println(max + "Total Crimes: " +highestCounet);
+		System.out.println(max + "Total Crimes: " + highestCounet);
+	}
+
+	/** This method will be used to find the highest stopandsearch on ethnic for a given date and police 
+	 * 
+	 * @param police String user police
+	 * @param UserDate String user date
+	 */
+	public void highestTotalEthnicForAGivenMonthAndPolice(String police, String UserDate) {
+		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+		for (String temp : ethnicSearchTree.keySet()) {
+			int counter = 0;
+			List<CrimeStopAndsearch> ethnicList = ethnicSearchTree.get(temp);
+			for (CrimeStopAndsearch currentCrime : ethnicList) {
+				if (currentCrime.Date.contains(UserDate) && currentCrime.Policing_operation.contains(police)) {
+					counter++;
+				}
+			}
+			hashMap.put(temp, counter);
+		}
+		String max = Collections.max(hashMap.entrySet(), (entry1, entry2) -> entry1.getValue() - entry2.getValue())
+				.getKey();
+		int highestCounet = hashMap.get(max);
+		System.out.println(max + "Total Crimes: " + highestCounet);
 	}
 
 }

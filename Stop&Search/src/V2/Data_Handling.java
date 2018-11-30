@@ -1,4 +1,4 @@
-package V2;
+	package V2;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -277,15 +277,31 @@ public class Data_Handling {
 	 * 
 	 * @param UserDate String user date
 	 */
-	public void highestTotalLegislationForAGivenMonth(String UserDate) {
+	public void highestTotalLegislationForAGivenMonth(String UserDate, int selection) {
 		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
 		for (String temp : legislationTree.keySet()) {
 			int counter = 0;
 			List<CrimeStopAndsearch> legislationList = legislationTree.get(temp);
+			switch(selection) {
+			case 1:{//for all crimes
 			for (CrimeStopAndsearch currentCrime : legislationList) {
 				if (currentCrime.Date.contains(UserDate)) {
 					counter++;
 				}
+			}
+			break;
+			}
+			case 2:{//for successful crimes
+				for (CrimeStopAndsearch currentCrime : legislationList) {
+					if (currentCrime.Date.contains(UserDate)) {
+						if(currentCrime.Outcome_linked_to_object_of_search.equalsIgnoreCase("TRUE")){	
+						counter++;
+						}
+					}
+				}
+				break;
+			}
+			
 			}
 			hashMap.put(temp, counter);
 		}

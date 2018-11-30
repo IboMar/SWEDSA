@@ -46,7 +46,7 @@ public class Data_Handling {
 		// This method will collect all the unique dates in the merged Array
 		Set<String> uniqueAttributes = getUniqueAttributes(selection);
 		int x = 1;
-		System.out.println("Please select one of the following options for "+selection); 
+		System.out.println("Please select one of the following options for " + selection);
 		for (String attribute : uniqueAttributes) {
 			System.out.println(x++ + ". " + attribute);
 		}
@@ -187,28 +187,6 @@ public class Data_Handling {
 		return mergedFiles;
 	}
 
-	public int[] SuccessfulSearch(String Outcome_linked_to_object_of_search) {
-		int successful = 0, unsuccessful = 0, partial = 0;
-
-		if (Outcome_linked_to_object_of_search.equalsIgnoreCase("TRUE")) {
-			successful++;
-		}
-		if (Outcome_linked_to_object_of_search.equalsIgnoreCase("FALSE")) {
-			partial++;
-		}
-		if (Outcome_linked_to_object_of_search.equals(null) || Outcome_linked_to_object_of_search.equals("")) {
-			unsuccessful++;
-		}
-
-		int[] intArray = new int[3];
-		intArray[0] = successful;
-		intArray[1] = unsuccessful;
-		intArray[2] = partial;
-
-		return intArray;
-
-	}
-
 	private static String percent(int num, int div) {
 		double perc = ((double) num / div);
 		perc *= 100;
@@ -220,12 +198,12 @@ public class Data_Handling {
 	}
 
 	public Map<String, List<CrimeStopAndsearch>> getObjectOfSearchTree() {
-		int i =0;
-		for(String temp : objectOfSearchTree.keySet()) {
-			if(temp.isEmpty()) {
+		int i = 0;
+		for (String temp : objectOfSearchTree.keySet()) {
+			if (temp.isEmpty()) {
 				System.out.println(i + " TBD");
-			}else {
-			System.out.println(i + " " +temp);
+			} else {
+				System.out.println(i + " " + temp);
 			}
 			i++;
 		}
@@ -258,26 +236,66 @@ public class Data_Handling {
 		}
 		return userChoice;
 	}
-	
-	
-	/** This method will be used to accept a specific date and then find find the most crimes for each legislation in that given month
+
+	/**
+	 * This method will be used to accept a specific date and then find find the
+	 * most crimes for each legislation in that given month
+	 * 
 	 * @param UserDate String user date
 	 */
-	public void highestTotalLegislationForAGivenMonth(String UserDate) {
+	public void legislationCounters(String UserDate, int select) {
 		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
-		for(String temp :legislationTree.keySet()) {
-			int counter =0;
+		for (String temp : legislationTree.keySet()) {
+			int counter = 0;
 			List<CrimeStopAndsearch> legislationList = legislationTree.get(temp);
-			for(CrimeStopAndsearch currentCrime : legislationList) {
-				if(currentCrime.Date.contains(UserDate)) {
-					counter++;
+
+			switch (select) {
+			case 1://This case is for counting all the stop and searches.
+				for (CrimeStopAndsearch currentCrime : legislationList) {
+					if (currentCrime.Date.contains(UserDate)) {
+						counter++;
+					}
+				}
+				break;
+			case 2: //This case is for counting the successful stop and searches.
+				for (CrimeStopAndsearch currentCrime : legislationList) {
+					if (currentCrime.Date.contains(UserDate)) {
+						if (currentCrime.Outcome_linked_to_object_of_search.equalsIgnoreCase("TRUE")) {
+							counter++;
+						}
+					}
+				break;
 				}
 			}
 			hashMap.put(temp, counter);
 		}
-		String max =Collections.max(hashMap.entrySet(), (entry1, entry2) -> entry1.getValue() - entry2.getValue()).getKey();
+		String max = Collections.max(hashMap.entrySet(), (entry1, entry2) -> entry1.getValue() - entry2.getValue())
+				.getKey();
 		int highestCounet = hashMap.get(max);
-		System.out.println(max + "Total Crimes: " +highestCounet);
+		System.out.println(max + "Total Crimes: " + highestCounet);
+	}
+
+
+	public int[] SuccessfulSearch(String Outcome_linked_to_object_of_search) {
+		int successful = 0, unsuccessful = 0, partial = 0;
+
+		if (Outcome_linked_to_object_of_search.equalsIgnoreCase("TRUE")) {
+			successful++;
+		}
+		if (Outcome_linked_to_object_of_search.equalsIgnoreCase("FALSE")) {
+			partial++;
+		}
+		if (Outcome_linked_to_object_of_search.equals(null) || Outcome_linked_to_object_of_search.equals("")) {
+			unsuccessful++;
+		}
+
+		int[] intArray = new int[3];
+		intArray[0] = successful;
+		intArray[1] = unsuccessful;
+		intArray[2] = partial;
+
+		return intArray;
+
 	}
 
 }

@@ -347,12 +347,12 @@ public class Data_Manipulation {
 	}
 
 	
-	/** This method will be used to sort by ethnicity and then print it out
+	/** This method will be used to sort by Legislation and then print it out on the given ethnic and gender
 	 * @param temp List<CrimeStopAndsearch>
 	 * @param pickGender user String gender
 	 * @param pickEthnic user String Ethnic
 	 */
-	public void sortByEthnicity(ArrayList<CrimeStopAndsearch> temp, String pickGender, String pickEthnic) {
+	public void sortByLegislation(ArrayList<CrimeStopAndsearch> temp, String pickGender, String pickEthnic) {
 		List<CrimeStopAndsearch> tempList = new ArrayList<>();
 		for (CrimeStopAndsearch currentCrime : temp) {
 

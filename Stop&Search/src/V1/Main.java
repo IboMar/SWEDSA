@@ -117,7 +117,7 @@ public class Main {
 				String pickGender = allTheFiles.getGender();
 				System.out.println("Please pick an ethnicity");
 				String pickEthnic = allTheFiles.getEthnic();
-				changeData.sortByEthnicity(allTheFiles.getmergedFiles(), pickGender, pickEthnic);
+				changeData.sortByLegislation(allTheFiles.getmergedFiles(), pickGender, pickEthnic);
 				break;
 			}
 			

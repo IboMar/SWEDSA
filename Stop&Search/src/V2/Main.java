@@ -53,25 +53,9 @@ public class Main {
 				allTheFiles.alloutputCrimes();
 				break;
 			case "D":
-				Map<String, List<CrimeStopAndsearch>> legislationTree = allTheFiles.getLegislationTree();
-				String countTotal = allTheFiles.userChoice(legislationTree);
-				System.out.println("Total Crimes for the given Legislation: " + legislationTree.get(countTotal).size());
-				
-//				int i=0;
-//				while (selection == null) {
-//					
-//					System.out.println("Please select a valid option");
-//					choice = scan.nextInt();
-//					scan.nextLine();
-//					for (String date : dates) {
-//						
-//						if (i == choice) {
-//							pickDate = date;
-//						}
-//						i++;
-//					}
-//				changeData.highestTotal(allTheFiles.getmergedFiles(),selection);
-				
+				//Set<String> uniqueDates = allTheFiles.getUniqueAttributes("date");
+				String uniqueDate =allTheFiles.printAttribute("date");
+				allTheFiles.highestTotalLegislationForAGivenMonth(uniqueDate);	
 				
 				break;
 			case "E":

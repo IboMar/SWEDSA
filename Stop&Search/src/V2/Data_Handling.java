@@ -3,6 +3,7 @@ package V2;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -256,6 +257,27 @@ public class Data_Handling {
 			choiceCounter++;
 		}
 		return userChoice;
+	}
+	
+	
+	/** This method will be used to accept a specific date and then find find the most crimes for each legislation in that given month
+	 * @param UserDate String user date
+	 */
+	public void highestTotalLegislationForAGivenMonth(String UserDate) {
+		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+		for(String temp :legislationTree.keySet()) {
+			int counter =0;
+			List<CrimeStopAndsearch> legislationList = legislationTree.get(temp);
+			for(CrimeStopAndsearch currentCrime : legislationList) {
+				if(currentCrime.Date.contains(UserDate)) {
+					counter++;
+				}
+			}
+			hashMap.put(temp, counter);
+		}
+		String max =Collections.max(hashMap.entrySet(), (entry1, entry2) -> entry1.getValue() - entry2.getValue()).getKey();
+		int highestCounet = hashMap.get(max);
+		System.out.println(max + "Total Crimes: " +highestCounet);
 	}
 
 }

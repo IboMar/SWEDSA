@@ -357,15 +357,8 @@ public class Data_Handling {
 		System.out.println(max + "Total Crimes: " + highestCounet);
 		return ListForG;
 	}
-<<<<<<< HEAD
 
-=======
-	
-	/** This method will be used to find the highest stopandsearch on ethnic for a legislation
-	 * 
-	 * @param legislation String user legislation
-	 */
->>>>>>> branch 'master' of https://github.com/SWEDSA/SWEDSA.git
+
 	public void highestTotalEthnicForAGivenMonthAndPolice(String legislation) {
 		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
 		for (String temp : ethnicSearchTree.keySet()) {

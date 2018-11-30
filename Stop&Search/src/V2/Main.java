@@ -13,8 +13,7 @@ import java.util.Set;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		List<CrimeStopAndsearch> policedateArray = null;
-		ArrayList<CrimeStopAndsearch> temp = null;
+		ArrayList<CrimeStopAndsearch> policedateArray = null;
 		Data_Manipulation changeDataV2 = new Data_Manipulation();
 		CSVFiles fileDIR = new CSVFiles();
 		fileDIR.readInFilesDir();
@@ -81,7 +80,10 @@ public class Main {
 				if(policedateArray == null) {
 					System.out.println("Please complete option F(i) to collect your list: ");
 				}else {
-					changeDataV2.chronoLogicalOrder(policedateArray);
+					ArrayList<CrimeStopAndsearch> gList = changeDataV2.quickSort(policedateArray);
+					for(CrimeStopAndsearch temp : gList) {
+						System.out.println(temp.toCSVString());
+					}
 				}
 				
 				break;

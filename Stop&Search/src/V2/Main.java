@@ -55,11 +55,12 @@ public class Main {
 			case "D":
 				//Set<String> uniqueDates = allTheFiles.getUniqueAttributes("date");
 				String uniqueDate =allTheFiles.printAttribute("date");
-				allTheFiles.highestTotalLegislationForAGivenMonth(uniqueDate);	
-				
+				allTheFiles.legislationCounters(uniqueDate, 1);	
+
 				break;
 			case "E":
-				
+				uniqueDate = allTheFiles.printAttribute("date");
+				allTheFiles.legislationCounters(uniqueDate,2);	
 				break;
 
 			case "F":

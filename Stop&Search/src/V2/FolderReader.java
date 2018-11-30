@@ -26,16 +26,8 @@ public class FolderReader {
 	        } else {
 	        	
 	        	if(fileEntry.getName().contains("stop-and-search")) {
-	        		//System.out.println(fileEntry.getName());
+	        		
 	        		Stop_Search.add(folder.toPath() + "\\" + fileEntry.getName());
-//	        	}else {
-//	        		//System.out.println(fileEntry.getName());
-//	        	basicCrimesCVS.add(folder.toPath() + "\\" + fileEntry.getName());
-//	        	}
-	        	
-	        	
-	        	
-	     
 	        	}
 	        }
 	    }

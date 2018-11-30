@@ -15,7 +15,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		List<CrimeStopAndsearch> policedateArray = null;
 		ArrayList<CrimeStopAndsearch> temp = null;
-		Data_Manipulation changeData = new Data_Manipulation();
+		Data_Manipulation changeDataV2 = new Data_Manipulation();
 		CSVFiles fileDIR = new CSVFiles();
 		fileDIR.readInFilesDir();
 		List<String> fileDIRList = FolderReader.getbasicStop_Search();
@@ -70,7 +70,7 @@ public class Main {
 				if (yesno == 1) {
 					String uniquePolice =allTheFiles.printAttribute("date");
 					String uniqueMonth =allTheFiles.printAttribute("police");
-					allTheFiles.highestTotalEthnicForAGivenMonthAndPolice(uniqueMonth,uniquePolice);
+					policedateArray = (allTheFiles.highestTotalEthnicForAGivenMonthAndPolice(uniqueMonth,uniquePolice));
 				}
 				if (yesno == 2) {
 					String uniqueLegislation =allTheFiles.printAttribute("legislation");
@@ -79,6 +79,12 @@ public class Main {
 				
 				break;
 			case "G":
+				if(policedateArray == null) {
+					System.out.println("Please complete option F(i) to collect your list: ");
+				}else {
+					changeDataV2.chronoLogicalOrder(policedateArray);
+				}
+				
 				break;
 			
 			case "H":

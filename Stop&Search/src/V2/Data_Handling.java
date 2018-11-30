@@ -322,13 +322,15 @@ public class Data_Handling {
 	 * @param police String user police
 	 * @param UserDate String user date
 	 */
-	public void highestTotalEthnicForAGivenMonthAndPolice(String police, String UserDate) {
+	public ArrayList<CrimeStopAndsearch> highestTotalEthnicForAGivenMonthAndPolice(String police, String UserDate) {
+		ArrayList<CrimeStopAndsearch> ListForG = new ArrayList<>();
 		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
 		for (String temp : ethnicSearchTree.keySet()) {
 			int counter = 0;
 			List<CrimeStopAndsearch> ethnicList = ethnicSearchTree.get(temp);
 			for (CrimeStopAndsearch currentCrime : ethnicList) {
 				if (currentCrime.Date.contains(UserDate) && currentCrime.Policing_operation.contains(police)) {
+					ListForG.add(currentCrime);
 					counter++;
 				}
 			}
@@ -338,8 +340,13 @@ public class Data_Handling {
 				.getKey();
 		int highestCounet = hashMap.get(max);
 		System.out.println(max + "Total Crimes: " + highestCounet);
+		return ListForG;
 	}
 	
+	/** This method will be used to find the highest stopandsearch on ethnic for a legislation
+	 * 
+	 * @param legislation String user legislation
+	 */
 	public void highestTotalEthnicForAGivenMonthAndPolice(String legislation) {
 		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
 		for (String temp : ethnicSearchTree.keySet()) {

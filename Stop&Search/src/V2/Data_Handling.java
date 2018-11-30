@@ -219,6 +219,15 @@ public class Data_Handling {
 	}
 
 	public Map<String, List<CrimeStopAndsearch>> getObjectOfSearchTree() {
+		int i =0;
+		for(String temp : objectOfSearchTree.keySet()) {
+			if(temp.isEmpty()) {
+				System.out.println(i + " TBD");
+			}else {
+			System.out.println(i + " " +temp);
+			}
+			i++;
+		}
 		return objectOfSearchTree;
 	}
 

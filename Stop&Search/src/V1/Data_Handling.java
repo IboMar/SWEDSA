@@ -175,10 +175,10 @@ public class Data_Handling {
 		List<String> genders = changeData.uniqueGender(mergedFiles);
 
 		String pickGender = null;
-		int i = 1;
+		int i = 0;
 
 		while (pickGender == null) {
-			i = 0;
+			i = 1;
 			int choice = scan.nextInt();
 			scan.nextLine();
 			for (String gender : genders) {

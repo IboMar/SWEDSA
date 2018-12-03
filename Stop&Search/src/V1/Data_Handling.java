@@ -145,7 +145,7 @@ public class Data_Handling {
 			i++;
 		}
 		while (pickDate == null) {
-			i = 0;
+			i = 1;
 			System.out.println("Please select a valid option");
 			choice = scan.nextInt();
 			scan.nextLine();

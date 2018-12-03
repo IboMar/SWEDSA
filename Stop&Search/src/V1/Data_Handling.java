@@ -253,7 +253,7 @@ public class Data_Handling {
 		}
 		while (policeOP == null) {
 			i = 0;
-			System.out.println("Please eneter a Correct Police Force");
+			System.out.println("Please enter a Correct Police Force");
 			choice = scan.nextInt();
 			scan.nextLine();
 			for (String police : policeForce) {
@@ -291,7 +291,7 @@ public class Data_Handling {
 		}
 		while (leg == null) {
 			i = 0;
-			System.out.println("Please eneter a Correct legislation");
+			System.out.println("Please enter a Correct legislation");
 			choice = scan.nextInt();
 			scan.nextLine();
 			for (String police : legislation) {
@@ -327,7 +327,7 @@ public class Data_Handling {
 		}
 		while (Search == null) {
 			i = 0;
-			System.out.println("Please eneter a Correct legislation");
+			System.out.println("Please enter a Correct legislation");
 			choice = scan.nextInt();
 			scan.nextLine();
 			for (String temps : objectOfSearch) {

@@ -252,7 +252,7 @@ public class Data_Handling {
 			i++;
 		}
 		while (policeOP == null) {
-			i = 0;
+			i = 1;
 			System.out.println("Please enter a Correct Police Force");
 			choice = scan.nextInt();
 			scan.nextLine();

@@ -315,7 +315,7 @@ public class Data_Handling {
 	/**
 	 * This method is used for the user to select a unique object of search and then
 	 * print out all the data on that option This method is also kind of pointless
-	 * could be changed beacuse sending values that are accessible within this class
+	 * could be changed because sending values that are accessible within this class
 	 * 
 	 * @param Treemap of object of search
 	 */
@@ -444,7 +444,7 @@ public class Data_Handling {
 	}
 
 	/**
-	 * This method is used to print out stop and searches on a specfic gender and
+	 * This method is used to print out stop and searches on a specific gender and
 	 * ethnicity and prints it on Legislation
 	 * 
 	 * @param gender    String user choice gender

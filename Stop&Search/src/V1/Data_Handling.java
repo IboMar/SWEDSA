@@ -37,7 +37,7 @@ public class Data_Handling {
 			String[] temp = line.split(SEP, -1);
 			// Adds Police Force to the list
 			temp[3] = parts[3];
-			// Puts the list back together after police has been enetered
+			// Puts the list back together after police has been entered
 			String line2 = String.join(",", temp);
 			StopandSearchtemp = new CrimeStopAndsearch(line2);
 			mergedFiles.add(StopandSearchtemp);

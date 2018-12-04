@@ -9,7 +9,7 @@ import java.io.IOException;
 public class CSVFiles {
 	/**
 	 * This Method will read in a txt file and each line will consist of a Directory
-	 * and for each directory it will call read foleder which will read all files in that directory
+	 * and for each directory it will call read folder which will read all files in that directory
 	 * @throws IOException
 	 */
 	public void readInFilesDir() throws IOException {

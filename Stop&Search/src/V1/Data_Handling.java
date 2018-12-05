@@ -65,11 +65,11 @@ public class Data_Handling {
 		int successful = 0, unsuccessful = 0, partial = 0;
 		for (CrimeStopAndsearch line : mergedFiles) {
 
-			int[] temp = SuccessfulSearch(line.Outcome_linked_to_object_of_search);
+			int[] temp = SuccessfulSearch(line.Outcome);
 			successful = successful + temp[0];
 			unsuccessful = unsuccessful + temp[1];
 			partial = partial + temp[2];
-			System.out.println(line.toCSVString());
+			line.toCSVString();
 
 		}
 		System.out.println("There are " + mergedFiles.size() + " recorded crimes; ");

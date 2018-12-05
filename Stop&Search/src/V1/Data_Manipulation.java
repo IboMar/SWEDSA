@@ -175,7 +175,7 @@ public class Data_Manipulation {
 
 		for (CrimeStopAndsearch currentCrime : temp) {
 			if (currentCrime.Object_of_search.contains(objectOfSearchTemp)) {
-				System.out.println(currentCrime.toCSVString());
+				 System.out.println(currentCrime.toCSVString());
 			}
 		}
 	}
@@ -204,7 +204,7 @@ public class Data_Manipulation {
 
 				if (Legislation.equals(currentCrime.Legislation) && currentCrime.Date.contains(pickDate)) {
 					// For each legislation the counter gets reset and if the parameters are met only then the increment takes place
-					int[] counter = instance.SuccessfulSearch(currentCrime.Outcome_linked_to_object_of_search);
+					int[] counter = instance.SuccessfulSearch(currentCrime.Outcome);
 					successful = successful + counter[0];
 					unsuccessful = unsuccessful + counter[1];
 					partial = partial + counter[2];
@@ -286,7 +286,7 @@ public class Data_Manipulation {
 		Comparator<CrimeStopAndsearch> cmp = Comparator.comparing(CrimeStopAndsearch::getDate);
 		Collections.sort(policedateArray, cmp.reversed());
 		for (CrimeStopAndsearch currentCrime : policedateArray) {
-			System.out.println(currentCrime.toCSVString());
+			currentCrime.toCSVString();
 		}
 	}
 
@@ -368,7 +368,7 @@ public class Data_Manipulation {
 
 		for (CrimeStopAndsearch j : tempList) {
 
-			System.out.println(j.toCSVString());
+			j.toCSVString();
 		}
 	}
 

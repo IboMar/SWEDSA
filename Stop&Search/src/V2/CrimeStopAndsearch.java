@@ -36,11 +36,10 @@ public class CrimeStopAndsearch {
 				+ sep + gap + Legislation + sep + gap + Object_of_search+ sep + gap + Outcome + sep + gap
 				+ Outcome_linked_to_object_of_search + sep + gap + Removal_of_more_than_just_outer_clothing;
 		 String filteredCSV = unfilteredCSV.replace("null", "Unspecified").replace(", ,", ", Unspecified,");
-		
-		return filteredCSV;
-//		return String.format("|%1$-26s|%2$-26s|%3$-12s|%4$-12s|%5$-12f|%6$-12f|%7$-8s|%8$-8s|%9$-58s|%10$-6s|%11$-50s|%12$-14s|%13$-32s|%14$-6b|%15$-6b|",
-//				type,Date,Part_of_a_policing_operation,Policing_operation,latitude,longitude,Gender,Age_range,Self_defined_ethnicity,Officer_defined_ethnicity,
-//				Legislation,Object_of_search,Outcome,Outcome_linked_to_object_of_search,Removal_of_more_than_just_outer_clothing);
+
+		return String.format("|%1$-26s|%2$-26s|%3$-12s|%4$-12s|%5$-12f|%6$-12f|%7$-8s|%8$-8s|%9$-58s|%10$-6s|%11$-50s|%12$-14s|%13$-32s|%14$-6b|%15$-6b|",
+				type,Date,Part_of_a_policing_operation,Policing_operation,latitude,longitude,Gender,Age_range,Self_defined_ethnicity,Officer_defined_ethnicity,
+				Legislation,Object_of_search,Outcome,Outcome_linked_to_object_of_search,Removal_of_more_than_just_outer_clothing);
 
 	}
 

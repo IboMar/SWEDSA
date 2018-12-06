@@ -64,13 +64,13 @@ public class Data_Handling {
 	public String printAttribute(String selection) {
 		// This method will collect all the unique dates in the merged Array
 		Set<String> uniqueAttributes = getUniqueAttributes(selection);
-		int x = 1;
+		int i = 1;
 		System.out.println("Please select one of the following options for " + selection);
 		for (String attribute : uniqueAttributes) {
-			System.out.println(x++ + ". " + attribute);
+			System.out.println(i++ + ". " + attribute);
 		}
 		String pickAttribute = null;
-		int i = 1;
+		i = 1;
 		while (pickAttribute == null) {
 			int choice = read.nextInt();
 			read.nextLine();
@@ -82,7 +82,19 @@ public class Data_Handling {
 				}
 				i++;
 			}
-			System.out.println("Please select a valid option.");
+			while (pickAttribute == null) {
+				i = 1;
+				System.out.println("Please select a valid option");
+				choice = read.nextInt();
+				read.nextLine();
+				for (String date : uniqueAttributes) {
+
+					if (i == choice) {
+						pickAttribute = date;
+					}
+					i++;
+				}
+			}
 		}
 		// Returning a unique date of the users choosing
 		return pickAttribute;
@@ -303,7 +315,7 @@ public class Data_Handling {
 	/**
 	 * This method is used for the user to select a unique object of search and then
 	 * print out all the data on that option This method is also kind of pointless
-	 * could be changed beacuse sending values that are accessible within this class
+	 * could be changed because sending values that are accessible within this class
 	 * 
 	 * @param Treemap of object of search
 	 */
@@ -432,7 +444,7 @@ public class Data_Handling {
 	}
 
 	/**
-	 * This method is used to print out stop and searches on a specfic gender and
+	 * This method is used to print out stop and searches on a specific gender and
 	 * ethnicity and prints it on Legislation
 	 * 
 	 * @param gender    String user choice gender

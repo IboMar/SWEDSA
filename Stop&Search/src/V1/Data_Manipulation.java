@@ -179,6 +179,25 @@ public class Data_Manipulation {
 			}
 		}
 	}
+	
+	public void insertSort(ArrayList<CrimeStopAndsearch> list, Comparator<CrimeStopAndsearch> comp) {
+		int n = list.size(); 
+        for (int i=1; i<n; ++i) 
+        { 
+            CrimeStopAndsearch key = list.get(i); 
+            int j = i-1; 
+  
+            /* Move elements of arr[0..i-1], that are 
+               greater than key, to one position ahead 
+               of their current position */
+            while (j>=0 && comp.compare(list.get(j),key)>0) 
+            { 
+                list.set(j+1, list.get(j)); 
+                j = j-1; 
+            } 
+            list.set(j+1, key); 
+        } 
+	}
 
 	
 	/** This method will be used to find the highest successful legislation for a given month

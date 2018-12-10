@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -80,7 +81,8 @@ public class Main {
 				if(policedateArray == null) {
 					System.out.println("Please complete option F(i) to collect your list: ");
 				}else {
-					ArrayList<CrimeStopAndsearch> gList = changeDataV2.quickSort(policedateArray);
+					Comparator<CrimeStopAndsearch> cmp = Comparator.comparing(CrimeStopAndsearch::getDate);
+					ArrayList<CrimeStopAndsearch> gList = changeDataV2.quickSort(policedateArray, cmp);
 					for(CrimeStopAndsearch temp : gList) {
 						System.out.println(temp.toCSVString());
 					}
@@ -94,9 +96,6 @@ public class Main {
 				System.out.println("Please pick a gender");
 				String uniqueGender = allTheFiles.printAttribute("gender");
 				allTheFiles.EthnicityAndGenderSearch(uniqueGender, uniqueEthnic);
-			
-				
-				
 				break;
 			}
 		} while (!(Menu.equals("Q")));

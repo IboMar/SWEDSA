@@ -23,7 +23,7 @@ public class Data_Manipulation {
 	 * 
 	 * @param policedateArray List of CrimeStopAndsearch
 	 */
-	protected ArrayList<CrimeStopAndsearch> quickSort(ArrayList<CrimeStopAndsearch> list)
+	protected ArrayList<CrimeStopAndsearch> quickSort(ArrayList<CrimeStopAndsearch> list, Comparator<CrimeStopAndsearch> comp)
 	{
 	    if (list.size() <= 1) 
 	        return list; // Already sorted  
@@ -35,13 +35,14 @@ public class Data_Manipulation {
 	    for (int i = 0; i < list.size()-1; i++)
 	    {
 	        //int order = list.get(i).compareTo(pivot);
-	        if (list.get(i).Date.compareTo(pivot.Date) <0)
+	        //if (list.get(i).Date.compareTo(pivot.Date) <0)
+	    	if (comp.compare(list.get(i), pivot) < 0)
 	            lesser.add(list.get(i));    
 	        else
 	            greater.add(list.get(i));   
 	    }
-	    lesser = quickSort(lesser);
-	    greater = quickSort(greater);
+	    lesser = quickSort(lesser, comp);
+	    greater = quickSort(greater, comp);
 	    lesser.add(pivot);
 	    lesser.addAll(greater);
 	    sorted = lesser;

@@ -2,44 +2,44 @@ package V2;
 /**
  * This will be the main class that we will use to output and manipulate data usually will be within an arrayList
  */
-public class CrimeStopAndsearch {
+public class CrimeStopAndSearch {
 
 	public String CrimeType;
 	public int Successful;
-	public int partially_successful;
-	public int unsuccessful;
+	public int partially_Successful;
+	public int unSuccessful;
 	public String ethnic;
 	public final String sep = ",";
 	public final String gap = " ";
 	public String type;
 	public String Date;
-	public String Part_of_a_policing_operation;
-	public String Policing_operation;
+	public String Part_Of_a_Policing_Operation;
+	public String Policing_Operation;
 	public Float latitude;
 	public Float longitude;
 	public String Gender;
 	public String Age_range;
-	public String Self_defined_ethnicity;
-	public String Officer_defined_ethnicity;
+	public String Self_Defined_Ethnicity;
+	public String Officer_Defined_Ethnicity;
 	public String Legislation;
-	public String Object_of_search;
-	public Boolean Outcome;
-	public String Outcome_linked_to_object_of_search;
-	public Boolean Removal_of_more_than_just_outer_clothing;
+	public String Object_Of_Search;
+	public String Outcome;
+	public Boolean Outcome_Linked_To_Object_Of_Search;
+	public Boolean Removal_Of_More_Than_Just_Outer_Clothing;
 	public int total;
 	
 	/** This method is used to print out all attributes within the object usually used looping through the list and outputting data
 	 */
 	public String toCSVString() {
-		String unfilteredCSV = type + sep + gap + Date + sep + gap + Gender + sep + gap + Part_of_a_policing_operation + sep + gap + Policing_operation + sep + gap + latitude
-				+ gap + longitude + gap + Age_range + gap + Self_defined_ethnicity + gap + Officer_defined_ethnicity
-				+ sep + gap + Legislation + sep + gap + Object_of_search+ sep + gap + Outcome + sep + gap
-				+ Outcome_linked_to_object_of_search + sep + gap + Removal_of_more_than_just_outer_clothing;
+		String unfilteredCSV = type + sep + gap + Date + sep + gap + Gender + sep + gap + Part_Of_a_Policing_Operation + sep + gap + Policing_Operation + sep + gap + latitude
+				+ gap + longitude + gap + Age_range + gap + Self_Defined_Ethnicity + gap + Officer_Defined_Ethnicity
+				+ sep + gap + Legislation + sep + gap + Object_Of_Search+ sep + gap + Outcome + sep + gap
+				+ Outcome_Linked_To_Object_Of_Search + sep + gap + Removal_Of_More_Than_Just_Outer_Clothing;
 		 String filteredCSV = unfilteredCSV.replace("null", "Unspecified").replace(", ,", ", Unspecified,");
 
 		return String.format("|%1$-26s|%2$-26s|%3$-12s|%4$-12s|%5$-12f|%6$-12f|%7$-8s|%8$-8s|%9$-58s|%10$-6s|%11$-50s|%12$-14s|%13$-32s|%14$-6b|%15$-6b|",
-				type,Date,Part_of_a_policing_operation,Policing_operation,latitude,longitude,Gender,Age_range,Self_defined_ethnicity,Officer_defined_ethnicity,
-				Legislation,Object_of_search,Outcome,Outcome_linked_to_object_of_search,Removal_of_more_than_just_outer_clothing);
+				type,Date,Part_Of_a_Policing_Operation,Policing_Operation,latitude,longitude,Gender,Age_range,Self_Defined_Ethnicity,Officer_Defined_Ethnicity,
+				Legislation,Object_Of_Search,Outcome,Outcome_Linked_To_Object_Of_Search,Removal_Of_More_Than_Just_Outer_Clothing);
 
 	}
 
@@ -50,14 +50,14 @@ public class CrimeStopAndsearch {
 	 * @param csv This will be a string from readnext line that splits by
 	 */
 
-	public CrimeStopAndsearch(String csv) {
+	public CrimeStopAndSearch(String csv) {
 		String[] csvParts = csv.split(sep, -1);
 		int i = 0;
 
 		type = csvParts[i++];
 		Date = csvParts[i++];
-		Part_of_a_policing_operation = csvParts[i++];
-		Policing_operation = csvParts[i++];
+		Part_Of_a_Policing_Operation = csvParts[i++];
+		Policing_Operation = csvParts[i++];
 		if(csvParts[i] !=null && csvParts[i].length()>0) {
 		latitude = Float.parseFloat(csvParts[i++]);}
 		else {latitude = null; i++;}
@@ -66,18 +66,18 @@ public class CrimeStopAndsearch {
 		else {longitude = null; i++;}
 		Gender = csvParts[i++];
 		Age_range = csvParts[i++];
-		Self_defined_ethnicity = csvParts[i++];
-		Officer_defined_ethnicity = csvParts[i++];
+		Self_Defined_Ethnicity = csvParts[i++];
+		Officer_Defined_Ethnicity = csvParts[i++];
 		Legislation = csvParts[i++];
-		Object_of_search = csvParts[i++];
+		Object_Of_Search = csvParts[i++];
 		if(csvParts[i] !=null && csvParts[i].length()>0) {
-		Outcome = Boolean.parseBoolean(csvParts[i++]);
+		Outcome = csvParts[i++];
 		}else {Outcome = null; i++;}
 		
-		Outcome_linked_to_object_of_search = csvParts[i++];
+		Outcome_Linked_To_Object_Of_Search = Boolean.parseBoolean(csvParts[i++]);
 		if(csvParts[i] !=null && csvParts[i].length()>0) {
-		Removal_of_more_than_just_outer_clothing = Boolean.parseBoolean(csvParts[i++]);
-		}else {Removal_of_more_than_just_outer_clothing =null; i++;}
+		Removal_Of_More_Than_Just_Outer_Clothing = Boolean.parseBoolean(csvParts[i++]);
+		}else {Removal_Of_More_Than_Just_Outer_Clothing =null; i++;}
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class CrimeStopAndsearch {
 	 * @param crime
 	 * @param Counter
 	 */
-	public CrimeStopAndsearch(String Crime, int Counter) {
+	public CrimeStopAndSearch(String Crime, int Counter) {
 		CrimeType = Crime;
 		total = Counter;
 	}
@@ -94,14 +94,14 @@ public class CrimeStopAndsearch {
 	 * This constructor is used to construct an object for the highest successful legislation.
 	 * @param legislationtemp
 	 * @param successfultemp
-	 * @param unsuccessfultemp
+	 * @param unSuccessfultemp
 	 * @param partialtemp
 	 */
-	public CrimeStopAndsearch(String legislationtemp, int successfultemp, int unsuccessfultemp, int partialtemp) {
+	public CrimeStopAndSearch(String legislationtemp, int successfultemp, int unSuccessfultemp, int partialtemp) {
 		Legislation = legislationtemp;
 		Successful = successfultemp;
-		partially_successful = partialtemp;
-		unsuccessful = unsuccessfultemp;
+		partially_Successful = partialtemp;
+		unSuccessful = unSuccessfultemp;
 	}
 
 
@@ -122,8 +122,8 @@ public class CrimeStopAndsearch {
 	 * @return A String ready to display highest successful Legislation
 	 */
 	public String highestSucessLeg() {
-		return Legislation + " : " + " Successful: " + Successful + " partially successful: " + partially_successful
-				+ " unsuccessful: " + unsuccessful;	
+		return Legislation + " : " + " Successful: " + Successful + " partially successful: " + partially_Successful
+				+ " unSuccessful: " + unSuccessful;	
 	}
 	
 	

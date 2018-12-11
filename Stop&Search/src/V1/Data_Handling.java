@@ -15,7 +15,7 @@ public class Data_Handling {
 	// This is used for split to add Police into the object
 	public final String SEP = ",";
 	// All Files
-	private ArrayList<CrimeStopAndsearch> mergedFiles = new ArrayList<>();
+	private ArrayList<CrimeStopAndSearch> mergedFiles = new ArrayList<>();
 
 	/**
 	 * This method accepts a String filename and reads it in for each line a new
@@ -30,7 +30,7 @@ public class Data_Handling {
 		String[] parts = filename.split("-");
 
 		Scanner csvScan = new Scanner(csvFile);
-		CrimeStopAndsearch StopandSearchtemp = null;
+		CrimeStopAndSearch StopandSearchtemp = null;
 		csvScan.nextLine(); // read header
 		while (csvScan.hasNextLine()) {
 			String line = csvScan.nextLine();
@@ -39,7 +39,7 @@ public class Data_Handling {
 			temp[3] = parts[3];
 			// Puts the list back together after police has been entered
 			String line2 = String.join(",", temp);
-			StopandSearchtemp = new CrimeStopAndsearch(line2);
+			StopandSearchtemp = new CrimeStopAndSearch(line2);
 			mergedFiles.add(StopandSearchtemp);
 
 		}
@@ -49,9 +49,9 @@ public class Data_Handling {
 	/**
 	 * Gets all files into a Arraylist
 	 * 
-	 * @return ArrayList of CrimeStopAndsearch
+	 * @return ArrayList of CrimeStopAndSearch
 	 */
-	public ArrayList<CrimeStopAndsearch> getmergedFiles() {
+	public ArrayList<CrimeStopAndSearch> getMergedFiles() {
 		return mergedFiles;
 	}
 
@@ -60,10 +60,10 @@ public class Data_Handling {
 	 * files whilst also creating a counter to see how many successful searches
 	 * there are
 	 */
-	void alloutputCrimes() {
-		ArrayList<CrimeStopAndsearch> mergedFiles = getmergedFiles();
+	void allOutputCrimes() {
+		ArrayList<CrimeStopAndSearch> mergedFiles = getMergedFiles();
 		int successful = 0, unsuccessful = 0, partial = 0;
-		for (CrimeStopAndsearch line : mergedFiles) {
+		for (CrimeStopAndSearch line : mergedFiles) {
 
 			int[] temp = SuccessfulSearch(line.Outcome);
 			successful = successful + temp[0];
@@ -93,24 +93,24 @@ public class Data_Handling {
 	}
 
 	/**
-	 * This method will accept a String of Outcome_linked_to_object_of_search to
+	 * This method will accept a String of Outcome_Linked_To_Object_Of_Search to
 	 * calculate if that search was successful,unsuccessful and partial and return
 	 * the values This method will mainly be used for counters
 	 * 
-	 * @param Outcome_linked_to_object_of_search String if true successful, false
+	 * @param Outcome_Linked_To_Object_Of_Search String if true successful, false
 	 *                                           partial else unsuccessful
 	 * @return intArray Array of 3 positions 0=successful 1=unsuccessful 2=partial
 	 */
-	public int[] SuccessfulSearch(String Outcome_linked_to_object_of_search) {
+	public int[] SuccessfulSearch(String Outcome_Linked_To_Object_Of_Search) {
 		int successful = 0, unsuccessful = 0, partial = 0;
 
-		if (Outcome_linked_to_object_of_search.equalsIgnoreCase("TRUE")) {
+		if (Outcome_Linked_To_Object_Of_Search.equalsIgnoreCase("TRUE")) {
 			successful++;
 		}
-		if (Outcome_linked_to_object_of_search.equalsIgnoreCase("FALSE")) {
+		if (Outcome_Linked_To_Object_Of_Search.equalsIgnoreCase("FALSE")) {
 			partial++;
 		}
-		if (Outcome_linked_to_object_of_search.equals(null) || Outcome_linked_to_object_of_search.equals("")) {
+		if (Outcome_Linked_To_Object_Of_Search.equals(null) || Outcome_Linked_To_Object_Of_Search.equals("")) {
 			unsuccessful++;
 		}
 

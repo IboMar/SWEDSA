@@ -21,10 +21,10 @@ import V1.Data_Manipulation;
 public class Data_Handling {
 
 	public final String SEP = ",";
-	private ArrayList<CrimeStopAndsearch> mergedFiles = new ArrayList<>();
-	private TreeMap<String, List<CrimeStopAndsearch>> legislationTree = new TreeMap<>();
-	private Map<String, List<CrimeStopAndsearch>> objectOfSearchTree = new HashMap<>();
-	private Map<String, List<CrimeStopAndsearch>> ethnicSearchTree = new HashMap<>();
+	private ArrayList<CrimeStopAndSearch> mergedFiles = new ArrayList<>();
+	private TreeMap<String, List<CrimeStopAndSearch>> legislationTree = new TreeMap<>();
+	private Map<String, List<CrimeStopAndSearch>> objectOfSearchTree = new HashMap<>();
+	private Map<String, List<CrimeStopAndSearch>> ethnicSearchTree = new HashMap<>();
 	private Set<String> uniqueDates = new HashSet<String>();
 	private Set<String> uniqueLegislation = new HashSet<String>();
 	private Set<String> uniquePoliceForce = new HashSet<String>();
@@ -49,7 +49,7 @@ public class Data_Handling {
 			String[] temp = line.split(SEP, -1);
 			temp[3] = parts[3];
 			String line2 = String.join(",", temp);
-			mergedFiles.add(new CrimeStopAndsearch(line2));
+			mergedFiles.add(new CrimeStopAndSearch(line2));
 		}
 		csvScan.close();
 	}
@@ -114,7 +114,7 @@ public class Data_Handling {
 		case "date":
 			if (uniqueDates.isEmpty()) {
 
-				for (CrimeStopAndsearch currentCrime : mergedFiles) {
+				for (CrimeStopAndSearch currentCrime : mergedFiles) {
 					if (currentCrime.Date == null || currentCrime.Date.length() == 0) {
 
 					} else {
@@ -130,12 +130,12 @@ public class Data_Handling {
 			return uniqueDates;
 		case "police":
 			if (uniquePoliceForce.isEmpty()) {
-				for (CrimeStopAndsearch currentCrime : mergedFiles) {
+				for (CrimeStopAndSearch currentCrime : mergedFiles) {
 
-					if (currentCrime.Policing_operation == null || currentCrime.Policing_operation.length() == 0) {
+					if (currentCrime.Policing_Operation == null || currentCrime.Policing_Operation.length() == 0) {
 
 					} else {
-						uniquePoliceForce.add(currentCrime.Policing_operation);
+						uniquePoliceForce.add(currentCrime.Policing_Operation);
 
 					}
 				}
@@ -145,7 +145,7 @@ public class Data_Handling {
 
 		case "legislation":
 			if (uniqueLegislation.isEmpty()) {
-				for (CrimeStopAndsearch currentCrime : mergedFiles) {
+				for (CrimeStopAndSearch currentCrime : mergedFiles) {
 					if (currentCrime.Legislation == null || currentCrime.Legislation.length() == 0) {
 
 					} else {
@@ -158,11 +158,11 @@ public class Data_Handling {
 			return uniqueLegislation;
 		case "ethnic":
 			if (uniqueEthnic.isEmpty()) {
-				for (CrimeStopAndsearch currentCrime : mergedFiles) {
-					if (currentCrime.Self_defined_ethnicity == null
-							|| currentCrime.Self_defined_ethnicity.length() == 0) {
+				for (CrimeStopAndSearch currentCrime : mergedFiles) {
+					if (currentCrime.Self_Defined_Ethnicity == null
+							|| currentCrime.Self_Defined_Ethnicity.length() == 0) {
 					} else {
-						uniqueEthnic.add(currentCrime.Self_defined_ethnicity);
+						uniqueEthnic.add(currentCrime.Self_Defined_Ethnicity);
 					}
 				}
 
@@ -171,7 +171,7 @@ public class Data_Handling {
 
 		case "gender":
 			if (uniqueGender.isEmpty()) {
-				for (CrimeStopAndsearch currentCrime : mergedFiles) {
+				for (CrimeStopAndSearch currentCrime : mergedFiles) {
 					if (currentCrime.Gender == null || currentCrime.Gender.length() == 0) {
 					} else {
 						uniqueGender.add(currentCrime.Gender);
@@ -190,39 +190,39 @@ public class Data_Handling {
 	 * navigate selected values
 	 */
 	public void loadTrees() {
-		for (CrimeStopAndsearch e : mergedFiles) {
-			List<CrimeStopAndsearch> legList = legislationTree.get(e.Legislation);
+		for (CrimeStopAndSearch e : mergedFiles) {
+			List<CrimeStopAndSearch> legList = legislationTree.get(e.Legislation);
 			if (legList == null) {
 				legList = new ArrayList<>();
 				legislationTree.put(e.Legislation, legList);
 			}
 			legList.add(e);
 
-			List<CrimeStopAndsearch> objectSearchList = objectOfSearchTree.get(e.Object_of_search);
+			List<CrimeStopAndSearch> objectSearchList = objectOfSearchTree.get(e.Object_Of_Search);
 			if (objectSearchList == null) {
 				objectSearchList = new ArrayList<>();
-				objectOfSearchTree.put(e.Object_of_search, objectSearchList);
+				objectOfSearchTree.put(e.Object_Of_Search, objectSearchList);
 			}
 			objectSearchList.add(e);
-			List<CrimeStopAndsearch> ethnicList = ethnicSearchTree.get(e.Self_defined_ethnicity);
+			List<CrimeStopAndSearch> ethnicList = ethnicSearchTree.get(e.Self_Defined_Ethnicity);
 			if (ethnicList == null) {
 				ethnicList = new ArrayList<>();
-				ethnicSearchTree.put(e.Self_defined_ethnicity, ethnicList);
+				ethnicSearchTree.put(e.Self_Defined_Ethnicity, ethnicList);
 			}
 			ethnicList.add(e);
 
 		}
 		/*
 		 * int count = 0; long start = System.currentTimeMillis();
-		 * List<CrimeStopAndsearch> matches =
-		 * objectOfSearchTree.get("Controlled drugs"); for (CrimeStopAndsearch stop :
+		 * List<CrimeStopAndSearch> matches =
+		 * objectOfSearchTree.get("Controlled drugs"); for (CrimeStopAndSearch stop :
 		 * matches) count++; // System.out.println(stop); long total =
 		 * System.currentTimeMillis() - start; System.out.println("This took " + total +
 		 * " to count " + count);
 		 * 
 		 * long start2 = System.nanoTime();
 		 * 
-		 * int count2 = 0; for (CrimeStopAndsearch stop : mergedFiles) if
+		 * int count2 = 0; for (CrimeStopAndSearch stop : mergedFiles) if
 		 * (stop.Object_of_search.equals("Controlled drugs")) count2++; long total2 =
 		 * System.currentTimeMillis() - start2; System.out.println("This took " + total2
 		 * + " to count " + count2);
@@ -236,11 +236,11 @@ public class Data_Handling {
 	 * number of crimes successful crimes unsuccessful and partially successful
 	 * crimes counters
 	 */
-	void alloutputCrimes() {
+	void allOutputCrimes() {
 		int successful = 0, unsuccessful = 0, partial = 0;
-		for (CrimeStopAndsearch line : mergedFiles) {
+		for (CrimeStopAndSearch line : mergedFiles) {
 
-			int[] temp = SuccessfulSearch(line.Outcome_linked_to_object_of_search);
+			int[] temp = SuccessfulSearch(line.Outcome_Linked_To_Object_Of_Search);
 			successful = successful + temp[0];
 			unsuccessful = unsuccessful + temp[1];
 			partial = partial + temp[2];
@@ -258,20 +258,20 @@ public class Data_Handling {
 	 * calculate if that search was successful,unsuccessful and partial and return
 	 * the values This method will mainly be used for counters
 	 * 
-	 * @param Outcome_linked_to_object_of_search String if true successful, false
+	 * @param outcome_Linked_To_Object_Of_Search String if true successful, false
 	 *                                           partial else unsuccessful
 	 * @return intArray Array of 3 positions 0=successful 1=unsuccessful 2=partial
 	 */
-	public int[] SuccessfulSearch(String Outcome_linked_to_object_of_search) {
+	public int[] SuccessfulSearch(Boolean outcome_Linked_To_Object_Of_Search) {
 		int successful = 0, unsuccessful = 0, partial = 0;
 
-		if (Outcome_linked_to_object_of_search.equalsIgnoreCase("TRUE")) {
+		if (outcome_Linked_To_Object_Of_Search.equals("TRUE")) {
 			successful++;
 		}
-		if (Outcome_linked_to_object_of_search.equalsIgnoreCase("FALSE")) {
+		if (outcome_Linked_To_Object_Of_Search.equals("FALSE")) {
 			partial++;
 		}
-		if (Outcome_linked_to_object_of_search.equals(null) || Outcome_linked_to_object_of_search.equals("")) {
+		if (outcome_Linked_To_Object_Of_Search.equals(null) || outcome_Linked_To_Object_Of_Search.equals("")) {
 			unsuccessful++;
 		}
 
@@ -301,7 +301,7 @@ public class Data_Handling {
 	 * IDK if this is useful was just to print out all unique objects of search for
 	 * option A before actually selecting
 	 */
-	public Map<String, List<CrimeStopAndsearch>> getObjectOfSearchTree() {
+	public Map<String, List<CrimeStopAndSearch>> getObjectOfSearchTree() {
 		for (String temp : objectOfSearchTree.keySet()) {
 			if (temp.isEmpty()) {
 				System.out.println("TBD");
@@ -319,7 +319,7 @@ public class Data_Handling {
 	 * 
 	 * @param Treemap of object of search
 	 */
-	public String userChoice(Map<String, List<CrimeStopAndsearch>> Unique) {
+	public String userChoice(Map<String, List<CrimeStopAndSearch>> Unique) {
 		String userChoice = null;
 		int choiceCounter = 0;
 		for (String temp : Unique.keySet()) {
@@ -336,8 +336,8 @@ public class Data_Handling {
 		for (String uniqueSeach : Unique.keySet()) {
 			if (pickObjectOfSearch == choiceCounter) {
 				userChoice = uniqueSeach;
-				List<CrimeStopAndsearch> List = Unique.get(uniqueSeach);
-				for (CrimeStopAndsearch looping : List) {
+				List<CrimeStopAndSearch> List = Unique.get(uniqueSeach);
+				for (CrimeStopAndSearch looping : List) {
 					System.out.println(looping.toCSVString());
 				}
 			}
@@ -356,10 +356,10 @@ public class Data_Handling {
 		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
 		for (String temp : legislationTree.keySet()) {
 			int counter = 0;
-			List<CrimeStopAndsearch> legislationList = legislationTree.get(temp);
+			List<CrimeStopAndSearch> legislationList = legislationTree.get(temp);
 			switch (selection) {
 			case 1: {// for all crimes
-				for (CrimeStopAndsearch currentCrime : legislationList) {
+				for (CrimeStopAndSearch currentCrime : legislationList) {
 					if (currentCrime.Date.contains(UserDate)) {
 						counter++;
 					}
@@ -367,9 +367,9 @@ public class Data_Handling {
 				break;
 			}
 			case 2: {// for successful crimes
-				for (CrimeStopAndsearch currentCrime : legislationList) {
+				for (CrimeStopAndSearch currentCrime : legislationList) {
 					if (currentCrime.Date.contains(UserDate)) {
-						if (currentCrime.Outcome_linked_to_object_of_search.equalsIgnoreCase("TRUE")) {
+						if (currentCrime.Outcome_Linked_To_Object_Of_Search.equals("TRUE")) {
 							counter++;
 						}
 					}
@@ -399,14 +399,14 @@ public class Data_Handling {
 	 * @param police   String user police
 	 * @param UserDate String user date
 	 */
-	public ArrayList<CrimeStopAndsearch> highestTotalEthnicForAGivenMonthAndPolice(String police, String UserDate) {
-		ArrayList<CrimeStopAndsearch> ListForG = new ArrayList<>();
+	public ArrayList<CrimeStopAndSearch> highestTotalEthnicForAGivenMonthAndPolice(String police, String UserDate) {
+		ArrayList<CrimeStopAndSearch> ListForG = new ArrayList<>();
 		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
 		for (String temp : ethnicSearchTree.keySet()) {
 			int counter = 0;
-			List<CrimeStopAndsearch> ethnicList = ethnicSearchTree.get(temp);
-			for (CrimeStopAndsearch currentCrime : ethnicList) {
-				if (currentCrime.Date.contains(UserDate) && currentCrime.Policing_operation.contains(police)) {
+			List<CrimeStopAndSearch> ethnicList = ethnicSearchTree.get(temp);
+			for (CrimeStopAndSearch currentCrime : ethnicList) {
+				if (currentCrime.Date.contains(UserDate) && currentCrime.Policing_Operation.contains(police)) {
 					ListForG.add(currentCrime);
 					counter++;
 				}
@@ -429,8 +429,8 @@ public class Data_Handling {
 		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
 		for (String temp : ethnicSearchTree.keySet()) {
 			int counter = 0;
-			List<CrimeStopAndsearch> ethnicList = ethnicSearchTree.get(temp);
-			for (CrimeStopAndsearch currentCrime : ethnicList) {
+			List<CrimeStopAndSearch> ethnicList = ethnicSearchTree.get(temp);
+			for (CrimeStopAndSearch currentCrime : ethnicList) {
 				if (currentCrime.Legislation.equals(legislation)) {
 					counter++;
 				}
@@ -452,10 +452,10 @@ public class Data_Handling {
 	 */
 	public void EthnicityAndGenderSearch(String gender, String ethnicity) {
 		for (String temp : legislationTree.keySet()) {
-			List<CrimeStopAndsearch> legList = legislationTree.get(temp);
+			List<CrimeStopAndSearch> legList = legislationTree.get(temp);
 
-			for (CrimeStopAndsearch currentCrime : legList) {
-				if (currentCrime.Gender.equals(gender) && currentCrime.Self_defined_ethnicity.equals(ethnicity)) {
+			for (CrimeStopAndSearch currentCrime : legList) {
+				if (currentCrime.Gender.equals(gender) && currentCrime.Self_Defined_Ethnicity.equals(ethnicity)) {
 					System.out.println(currentCrime.toCSVString());
 				}
 			}

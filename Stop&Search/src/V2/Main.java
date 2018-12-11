@@ -14,7 +14,7 @@ import java.util.Set;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		ArrayList<CrimeStopAndsearch> policedateArray = null;
+		ArrayList<CrimeStopAndSearch> policeDateArray = null;
 		Data_Manipulation changeDataV2 = new Data_Manipulation();
 		CSVFiles fileDIR = new CSVFiles();
 		fileDIR.readInFilesDir();
@@ -40,17 +40,17 @@ public class Main {
 			switch (Menu) {
 
 			case "A":
-				Map<String, List<CrimeStopAndsearch>> objectOfSearchTree = allTheFiles.getObjectOfSearchTree();
+				Map<String, List<CrimeStopAndSearch>> objectOfSearchTree = allTheFiles.getObjectOfSearchTree();
 				System.out.println("\nDo you want to carry out a obeject of search on this File?: \r\n1. Yes \r\n2. No");
-				int yesno = scan.nextInt();
+				int yes_no = scan.nextInt();
 				scan.nextLine();
-				if (yesno == 1) {
+				if (yes_no == 1) {
 					System.out.println("Please select an object of search:  ");
 					allTheFiles.userChoice(objectOfSearchTree);
 				}
 				break;
 			case "C":
-				allTheFiles.alloutputCrimes();
+				allTheFiles.allOutputCrimes();
 				break;
 			case "D":
 				String uniqueDate =allTheFiles.printAttribute("date");
@@ -64,26 +64,26 @@ public class Main {
 
 			case "F":
 				System.out.println("Please pick a option \r\n1. F(i) \r\n2. F(ii)");
-				yesno = scan.nextInt();
+				yes_no = scan.nextInt();
 				scan.nextLine();
-				if (yesno == 1) {
+				if (yes_no == 1) {
 					String uniquePolice =allTheFiles.printAttribute("date");
 					String uniqueMonth =allTheFiles.printAttribute("police");
-					policedateArray = (allTheFiles.highestTotalEthnicForAGivenMonthAndPolice(uniqueMonth,uniquePolice));
+					policeDateArray = (allTheFiles.highestTotalEthnicForAGivenMonthAndPolice(uniqueMonth,uniquePolice));
 				}
-				if (yesno == 2) {
+				if (yes_no == 2) {
 					String uniqueLegislation =allTheFiles.printAttribute("legislation");
 					allTheFiles.highestTotalEthnicForAGivenMonthAndPolice(uniqueLegislation);
 				}
 				
 				break;
 			case "G":
-				if(policedateArray == null) {
+				if(policeDateArray == null) {
 					System.out.println("Please complete option F(i) to collect your list: ");
 				}else {
-					Comparator<CrimeStopAndsearch> cmp = Comparator.comparing(CrimeStopAndsearch::getDate);
-					ArrayList<CrimeStopAndsearch> gList = changeDataV2.quickSort(policedateArray, cmp);
-					for(CrimeStopAndsearch temp : gList) {
+					Comparator<CrimeStopAndSearch> cmp = Comparator.comparing(CrimeStopAndSearch::getDate);
+					ArrayList<CrimeStopAndSearch> gList = changeDataV2.quickSort(policeDateArray, cmp);
+					for(CrimeStopAndSearch temp : gList) {
 						System.out.println(temp.toCSVString());
 					}
 				}

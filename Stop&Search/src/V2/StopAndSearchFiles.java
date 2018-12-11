@@ -3,12 +3,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StopAndSearchFiles {
-	private List<CrimeStopAndsearch> OneStopAndSearchFiles = new ArrayList<>();
+	private List<CrimeStopAndSearch> OneStopAndSearchFiles = new ArrayList<>();
 	private int size =0;
-	public StopAndSearchFiles(ArrayList<CrimeStopAndsearch> stopandSearch) {
-		OneStopAndSearchFiles = new ArrayList<CrimeStopAndsearch>(stopandSearch);
+	public StopAndSearchFiles(ArrayList<CrimeStopAndSearch> stopandSearch) {
+		OneStopAndSearchFiles = new ArrayList<CrimeStopAndSearch>(stopandSearch);
 	}
-	public List<CrimeStopAndsearch> getStopAndSearchFiles()
+	public List<CrimeStopAndSearch> getStopAndSearchFiles()
 	{
 		return OneStopAndSearchFiles;
 	}

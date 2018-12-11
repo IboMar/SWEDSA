@@ -21,17 +21,17 @@ public class Data_Manipulation {
 	 * This method will be used to print out the list from F(i) reverse
 	 * chronological order
 	 * 
-	 * @param policedateArray List of CrimeStopAndsearch
+	 * @param policedateArray List of CrimeStopAndSearch
 	 */
-	protected ArrayList<CrimeStopAndsearch> quickSort(ArrayList<CrimeStopAndsearch> list, Comparator<CrimeStopAndsearch> comp)
+	protected ArrayList<CrimeStopAndSearch> quickSort(ArrayList<CrimeStopAndSearch> list, Comparator<CrimeStopAndSearch> comp)
 	{
 	    if (list.size() <= 1) 
 	        return list; // Already sorted  
 
-	    ArrayList<CrimeStopAndsearch> sorted = new ArrayList<CrimeStopAndsearch>();
-	    ArrayList<CrimeStopAndsearch> lesser = new ArrayList<CrimeStopAndsearch>();
-	    ArrayList<CrimeStopAndsearch> greater = new ArrayList<CrimeStopAndsearch>();
-	    CrimeStopAndsearch pivot = list.get(list.size()-1); // Use last Vehicle as pivot
+	    ArrayList<CrimeStopAndSearch> sorted = new ArrayList<CrimeStopAndSearch>();
+	    ArrayList<CrimeStopAndSearch> lesser = new ArrayList<CrimeStopAndSearch>();
+	    ArrayList<CrimeStopAndSearch> greater = new ArrayList<CrimeStopAndSearch>();
+	    CrimeStopAndSearch pivot = list.get(list.size()-1); // Use last Vehicle as pivot
 	    for (int i = 0; i < list.size()-1; i++)
 	    {
 	        //int order = list.get(i).compareTo(pivot);
@@ -54,13 +54,13 @@ public class Data_Manipulation {
 	 * This method will be used to print out the list from F(i) reverse
 	 * chronological order
 	 * 
-	 * @param policedateArray List of CrimeStopAndsearch
+	 * @param policedateArray List of CrimeStopAndSearch
 	 */
-	public void chronoLogicalOrder(List<CrimeStopAndsearch> policedateArray) {
+	public void chronologicalOrder(List<CrimeStopAndSearch> policedateArray) {
 
-		Comparator<CrimeStopAndsearch> cmp = Comparator.comparing(CrimeStopAndsearch::getDate);
+		Comparator<CrimeStopAndSearch> cmp = Comparator.comparing(CrimeStopAndSearch::getDate);
 		Collections.sort(policedateArray, cmp.reversed());
-		for (CrimeStopAndsearch currentCrime : policedateArray) {
+		for (CrimeStopAndSearch currentCrime : policedateArray) {
 			System.out.println(currentCrime.toCSVString());
 		}
 	}

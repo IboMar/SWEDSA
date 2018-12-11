@@ -15,7 +15,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		//TempArray created for task G where it will use the data from F(i)
-		List<CrimeStopAndsearch> policedateArray = null;
+		List<CrimeStopAndSearch> policeDateArray = null;
 		//Creates objects to access Classes in a none static way
 		Scanner scan = new Scanner(System.in);
 		Data_Manipulation changeData = new Data_Manipulation();
@@ -49,14 +49,14 @@ public class Main {
 			switch (Menu) {
 
 			case "A":
-				ArrayList<CrimeStopAndsearch>temp = allTheFiles.getmergedFiles();
-				List<String> uniqueobjectOfSearch = changeData.uniqueObjectOfSearch(temp);
+				ArrayList<CrimeStopAndSearch>temp = allTheFiles.getMergedFiles();
+				List<String> uniqueObjectOfSearch = changeData.uniqueObjectOfSearch(temp);
 				System.out.println("Do you want to carry out a obeject of search on this File?: \r\n Y/N");
 				String yesno = scan.nextLine();
 				if (yesno.equalsIgnoreCase("Y")) {
 					System.out.println("Please Select a object of search");
 					String pickObjectOfSearch = allTheFiles.GetObjectiveSearch();
-					for (String uniqueSeach : uniqueobjectOfSearch) {
+					for (String uniqueSeach : uniqueObjectOfSearch) {
 						if (pickObjectOfSearch.equals(uniqueSeach)) {
 							changeData.outPutOneObjectOfSearch(temp, pickObjectOfSearch);
 						}
@@ -65,19 +65,19 @@ public class Main {
 				break;
 
 			case "C":
-				allTheFiles.alloutputCrimes();
+				allTheFiles.allOutputCrimes();
 				break;
 
 			case "D":
 				System.out.println("Please pick a date");
 				String pickDate = allTheFiles.GetDate();
-				changeData.highestTotal(allTheFiles.getmergedFiles(),pickDate);
+				changeData.highestTotal(allTheFiles.getMergedFiles(),pickDate);
 				break;
 
 			case "E":
 				System.out.println("Please pick a date");
 				pickDate = allTheFiles.GetDate();
-				changeData.allFilesLegislationHighestSucessful(allTheFiles.getmergedFiles(), pickDate);
+				changeData.allFilesLegislationHighestSucessful(allTheFiles.getMergedFiles(), pickDate);
 				break;
 
 			case "F":
@@ -91,21 +91,21 @@ public class Main {
 				System.out.println("Please pick a police force");
 				String pickPolice = allTheFiles.GetPoliceForce();
 				System.out.println(pickPolice);
-				policedateArray =
-				changeData.ethnic(allTheFiles.getmergedFiles(), pickDate, pickPolice);
+				policeDateArray =
+				changeData.ethnic(allTheFiles.getMergedFiles(), pickDate, pickPolice);
 				break;
 				case "2":
 				System.out.println("================================================");
 				System.out.println("Please pick a legislation");
 				String pickLegislation = allTheFiles.GetLeg();
-				changeData.ethnicLeg(allTheFiles.getmergedFiles(), pickLegislation);
+				changeData.ethnicLeg(allTheFiles.getMergedFiles(), pickLegislation);
 				break;
 				}
 				break;
 			case "G":
-				if(policedateArray !=null) {
+				if(policeDateArray !=null) {
 					
-					changeData.chronoLogicalOrder(policedateArray);
+					changeData.chronoLogicalOrder(policeDateArray);
 				}
 				else{
 					System.out.println("Please use (F. Find which (self-determined) ethnic group has the highest number of recorded stop and search events)\nbefore listing in chronological order.");
@@ -117,7 +117,7 @@ public class Main {
 				String pickGender = allTheFiles.getGender();
 				System.out.println("Please pick an ethnicity");
 				String pickEthnic = allTheFiles.getEthnic();
-				changeData.sortByLegislation(allTheFiles.getmergedFiles(), pickGender, pickEthnic);
+				changeData.sortByLegislation(allTheFiles.getMergedFiles(), pickGender, pickEthnic);
 				break;
 			}
 			

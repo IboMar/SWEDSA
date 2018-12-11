@@ -13,18 +13,18 @@ public class Data_Manipulation {
 	/**
 	 * This Method will get all the unique objects of search within the merged files
 	 * 
-	 * @param temp List<CrimeStopAndsearch> of all files
+	 * @param temp List<CrimeStopAndSearch> of all files
 	 * @return tempList List of all unique Strings for objectOfSearch
 	 */
-	public List<String> uniqueObjectOfSearch(ArrayList<CrimeStopAndsearch> temp) {
+	public List<String> uniqueObjectOfSearch(ArrayList<CrimeStopAndSearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
-		for (CrimeStopAndsearch currentCrime : temp) {
-			if (currentCrime.Object_of_search.equalsIgnoreCase("")
-					|| currentCrime.Object_of_search.equalsIgnoreCase(null)) {
+		for (CrimeStopAndSearch currentCrime : temp) {
+			if (currentCrime.Object_Of_Search.equalsIgnoreCase("")
+					|| currentCrime.Object_Of_Search.equalsIgnoreCase(null)) {
 			} else {
-				if (!tempList.contains(currentCrime.Object_of_search)) {
-					tempList.add(currentCrime.Object_of_search);
+				if (!tempList.contains(currentCrime.Object_Of_Search)) {
+					tempList.add(currentCrime.Object_Of_Search);
 				}
 			}
 		}
@@ -40,13 +40,13 @@ public class Data_Manipulation {
 	/**
 	 * This Method will get all the unique dates within the merged files
 	 * 
-	 * @param temp List<CrimeStopAndsearch> of all files
+	 * @param temp List<CrimeStopAndSearch> of all files
 	 * @return tempList List of all unique Strings for dates
 	 */
-	public List<String> uniqueDate(List<CrimeStopAndsearch> temp) {
+	public List<String> uniqueDate(List<CrimeStopAndSearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
-		for (CrimeStopAndsearch currentCrime : temp) {
+		for (CrimeStopAndSearch currentCrime : temp) {
 			if (currentCrime.Date.equalsIgnoreCase("") || currentCrime.Date.equalsIgnoreCase(null)) {
 			} else {
 				String substringDate = currentCrime.Date;
@@ -68,12 +68,12 @@ public class Data_Manipulation {
 	/**
 	 * This Method will get all the unique genders within the merged files
 	 * 
-	 * @param temp List<CrimeStopAndsearch> of all files
+	 * @param temp List<CrimeStopAndSearch> of all files
 	 * @return tempList List of all unique Strings for gender
 	 */
-	public List<String> uniqueGender(List<CrimeStopAndsearch> temp) {
+	public List<String> uniqueGender(List<CrimeStopAndSearch> temp) {
 		List<String> tempList = new ArrayList<>();
-		for (CrimeStopAndsearch currentCrime : temp) {
+		for (CrimeStopAndSearch currentCrime : temp) {
 			if (currentCrime.Gender.equalsIgnoreCase("") || currentCrime.Gender == null) {
 			} else {
 				if (!tempList.contains(currentCrime.Gender)) {
@@ -93,17 +93,17 @@ public class Data_Manipulation {
 	/**
 	 * This Method will get all the unique Ethnics within the merged files
 	 * 
-	 * @param temp List<CrimeStopAndsearch> of all files
+	 * @param temp List<CrimeStopAndSearch> of all files
 	 * @return tempList List of all unique Strings for Ethnic
 	 */
-	public List<String> uniqueEthnic(List<CrimeStopAndsearch> temp) {
+	public List<String> uniqueEthnic(List<CrimeStopAndSearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
-		for (CrimeStopAndsearch currentCrime : temp) {
-			if (currentCrime.Self_defined_ethnicity != null
-					&& !currentCrime.Self_defined_ethnicity.equalsIgnoreCase("")) {
-				if (!tempList.contains(currentCrime.Self_defined_ethnicity)) {
-					tempList.add(currentCrime.Self_defined_ethnicity);
+		for (CrimeStopAndSearch currentCrime : temp) {
+			if (currentCrime.Self_Defined_Ethnicity != null
+					&& !currentCrime.Self_Defined_Ethnicity.equalsIgnoreCase("")) {
+				if (!tempList.contains(currentCrime.Self_Defined_Ethnicity)) {
+					tempList.add(currentCrime.Self_Defined_Ethnicity);
 				}
 			}
 		}
@@ -118,18 +118,18 @@ public class Data_Manipulation {
 	/**
 	 * This Method will get all the unique Police within the merged files
 	 * 
-	 * @param temp List<CrimeStopAndsearch> of all files
+	 * @param temp List<CrimeStopAndSearch> of all files
 	 * @return tempList List of all unique Strings for Police
 	 */
-	public List<String> uniquePolice(List<CrimeStopAndsearch> temp) {
+	public List<String> uniquePolice(List<CrimeStopAndSearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
-		for (CrimeStopAndsearch currentCrime : temp) {
-			if (currentCrime.Policing_operation.equalsIgnoreCase("")
-					|| currentCrime.Policing_operation.equalsIgnoreCase(null)) {
+		for (CrimeStopAndSearch currentCrime : temp) {
+			if (currentCrime.Policing_Operation.equalsIgnoreCase("")
+					|| currentCrime.Policing_Operation.equalsIgnoreCase(null)) {
 			} else {
-				if (!tempList.contains(currentCrime.Policing_operation))
-					tempList.add(currentCrime.Policing_operation);
+				if (!tempList.contains(currentCrime.Policing_Operation))
+					tempList.add(currentCrime.Policing_Operation);
 			}
 
 		}
@@ -144,13 +144,13 @@ public class Data_Manipulation {
 	/**
 	 * This Method will get all the unique Legislations within the merged files
 	 * 
-	 * @param temp List<CrimeStopAndsearch> of all files
+	 * @param temp List<CrimeStopAndSearch> of all files
 	 * @return tempList List of all unique Strings for Legislations
 	 */
-	public List<String> uniqueLeg(List<CrimeStopAndsearch> temp) {
+	public List<String> uniqueLeg(List<CrimeStopAndSearch> temp) {
 
 		List<String> tempList = new ArrayList<>();
-		for (CrimeStopAndsearch currentCrime : temp) {
+		for (CrimeStopAndSearch currentCrime : temp) {
 			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equalsIgnoreCase(null)) {
 			} else {
 				if (!tempList.contains(currentCrime.Legislation))
@@ -168,23 +168,23 @@ public class Data_Manipulation {
 
 	
 	/** This Method will be used to print out one object of search that the user has selected
-	 * @param temp List<CrimeStopAndsearch>
+	 * @param temp List<CrimeStopAndSearch>
 	 * @param objectOfSearchTemp String user choice objectOfSearch
 	 */
-	public void outPutOneObjectOfSearch(ArrayList<CrimeStopAndsearch> temp, String objectOfSearchTemp) {
+	public void outPutOneObjectOfSearch(ArrayList<CrimeStopAndSearch> temp, String objectOfSearchTemp) {
 
-		for (CrimeStopAndsearch currentCrime : temp) {
-			if (currentCrime.Object_of_search.contains(objectOfSearchTemp)) {
+		for (CrimeStopAndSearch currentCrime : temp) {
+			if (currentCrime.Object_Of_Search.contains(objectOfSearchTemp)) {
 				 System.out.println(currentCrime.toCSVString());
 			}
 		}
 	}
 	
-	public void insertSort(ArrayList<CrimeStopAndsearch> list, Comparator<CrimeStopAndsearch> comp) {
+	public void insertSort(ArrayList<CrimeStopAndSearch> list, Comparator<CrimeStopAndSearch> comp) {
 		int n = list.size(); 
         for (int i=1; i<n; ++i) 
         { 
-            CrimeStopAndsearch key = list.get(i); 
+            CrimeStopAndSearch key = list.get(i); 
             int j = i-1; 
   
             /* Move elements of arr[0..i-1], that are 
@@ -201,16 +201,16 @@ public class Data_Manipulation {
 
 	
 	/** This method will be used to find the highest successful legislation for a given month
-	 * @param temp List<CrimeStopAndsearch>
+	 * @param temp List<CrimeStopAndSearch>
 	 * @param pickDate String user choice date
 	 */
-	public void allFilesLegislationHighestSucessful(ArrayList<CrimeStopAndsearch> temp, String pickDate) {
+	public void allFilesLegislationHighestSucessful(ArrayList<CrimeStopAndSearch> temp, String pickDate) {
 		// Creates a list to collect all unique legislations 
-		List<CrimeStopAndsearch> myList = new ArrayList<>();
-		CrimeStopAndsearch storage = null;
+		List<CrimeStopAndSearch> myList = new ArrayList<>();
+		CrimeStopAndSearch storage = null;
 		Data_Handling instance = new Data_Handling();
 		List<String> tempList = new ArrayList<>();
-		for (CrimeStopAndsearch currentCrime : temp) {
+		for (CrimeStopAndSearch currentCrime : temp) {
 			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equals(null)) {
 			} else {
 				if (!tempList.contains(currentCrime.Legislation))
@@ -219,7 +219,7 @@ public class Data_Manipulation {
 		}
 		for (String Legislation : tempList) {
 			int successful = 0, unsuccessful = 0, partial = 0;
-			for (CrimeStopAndsearch currentCrime : temp) {
+			for (CrimeStopAndSearch currentCrime : temp) {
 
 				if (Legislation.equals(currentCrime.Legislation) && currentCrime.Date.contains(pickDate)) {
 					// For each legislation the counter gets reset and if the parameters are met only then the increment takes place
@@ -229,13 +229,13 @@ public class Data_Manipulation {
 					partial = partial + counter[2];
 				}
 			}
-			storage = new CrimeStopAndsearch(Legislation, successful, unsuccessful, partial);
+			storage = new CrimeStopAndSearch(Legislation, successful, unsuccessful, partial);
 			myList.add(storage);
 		}
 		// Orders the list on successful crimes highest to smallest
-		Collections.sort(myList, new Comparator<CrimeStopAndsearch>() {
+		Collections.sort(myList, new Comparator<CrimeStopAndSearch>() {
 			@Override
-			public int compare(CrimeStopAndsearch z1, CrimeStopAndsearch z2) {
+			public int compare(CrimeStopAndSearch z1, CrimeStopAndSearch z2) {
 				if (z1.getSuccessful() < z2.getSuccessful())
 					return 1;
 				if (z1.getSuccessful() > z2.getSuccessful())
@@ -245,7 +245,7 @@ public class Data_Manipulation {
 		});
 
 		// The list has been ordered now you print the largest item and break which will give you the highest successful value
-		for (CrimeStopAndsearch list : myList) {
+		for (CrimeStopAndSearch list : myList) {
 			System.out.println(list.highestSucessLeg());
 			break;
 
@@ -254,14 +254,14 @@ public class Data_Manipulation {
 	}
 
 	/** This method will be used to find the highest total crimes for each legislation for a given month
-	 * @param temp List<CrimeStopAndsearch>
+	 * @param temp List<CrimeStopAndSearch>
 	 * @param pickDate String user choice date
 	 */
-	public void highestTotal(ArrayList<CrimeStopAndsearch> temp, String pickDate) {
-		List<CrimeStopAndsearch> myList = new ArrayList<>();
-		CrimeStopAndsearch storage = null;
+	public void highestTotal(ArrayList<CrimeStopAndSearch> temp, String pickDate) {
+		List<CrimeStopAndSearch> myList = new ArrayList<>();
+		CrimeStopAndSearch storage = null;
 		List<String> tempList = new ArrayList<>();
-		for (CrimeStopAndsearch currentCrime : temp) {
+		for (CrimeStopAndSearch currentCrime : temp) {
 			if (currentCrime.Legislation.equalsIgnoreCase("") || currentCrime.Legislation.equalsIgnoreCase(null)) {
 			} else {
 				if (!tempList.contains(currentCrime.Legislation))
@@ -270,17 +270,17 @@ public class Data_Manipulation {
 		}
 		for (String Legislation : tempList) {
 			int total = 0;
-			for (CrimeStopAndsearch currentCrime : temp) {
+			for (CrimeStopAndSearch currentCrime : temp) {
 
 				if (Legislation.equals(currentCrime.Legislation) && currentCrime.Date.contains(pickDate)) {
 					total++;
 				}
 			}
-			storage = new CrimeStopAndsearch(Legislation, total);
+			storage = new CrimeStopAndSearch(Legislation, total);
 			myList.add(storage);
 		}
-		Collections.sort(myList, new Comparator<CrimeStopAndsearch>() {
-			public int compare(CrimeStopAndsearch z1, CrimeStopAndsearch z2) {
+		Collections.sort(myList, new Comparator<CrimeStopAndSearch>() {
+			public int compare(CrimeStopAndSearch z1, CrimeStopAndSearch z2) {
 				if (z1.getTotal() < z2.getTotal())
 					return 1;
 				if (z1.getTotal() > z2.getTotal())
@@ -289,7 +289,7 @@ public class Data_Manipulation {
 			}
 		});
 
-		for (CrimeStopAndsearch list : myList) {
+		for (CrimeStopAndSearch list : myList) {
 			System.out.println(list.highestTotal());
 			break;
 		}
@@ -298,56 +298,56 @@ public class Data_Manipulation {
 
 	
 	/** This method will be used to sort in chronological order list from F(i) and then print the list out
-	 * @param temp List<CrimeStopAndsearch>
+	 * @param temp List<CrimeStopAndSearch>
 	 */
-	public void chronoLogicalOrder(List<CrimeStopAndsearch> policedateArray) {
+	public void chronoLogicalOrder(List<CrimeStopAndSearch> policedateArray) {
 
-		Comparator<CrimeStopAndsearch> cmp = Comparator.comparing(CrimeStopAndsearch::getDate);
+		Comparator<CrimeStopAndSearch> cmp = Comparator.comparing(CrimeStopAndSearch::getDate);
 		Collections.sort(policedateArray, cmp.reversed());
-		for (CrimeStopAndsearch currentCrime : policedateArray) {
+		for (CrimeStopAndSearch currentCrime : policedateArray) {
 			currentCrime.toCSVString();
 		}
 	}
 
 	
 	/** This method will be used to see total crimes for each ethnic group based on user parameters of date and police
-	 * @param temp List<CrimeStopAndsearch>
+	 * @param temp List<CrimeStopAndSearch>
 	 * @param pickDate user String date
 	 * @param String user policeForce
 	 * @return chronoArray A list of data we found within this method for the users options will be used to sort in chronological order
 	 */
-	public List<CrimeStopAndsearch> ethnic(ArrayList<CrimeStopAndsearch> temp, String pickDate, String policeForce) {
-		List<CrimeStopAndsearch> myList = new ArrayList<>();
-		CrimeStopAndsearch storage = null;
+	public List<CrimeStopAndSearch> ethnic(ArrayList<CrimeStopAndSearch> temp, String pickDate, String policeForce) {
+		List<CrimeStopAndSearch> myList = new ArrayList<>();
+		CrimeStopAndSearch storage = null;
 		List<String> tempList = new ArrayList<>();
-		List<CrimeStopAndsearch> chronoArray = new ArrayList<>();
+		List<CrimeStopAndSearch> chronoArray = new ArrayList<>();
 
-		for (CrimeStopAndsearch currentCrime : temp) {
-			if (currentCrime.Self_defined_ethnicity.equalsIgnoreCase("")
-					|| currentCrime.Self_defined_ethnicity.equalsIgnoreCase(null)) {
+		for (CrimeStopAndSearch currentCrime : temp) {
+			if (currentCrime.Self_Defined_Ethnicity.equalsIgnoreCase("")
+					|| currentCrime.Self_Defined_Ethnicity.equalsIgnoreCase(null)) {
 			} else {
-				if (!tempList.contains(currentCrime.Self_defined_ethnicity))
-					tempList.add(currentCrime.Self_defined_ethnicity);
+				if (!tempList.contains(currentCrime.Self_Defined_Ethnicity))
+					tempList.add(currentCrime.Self_Defined_Ethnicity);
 			}
 		}
 		for (String Ethnic : tempList) {
 			int total = 0;
-			for (CrimeStopAndsearch currentCrime : temp) {
+			for (CrimeStopAndSearch currentCrime : temp) {
 
-				if (Ethnic.equals(currentCrime.Self_defined_ethnicity) && currentCrime.Date.contains(pickDate)
-						&& currentCrime.Policing_operation.contains(policeForce)) {
+				if (Ethnic.equals(currentCrime.Self_Defined_Ethnicity) && currentCrime.Date.contains(pickDate)
+						&& currentCrime.Policing_Operation.contains(policeForce)) {
 					chronoArray.add(currentCrime);
 					;
 					total++;
 				}
 			}
-			storage = new CrimeStopAndsearch(Ethnic, total);
+			storage = new CrimeStopAndSearch(Ethnic, total);
 			myList.add(storage);
 		}
 
-		Collections.sort(myList, new Comparator<CrimeStopAndsearch>() {
+		Collections.sort(myList, new Comparator<CrimeStopAndSearch>() {
 			@Override
-			public int compare(CrimeStopAndsearch z1, CrimeStopAndsearch z2) {
+			public int compare(CrimeStopAndSearch z1, CrimeStopAndSearch z2) {
 				if (z1.getTotal() < z2.getTotal())
 					return 1;
 				if (z1.getTotal() > z2.getTotal())
@@ -356,7 +356,7 @@ public class Data_Manipulation {
 			}
 		});
 
-		for (CrimeStopAndsearch j : myList) {
+		for (CrimeStopAndSearch j : myList) {
 
 			System.out.println(j.highestTotal());
 			break;
@@ -367,64 +367,64 @@ public class Data_Manipulation {
 
 	
 	/** This method will be used to sort by Legislation and then print it out on the given ethnic and gender
-	 * @param temp List<CrimeStopAndsearch>
+	 * @param temp List<CrimeStopAndSearch>
 	 * @param pickGender user String gender
 	 * @param pickEthnic user String Ethnic
 	 */
-	public void sortByLegislation(ArrayList<CrimeStopAndsearch> temp, String pickGender, String pickEthnic) {
-		List<CrimeStopAndsearch> tempList = new ArrayList<>();
-		for (CrimeStopAndsearch currentCrime : temp) {
+	public void sortByLegislation(ArrayList<CrimeStopAndSearch> temp, String pickGender, String pickEthnic) {
+		List<CrimeStopAndSearch> tempList = new ArrayList<>();
+		for (CrimeStopAndSearch currentCrime : temp) {
 
-			if (currentCrime.Gender.equals(pickGender) && currentCrime.Self_defined_ethnicity.equals(pickEthnic)) {
+			if (currentCrime.Gender.equals(pickGender) && currentCrime.Self_Defined_Ethnicity.equals(pickEthnic)) {
 				tempList.add(currentCrime);
 				;
 
 			}
 		}
 
-		Comparator<CrimeStopAndsearch> cmp = Comparator.comparing(CrimeStopAndsearch::getLegislation);
+		Comparator<CrimeStopAndSearch> cmp = Comparator.comparing(CrimeStopAndSearch::getLegislation);
 		Collections.sort(tempList, cmp);
 
-		for (CrimeStopAndsearch j : tempList) {
+		for (CrimeStopAndSearch j : tempList) {
 
 			j.toCSVString();
 		}
 	}
 
 	/** This method will find the highest total crimes for each ethnicity on a given legislation 
-	 * @param temp List<CrimeStopAndsearch>
+	 * @param temp List<CrimeStopAndSearch>
 	 * @param pickLegislation user String Legislation
 	 */
-	public void ethnicLeg(ArrayList<CrimeStopAndsearch> temp, String pickLegislation) {
-		List<CrimeStopAndsearch> myList = new ArrayList<>();
-		CrimeStopAndsearch storage = null;
+	public void ethnicLeg(ArrayList<CrimeStopAndSearch> temp, String pickLegislation) {
+		List<CrimeStopAndSearch> myList = new ArrayList<>();
+		CrimeStopAndSearch storage = null;
 		List<String> tempList = new ArrayList<>();
 
-		for (CrimeStopAndsearch currentCrime : temp) {
-			if (currentCrime.Self_defined_ethnicity.equalsIgnoreCase("")
-					|| currentCrime.Self_defined_ethnicity.equalsIgnoreCase(null)) {
+		for (CrimeStopAndSearch currentCrime : temp) {
+			if (currentCrime.Self_Defined_Ethnicity.equalsIgnoreCase("")
+					|| currentCrime.Self_Defined_Ethnicity.equalsIgnoreCase(null)) {
 			} else {
-				if (!tempList.contains(currentCrime.Self_defined_ethnicity)) {
-					tempList.add(currentCrime.Self_defined_ethnicity);
+				if (!tempList.contains(currentCrime.Self_Defined_Ethnicity)) {
+					tempList.add(currentCrime.Self_Defined_Ethnicity);
 				}
 			}
 		}
 		for (String Ethnic : tempList) {
 			int total = 0;
-			for (CrimeStopAndsearch currentCrime : temp) {
+			for (CrimeStopAndSearch currentCrime : temp) {
 
-				if (Ethnic.equals(currentCrime.Self_defined_ethnicity)
+				if (Ethnic.equals(currentCrime.Self_Defined_Ethnicity)
 						&& currentCrime.Legislation.contains(pickLegislation)) {
 
 					total++;
 				}
 			}
-			storage = new CrimeStopAndsearch(Ethnic, total);
+			storage = new CrimeStopAndSearch(Ethnic, total);
 			myList.add(storage);
 		}
-		Collections.sort(myList, new Comparator<CrimeStopAndsearch>() {
+		Collections.sort(myList, new Comparator<CrimeStopAndSearch>() {
 			@Override
-			public int compare(CrimeStopAndsearch z1, CrimeStopAndsearch z2) {
+			public int compare(CrimeStopAndSearch z1, CrimeStopAndSearch z2) {
 				if (z1.getTotal() < z2.getTotal())
 					return 1;
 				if (z1.getTotal() > z2.getTotal())
@@ -433,7 +433,7 @@ public class Data_Manipulation {
 			}
 		});
 
-		for (CrimeStopAndsearch j : myList) {
+		for (CrimeStopAndSearch j : myList) {
 			System.out.println(j.highestTotal());
 			break;
 		}

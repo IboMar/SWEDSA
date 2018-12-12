@@ -69,7 +69,7 @@ public class Data_Handling {
 			successful = successful + temp[0];
 			unsuccessful = unsuccessful + temp[1];
 			partial = partial + temp[2];
-			line.toCSVString();
+			System.out.println(line.toCSVString());
 
 		}
 		System.out.println("There are " + mergedFiles.size() + " recorded crimes; ");

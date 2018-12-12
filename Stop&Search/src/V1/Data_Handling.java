@@ -97,23 +97,24 @@ public class Data_Handling {
 	 * calculate if that search was successful,unsuccessful and partial and return
 	 * the values This method will mainly be used for counters
 	 * 
-	 * @param Outcome_Linked_To_Object_Of_Search String if true successful, false
+	 * @param outcome_Linked_To_Object_Of_Search String if true successful, false
 	 *                                           partial else unsuccessful
 	 * @return intArray Array of 3 positions 0=successful 1=unsuccessful 2=partial
 	 */
-	public int[] SuccessfulSearch(String Outcome_Linked_To_Object_Of_Search) {
+	public int[] SuccessfulSearch(Boolean outcome_Linked_To_Object_Of_Search) {
 		int successful = 0, unsuccessful = 0, partial = 0;
 
-		
-		if (Outcome_Linked_To_Object_Of_Search.equalsIgnoreCase("TRUE")) {
+		try {
+		if (outcome_Linked_To_Object_Of_Search.equals(true)) {
 			successful++;
 		}
-		if (Outcome_Linked_To_Object_Of_Search.equalsIgnoreCase("FALSE")) {
+		if (outcome_Linked_To_Object_Of_Search.equals(false)) {
 			partial++;
 		}
-		if (Outcome_Linked_To_Object_Of_Search.equals(null) || Outcome_Linked_To_Object_Of_Search.equals("")) {
+		}catch(NullPointerException e) {
 			unsuccessful++;
 		}
+		
 
 		int[] intArray = new int[3];
 		intArray[0] = successful;

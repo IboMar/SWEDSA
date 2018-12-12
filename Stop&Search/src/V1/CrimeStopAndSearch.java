@@ -27,7 +27,7 @@ public class CrimeStopAndSearch {
 	public String Officer_Defined_Ethnicity;
 	public String Legislation;
 	public String Object_Of_Search;
-	public Boolean Outcome;
+	public String Outcome;
 	public String Outcome_Linked_To_Object_Of_Search;
 	public Boolean Removal_Of_More_Than_Just_Outer_Clothing;
 	public int total;
@@ -75,10 +75,7 @@ public class CrimeStopAndSearch {
 		Officer_Defined_Ethnicity = csvParts[i++];
 		Legislation = csvParts[i++];
 		Object_Of_Search = csvParts[i++];
-		if(csvParts[i] !=null && csvParts[i].length()>0) {
-		Outcome = Boolean.parseBoolean(csvParts[i++]);
-		}else {Outcome = null; i++;}
-		
+		Outcome = csvParts[i++];
 		Outcome_Linked_To_Object_Of_Search = csvParts[i++];
 		if(csvParts[i] !=null && csvParts[i].length()>0) {
 		Removal_Of_More_Than_Just_Outer_Clothing = Boolean.parseBoolean(csvParts[i++]);

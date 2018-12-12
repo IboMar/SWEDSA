@@ -70,10 +70,7 @@ public class CrimeStopAndSearch {
 		Officer_Defined_Ethnicity = csvParts[i++];
 		Legislation = csvParts[i++];
 		Object_Of_Search = csvParts[i++];
-		if(csvParts[i] !=null && csvParts[i].length()>0) {
 		Outcome = csvParts[i++];
-		}else {Outcome = null; i++;}
-		
 		Outcome_Linked_To_Object_Of_Search = Boolean.parseBoolean(csvParts[i++]);
 		if(csvParts[i] !=null && csvParts[i].length()>0) {
 		Removal_Of_More_Than_Just_Outer_Clothing = Boolean.parseBoolean(csvParts[i++]);

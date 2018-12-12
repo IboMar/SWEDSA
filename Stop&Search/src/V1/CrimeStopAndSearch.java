@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * This will be the main class that we will use to output and manipulate data usually will be within an arrayList
+ * 
  */
 public class CrimeStopAndSearch {
 

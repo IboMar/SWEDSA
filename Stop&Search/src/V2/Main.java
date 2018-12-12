@@ -41,7 +41,7 @@ public class Main {
 
 			case "A":
 				Map<String, List<CrimeStopAndSearch>> objectOfSearchTree = allTheFiles.getObjectOfSearchTree();
-				System.out.println("\nDo you want to carry out a obeject of search on this File?: \r\n1. Yes \r\n2. No");
+				System.out.println("\nDo you want to carry out a object of search on this File?: \r\n1. Yes \r\n2. No" );
 				int yes_no = scan.nextInt();
 				scan.nextLine();
 				if (yes_no == 1) {

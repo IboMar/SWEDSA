@@ -51,7 +51,7 @@ public class Main {
 			case "A":
 				ArrayList<CrimeStopAndSearch>temp = allTheFiles.getMergedFiles();
 				List<String> uniqueObjectOfSearch = changeData.uniqueObjectOfSearch(temp);
-				System.out.println("Do you want to carry out a obeject of search on this File?:");
+				System.out.println("Do you want to carry out a object of search on this File?:");
 				System.out.println("1.Yes");
 				System.out.println("2.No");
 				String yesno = scan.nextLine();

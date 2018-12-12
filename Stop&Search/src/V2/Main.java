@@ -18,7 +18,7 @@ public class Main {
 		Data_Manipulation changeDataV2 = new Data_Manipulation();
 		CSVFiles fileDIR = new CSVFiles();
 		fileDIR.readInFilesDir();
-		List<String> fileDIRList = FolderReader.getbasicStop_Search();
+		List<String> fileDIRList = FolderReader.getBasicStop_Search();
 		Data_Handling allTheFiles = new Data_Handling();
 		for (String file : fileDIRList) {
 			allTheFiles.readFile(file);

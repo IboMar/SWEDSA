@@ -29,7 +29,7 @@ public class FolderReader {
 	}
 
 	//Getter method for the static list
-	public static List<String> getbasicStop_Search() {
+	public static List<String> getBasicStop_Search() {
 		return Stop_Search;
 	}
 

@@ -20,7 +20,7 @@ import V1.Data_Manipulation;
  */
 public class Data_Handling {
 
-	public final String SEP = ",";
+	public final String sep = ",";
 	private ArrayList<CrimeStopAndSearch> mergedFiles = new ArrayList<>();
 	private TreeMap<String, List<CrimeStopAndSearch>> legislationTree = new TreeMap<>();
 	private Map<String, List<CrimeStopAndSearch>> objectOfSearchTree = new HashMap<>();
@@ -36,7 +36,8 @@ public class Data_Handling {
 	 * This method accepts a String filename and reads it in for each line a new
 	 * arraylist will be made so in future you can navigate through ever line
 	 * 
-	 * @param filename String FileNames
+	 * @param filename
+	 *            String FileNames
 	 */
 	public void readFile(String filename) throws FileNotFoundException {
 
@@ -46,9 +47,9 @@ public class Data_Handling {
 		csvScan.nextLine(); // read header
 		while (csvScan.hasNextLine()) {
 			String line = csvScan.nextLine();
-			String[] temp = line.split(SEP, -1);
+			String[] temp = line.split(sep, -1);
 			temp[3] = parts[3];
-			String line2 = String.join(",", temp);
+			String line2 = String.join(sep, temp);
 			mergedFiles.add(new CrimeStopAndSearch(line2));
 		}
 		csvScan.close();
@@ -58,8 +59,8 @@ public class Data_Handling {
 	 * The purpose of this method is user validation on picking unique values which
 	 * will get them unique values from a sub method called getUniqueAttributes()
 	 * 
-	 * @param selection String this will be programmers selection to find a certain
-	 *                  set
+	 * @param selection
+	 *            String this will be programmers selection to find a certain set
 	 */
 	public String printAttribute(String selection) {
 		// This method will collect all the unique dates in the merged Array
@@ -105,8 +106,8 @@ public class Data_Handling {
 	 * String e.g. police which will check if uniquepolice exists if not create it
 	 * and then return
 	 * 
-	 * @param selection String this will be programmers selection to find a certain
-	 *                  set
+	 * @param selection
+	 *            String this will be programmers selection to find a certain set
 	 * @return unique values in for of Set String
 	 */
 	public Set<String> getUniqueAttributes(String selection) {
@@ -237,19 +238,19 @@ public class Data_Handling {
 	 * crimes counters
 	 */
 	void allOutputCrimes() {
-		int successful = 0, unsuccessful = 0, partial = 0;
+		int successful = 0, unSuccessful = 0, partial = 0;
 		for (CrimeStopAndSearch line : mergedFiles) {
 
 			int[] temp = SuccessfulSearch(line.Outcome_Linked_To_Object_Of_Search);
 			successful = successful + temp[0];
-			unsuccessful = unsuccessful + temp[1];
+			unSuccessful = unSuccessful + temp[1];
 			partial = partial + temp[2];
 			System.out.println(line.toCSVString());
 		}
 		System.out.println("There are " + mergedFiles.size() + " recorded crimes; ");
 		System.out.println(successful + " Successful Searches - " + percent(successful, mergedFiles.size()));
 		System.out.println(partial + " Partial Successful Searches -" + percent(partial, mergedFiles.size()));
-		System.out.println(unsuccessful + " Unsuccessful Searches -" + percent(unsuccessful, mergedFiles.size()));
+		System.out.println(unSuccessful + " Unsuccessful Searches -" + percent(unSuccessful, mergedFiles.size()));
 
 	}
 
@@ -258,23 +259,25 @@ public class Data_Handling {
 	 * calculate if that search was successful,unsuccessful and partial and return
 	 * the values This method will mainly be used for counters
 	 * 
-	 * @param outcome_Linked_To_Object_Of_Search String if true successful, false
-	 *                                           partial else unsuccessful
+	 * @param outcome_Linked_To_Object_Of_Search
+	 *            String if true successful, false partial else unsuccessful
 	 * @return intArray Array of 3 positions 0=successful 1=unsuccessful 2=partial
 	 */
-	public int[] SuccessfulSearch(Boolean outcome_Linked_To_Object_Of_Search) {
+	public int[] SuccessfulSearch(Boolean Outcome_Linked_To_Object_Of_Search) {
 		int successful = 0, unsuccessful = 0, partial = 0;
 
-		if (outcome_Linked_To_Object_Of_Search.equals("TRUE")) {
-			successful++;
+		try {
+			if (Outcome_Linked_To_Object_Of_Search.equals(true)) {
+				successful++;
+			}
+			if (Outcome_Linked_To_Object_Of_Search.equals(false)) {
+				partial++;
+			}
+		} catch (NullPointerException e) {
+			if (Outcome_Linked_To_Object_Of_Search == null) {
+				unsuccessful++;
+			}
 		}
-		if (outcome_Linked_To_Object_Of_Search.equals("FALSE")) {
-			partial++;
-		}
-		if (outcome_Linked_To_Object_Of_Search.equals(null) || outcome_Linked_To_Object_Of_Search.equals("")) {
-			unsuccessful++;
-		}
-
 		int[] intArray = new int[3];
 		intArray[0] = successful;
 		intArray[1] = unsuccessful;
@@ -287,8 +290,10 @@ public class Data_Handling {
 	/**
 	 * This method is used to find the percent
 	 * 
-	 * @param num int num / div
-	 * @param div int num / div
+	 * @param num
+	 *            int num / div
+	 * @param div
+	 *            int num / div
 	 * @return String.format(" %.1f%%", perc);
 	 */
 	private static String percent(int num, int div) {
@@ -317,7 +322,8 @@ public class Data_Handling {
 	 * print out all the data on that option This method is also kind of pointless
 	 * could be changed because sending values that are accessible within this class
 	 * 
-	 * @param Treemap of object of search
+	 * @param Treemap
+	 *            of object of search
 	 */
 	public String userChoice(Map<String, List<CrimeStopAndSearch>> Unique) {
 		String userChoice = null;
@@ -350,7 +356,8 @@ public class Data_Handling {
 	 * This method will be used to accept a specific date and then find find the
 	 * most crimes for each legislation in that given month
 	 * 
-	 * @param UserDate String user date
+	 * @param UserDate
+	 *            String user date
 	 */
 	public void highestTotalLegislationForAGivenMonth(String UserDate, int selection) {
 		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
@@ -396,8 +403,10 @@ public class Data_Handling {
 	 * This method will be used to find the highest stopandsearch on ethnic for a
 	 * given date and police
 	 * 
-	 * @param police   String user police
-	 * @param UserDate String user date
+	 * @param police
+	 *            String user police
+	 * @param UserDate
+	 *            String user date
 	 */
 	public ArrayList<CrimeStopAndSearch> highestTotalEthnicForAGivenMonthAndPolice(String police, String UserDate) {
 		ArrayList<CrimeStopAndSearch> ListForG = new ArrayList<>();
@@ -423,7 +432,8 @@ public class Data_Handling {
 	/**
 	 * This method is used to find the highest total ethnic for a given legislation
 	 * 
-	 * @param String user legislation
+	 * @param String
+	 *            user legislation
 	 */
 	public void highestTotalEthnicForAGivenMonthAndPolice(String legislation) {
 		HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
@@ -447,8 +457,10 @@ public class Data_Handling {
 	 * This method is used to print out stop and searches on a specific gender and
 	 * ethnicity and prints it on Legislation
 	 * 
-	 * @param gender    String user choice gender
-	 * @param ethnicity String user choice
+	 * @param gender
+	 *            String user choice gender
+	 * @param ethnicity
+	 *            String user choice
 	 */
 	public void EthnicityAndGenderSearch(String gender, String ethnicity) {
 		for (String temp : legislationTree.keySet()) {

@@ -14,15 +14,15 @@ public class CSVFiles {
 	 */
 	public void readInFilesDir() throws IOException {
 
-		FileReader fr = new FileReader("Data//ExcelDIR.txt");
-		BufferedReader br = new BufferedReader(fr);
+		FileReader fReader = new FileReader("Data//ExcelDIR.txt");
+		BufferedReader bReader = new BufferedReader(fReader);
 		String tempdata;
 		
-		while ((tempdata = br.readLine()) != null) {
+		while ((tempdata = bReader.readLine()) != null) {
 			File aFile = new File(tempdata);
 			FolderReader.readFolder(aFile);
 		}
-		br.close();
+		bReader.close();
 
 	}
 

@@ -26,7 +26,7 @@ public class Main {
 		//and creates a list which we can access to read each file
 		fileDIR.readInFilesDir();
 		//Gets the list of all files
-		List<String> fileDIRList = FolderReader.getbasicStop_Search();
+		List<String> fileDIRList = FolderReader.getBasicStop_Search();
 		//Loop around the list for every file read it in
 		for (String file : fileDIRList) {
 			allTheFiles.readFile(file);

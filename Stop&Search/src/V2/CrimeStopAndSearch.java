@@ -71,7 +71,9 @@ public class CrimeStopAndSearch {
 		Legislation = csvParts[i++];
 		Object_Of_Search = csvParts[i++];
 		Outcome = csvParts[i++];
-		Outcome_Linked_To_Object_Of_Search = Boolean.parseBoolean(csvParts[i++]);
+		if(csvParts[i] !=null && csvParts[i].length()>0) {
+			Outcome_Linked_To_Object_Of_Search = Boolean.parseBoolean(csvParts[i++]);
+			}else {Outcome_Linked_To_Object_Of_Search =null; i++;}
 		if(csvParts[i] !=null && csvParts[i].length()>0) {
 		Removal_Of_More_Than_Just_Outer_Clothing = Boolean.parseBoolean(csvParts[i++]);
 		}else {Removal_Of_More_Than_Just_Outer_Clothing =null; i++;}
@@ -94,11 +96,11 @@ public class CrimeStopAndSearch {
 	 * @param unSuccessfultemp
 	 * @param partialtemp
 	 */
-	public CrimeStopAndSearch(String legislationtemp, int successfultemp, int unSuccessfultemp, int partialtemp) {
-		Legislation = legislationtemp;
-		Successful = successfultemp;
-		partially_Successful = partialtemp;
-		unSuccessful = unSuccessfultemp;
+	public CrimeStopAndSearch(String legTemp, int sucTemp, int unSucTemp, int partialTemp) {
+		Legislation = legTemp;
+		Successful = sucTemp;
+		unSuccessful = unSucTemp;
+		partially_Successful = partialTemp;
 	}
 
 

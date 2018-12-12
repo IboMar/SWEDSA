@@ -220,18 +220,18 @@ public class Data_Manipulation {
 			}
 		}
 		for (String Legislation : tempList) {
-			int successful = 0, unsuccessful = 0, partial = 0;
+			int successful = 0, unSuccessful = 0, partial = 0;
 			for (CrimeStopAndSearch currentCrime : temp) {
 
 				if (Legislation.equals(currentCrime.Legislation) && currentCrime.Date.contains(pickDate)) {
 					// For each legislation the counter gets reset and if the parameters are met only then the increment takes place
 					int[] counter = instance.SuccessfulSearch(currentCrime.Outcome_Linked_To_Object_Of_Search);
 					successful = successful + counter[0];
-					unsuccessful = unsuccessful + counter[1];
+					unSuccessful = unSuccessful + counter[1];
 					partial = partial + counter[2];
 				}
 			}
-			storage = new CrimeStopAndSearch(Legislation, successful, unsuccessful, partial);
+			storage = new CrimeStopAndSearch(Legislation, successful, unSuccessful, partial);
 			myList.add(storage);
 		}
 		// Orders the list on successful crimes highest to smallest

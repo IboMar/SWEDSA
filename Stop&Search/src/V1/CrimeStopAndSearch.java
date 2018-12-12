@@ -44,7 +44,7 @@ public class CrimeStopAndSearch {
 		
 		  String filteredCSV = unfilteredCSV.replace("null", "Unspecified").replace(", ,", ", Unspecified,");
 
-		return String.format("|%1$-26s|%2$-26s|%3$-12s|%4$-12s|%5$-12f|%6$-12f|%7$-8s|%8$-8s|%9$-58s|%10$-6s|%11$-50s|%12$-14s|%13$-32s|%14$-6b|%15$-6b|",
+		return String.format("|%1$-26s|%2$-26s|%3$-12s|%4$-12s|%5$-12f|%6$-12f|%7$-8s|%8$-8s|%9$-58s|%10$-6s|%11$-50s|%12$-14s|%13$-34s|%14$-6b|%15$-6b|",
 				type,Date,Part_Of_a_Policing_Operation,Policing_Operation,latitude,longitude,Gender,Age_Range,Self_Defined_Ethnicity,Officer_Defined_Ethnicity,
 				Legislation,Object_Of_Search,Outcome,Outcome_Linked_To_Object_Of_Search,Removal_Of_More_Than_Just_Outer_Clothing);
 	}

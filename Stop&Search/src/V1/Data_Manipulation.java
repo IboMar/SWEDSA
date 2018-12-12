@@ -179,23 +179,25 @@ public class Data_Manipulation {
 			}
 		}
 	}
-	
-	public void insertSort(ArrayList<CrimeStopAndSearch> list, Comparator<CrimeStopAndSearch> comp) {
-		int n = list.size(); 
+	/**
+	 * Move elements of arr[0..i-1], that are 
+     * greater than key, to one position ahead 
+     * of their current position
+	 * @param myList
+	 * @param comp
+	 */
+	public void insertSort(List<CrimeStopAndSearch> myList, Comparator<CrimeStopAndSearch> comp) {
+		int n = myList.size(); 
         for (int i=1; i<n; ++i) 
         { 
-            CrimeStopAndSearch key = list.get(i); 
-            int j = i-1; 
-  
-            /* Move elements of arr[0..i-1], that are 
-               greater than key, to one position ahead 
-               of their current position */
-            while (j>=0 && comp.compare(list.get(j),key)>0) 
+            CrimeStopAndSearch key = myList.get(i); 
+            int j = i-1;
+            while (j>=0 && comp.compare(myList.get(j),key)>0) 
             { 
-                list.set(j+1, list.get(j)); 
+                myList.set(j+1, myList.get(j)); 
                 j = j-1; 
             } 
-            list.set(j+1, key); 
+            myList.set(j+1, key); 
         } 
 	}
 
@@ -223,7 +225,7 @@ public class Data_Manipulation {
 
 				if (Legislation.equals(currentCrime.Legislation) && currentCrime.Date.contains(pickDate)) {
 					// For each legislation the counter gets reset and if the parameters are met only then the increment takes place
-					int[] counter = instance.SuccessfulSearch(currentCrime.Outcome);
+					int[] counter = instance.SuccessfulSearch(currentCrime.Outcome_Linked_To_Object_Of_Search);
 					successful = successful + counter[0];
 					unsuccessful = unsuccessful + counter[1];
 					partial = partial + counter[2];
@@ -233,7 +235,12 @@ public class Data_Manipulation {
 			myList.add(storage);
 		}
 		// Orders the list on successful crimes highest to smallest
-		Collections.sort(myList, new Comparator<CrimeStopAndSearch>() {
+		
+		
+		
+		
+		
+		insertSort(myList, new Comparator<CrimeStopAndSearch>() {
 			@Override
 			public int compare(CrimeStopAndSearch z1, CrimeStopAndSearch z2) {
 				if (z1.getSuccessful() < z2.getSuccessful())
@@ -248,7 +255,7 @@ public class Data_Manipulation {
 		for (CrimeStopAndSearch list : myList) {
 			System.out.println(list.highestSucessLeg());
 			break;
-
+			
 		}
 
 	}
@@ -279,16 +286,9 @@ public class Data_Manipulation {
 			storage = new CrimeStopAndSearch(Legislation, total);
 			myList.add(storage);
 		}
-		Collections.sort(myList, new Comparator<CrimeStopAndSearch>() {
-			public int compare(CrimeStopAndSearch z1, CrimeStopAndSearch z2) {
-				if (z1.getTotal() < z2.getTotal())
-					return 1;
-				if (z1.getTotal() > z2.getTotal())
-					return -1;
-				return 0;
-			}
-		});
-
+		Comparator<CrimeStopAndSearch> cmp = Comparator.comparing(CrimeStopAndSearch::getTotal);
+		insertSort(myList, cmp.reversed());
+		
 		for (CrimeStopAndSearch list : myList) {
 			System.out.println(list.highestTotal());
 			break;
@@ -303,9 +303,9 @@ public class Data_Manipulation {
 	public void chronoLogicalOrder(List<CrimeStopAndSearch> policedateArray) {
 
 		Comparator<CrimeStopAndSearch> cmp = Comparator.comparing(CrimeStopAndSearch::getDate);
-		Collections.sort(policedateArray, cmp.reversed());
+		insertSort(policedateArray, cmp.reversed());
 		for (CrimeStopAndSearch currentCrime : policedateArray) {
-			currentCrime.toCSVString();
+			System.out.println(currentCrime.toCSVString());
 		}
 	}
 
@@ -345,7 +345,7 @@ public class Data_Manipulation {
 			myList.add(storage);
 		}
 
-		Collections.sort(myList, new Comparator<CrimeStopAndSearch>() {
+			insertSort(myList, new Comparator<CrimeStopAndSearch>() {
 			@Override
 			public int compare(CrimeStopAndSearch z1, CrimeStopAndSearch z2) {
 				if (z1.getTotal() < z2.getTotal())
@@ -383,11 +383,10 @@ public class Data_Manipulation {
 		}
 
 		Comparator<CrimeStopAndSearch> cmp = Comparator.comparing(CrimeStopAndSearch::getLegislation);
-		Collections.sort(tempList, cmp);
+		insertSort(tempList, cmp);
 
 		for (CrimeStopAndSearch j : tempList) {
-
-			j.toCSVString();
+			System.out.println(j.toCSVString());
 		}
 	}
 
@@ -422,7 +421,7 @@ public class Data_Manipulation {
 			storage = new CrimeStopAndSearch(Ethnic, total);
 			myList.add(storage);
 		}
-		Collections.sort(myList, new Comparator<CrimeStopAndSearch>() {
+		insertSort(myList, new Comparator<CrimeStopAndSearch>() {
 			@Override
 			public int compare(CrimeStopAndSearch z1, CrimeStopAndSearch z2) {
 				if (z1.getTotal() < z2.getTotal())

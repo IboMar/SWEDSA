@@ -65,7 +65,7 @@ public class Data_Handling {
 		int successful = 0, unsuccessful = 0, partial = 0;
 		for (CrimeStopAndSearch line : mergedFiles) {
 
-			int[] temp = SuccessfulSearch(line.Outcome);
+			int[] temp = SuccessfulSearch(line.Outcome_Linked_To_Object_Of_Search);
 			successful = successful + temp[0];
 			unsuccessful = unsuccessful + temp[1];
 			partial = partial + temp[2];
@@ -104,6 +104,7 @@ public class Data_Handling {
 	public int[] SuccessfulSearch(String Outcome_Linked_To_Object_Of_Search) {
 		int successful = 0, unsuccessful = 0, partial = 0;
 
+		
 		if (Outcome_Linked_To_Object_Of_Search.equalsIgnoreCase("TRUE")) {
 			successful++;
 		}

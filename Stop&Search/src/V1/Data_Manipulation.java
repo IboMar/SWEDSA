@@ -107,7 +107,7 @@ public class Data_Manipulation {
 				}
 			}
 		}
-		int i = 1;
+		int i = 0;
 		for (String ethnic : tempList) {
 			System.out.println(i++ + ". " + ethnic);
 		}

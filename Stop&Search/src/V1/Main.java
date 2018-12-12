@@ -51,9 +51,11 @@ public class Main {
 			case "A":
 				ArrayList<CrimeStopAndSearch>temp = allTheFiles.getMergedFiles();
 				List<String> uniqueObjectOfSearch = changeData.uniqueObjectOfSearch(temp);
-				System.out.println("Do you want to carry out a obeject of search on this File?: \r\n Y/N");
+				System.out.println("Do you want to carry out a obeject of search on this File?:");
+				System.out.println("1.Yes");
+				System.out.println("2.No");
 				String yesno = scan.nextLine();
-				if (yesno.equalsIgnoreCase("Y")) {
+				if (yesno.equalsIgnoreCase("1")) {
 					System.out.println("Please Select a object of search");
 					String pickObjectOfSearch = allTheFiles.GetObjectiveSearch();
 					for (String uniqueSeach : uniqueObjectOfSearch) {

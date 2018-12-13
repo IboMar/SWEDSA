@@ -376,7 +376,7 @@ public class Data_Handling {
 			case 2: {// for successful crimes
 				for (CrimeStopAndSearch currentCrime : legislationList) {
 					if (currentCrime.Date.contains(UserDate)) {
-						if (currentCrime.Outcome_Linked_To_Object_Of_Search.equals("TRUE")) {
+						if (currentCrime.Outcome_Linked_To_Object_Of_Search.equals(true)) {
 							counter++;
 						}
 					}

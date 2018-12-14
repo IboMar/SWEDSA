@@ -64,13 +64,13 @@ public class Data_Handling {
 	public String printAttribute(String selection) {
 		// This method will collect all the unique dates in the merged Array
 		Set<String> uniqueAttributes = getUniqueAttributes(selection);
-		int i = 0;
+		int i = 1;
 		System.out.println("Please select one of the following options for " + selection);
 		for (String attribute : uniqueAttributes) {
 			System.out.println(i++ + ". " + attribute);
 		}
 		String pickAttribute = null;
-		i = 0;
+		i = 1;
 		while (pickAttribute == null) {
 			try {
 			int choice = read.nextInt();
@@ -84,7 +84,7 @@ public class Data_Handling {
 				i++;
 			}
 			while (pickAttribute == null) {
-				i = 0;
+				i = 1;
 				System.out.println("Please enter one of the valid numbers");
 				choice = read.nextInt();
 				read.nextLine();

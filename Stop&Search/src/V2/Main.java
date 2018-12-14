@@ -1,4 +1,5 @@
 package V2;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -35,69 +36,84 @@ public class Main {
 					+ "G. List, in reverse chronological order (i.e. most recent first), the search data found for F.i \r\n"
 					+ "H. One more analysis (search and/or sort) feature of your choosing that uses multiple search attributes\r\n"
 					+ "Q. -Quit- \r\n");
+			System.out.println(scan.hasNext());
 			Menu = scan.nextLine().toUpperCase();
-
-			switch (Menu) {
-
-			case "A":
-				Map<String, List<CrimeStopAndSearch>> objectOfSearchTree = allTheFiles.getObjectOfSearchTree();
-				System.out.println("\nDo you want to carry out a object of search on this File?: \r\n1. Yes \r\n2. No" );
-				int yes_no = scan.nextInt();
-				scan.nextLine();
-				if (yes_no == 1) {
-					System.out.println("Please select an object of search:  ");
-					allTheFiles.userChoice(objectOfSearchTree);
-				}
-				break;
-			case "C":
-				allTheFiles.allOutputCrimes();
-				break;
-			case "D":
-				String uniqueDate =allTheFiles.printAttribute("date");
-				allTheFiles.highestTotalLegislationForAGivenMonth(uniqueDate, 1);	
-
-				break;
-			case "E":
-				uniqueDate = allTheFiles.printAttribute("date");
-				allTheFiles.highestTotalLegislationForAGivenMonth(uniqueDate,2);	
-				break;
-
-			case "F":
-				System.out.println("Please pick a option \r\n1. F(i) \r\n2. F(ii)");
-				yes_no = scan.nextInt();
-				scan.nextLine();
-				if (yes_no == 1) {
-					String uniquePolice =allTheFiles.printAttribute("date");
-					String uniqueMonth =allTheFiles.printAttribute("police");
-					policeDateArray = (allTheFiles.highestTotalEthnicForAGivenMonthAndPolice(uniqueMonth,uniquePolice));
-				}
-				if (yes_no == 2) {
-					String uniqueLegislation =allTheFiles.printAttribute("legislation");
-					allTheFiles.highestTotalEthnicForAGivenMonthAndPolice(uniqueLegislation);
-				}
-				
-				break;
-			case "G":
-				if(policeDateArray == null) {
-					System.out.println("Please complete option F(i) to collect your list: ");
-				}else {
-					Comparator<CrimeStopAndSearch> cmp = Comparator.comparing(CrimeStopAndSearch::getDate);
-					ArrayList<CrimeStopAndSearch> gList = changeDataV2.quickSort(policeDateArray, cmp);
-					for(CrimeStopAndSearch temp : gList) {
-						System.out.println(temp.toCSVString());
+			int yes_no;
+				switch (Menu) {
+				case "A":
+					Map<String, List<CrimeStopAndSearch>> objectOfSearchTree = allTheFiles.getObjectOfSearchTree();
+					System.out.println(
+							"\nDo you want to carry out a object of search on this File?: \r\n1. Yes \r\n2. No");
+					try {
+					yes_no = scan.nextInt();
+					scan.nextLine();
+					
+					if (yes_no == 1) {
+						System.out.println("Please select an object of search:  ");
+						allTheFiles.userChoice(objectOfSearchTree);
 					}
+					} catch (Exception e) {
+						scan.nextLine();
+						System.out.println("Please enter a Correct value INT");
+					}
+					break;
+				case "C":
+					allTheFiles.allOutputCrimes();
+					break;
+				case "D":
+					String uniqueDate = allTheFiles.printAttribute("date");
+					allTheFiles.highestTotalLegislationForAGivenMonth(uniqueDate, 1);
+
+					break;
+				case "E":
+					uniqueDate = allTheFiles.printAttribute("date");
+					allTheFiles.highestTotalLegislationForAGivenMonth(uniqueDate, 2);
+					break;
+
+				case "F":
+					System.out.println("Please pick a option \r\n1. F(i) \r\n2. F(ii)");
+					try {
+					yes_no = scan.nextInt();
+					scan.nextLine();
+					if (yes_no == 1) {
+						String uniquePolice = allTheFiles.printAttribute("date");
+						String uniqueMonth = allTheFiles.printAttribute("police");
+						policeDateArray = (allTheFiles.highestTotalEthnicForAGivenMonthAndPolice(uniqueMonth,
+								uniquePolice));
+					}
+					if (yes_no == 2) {
+						String uniqueLegislation = allTheFiles.printAttribute("legislation");
+						allTheFiles.highestTotalEthnicForAGivenMonthAndPolice(uniqueLegislation);
+					}
+					}catch(Exception E) {
+						scan.nextLine();
+						System.out.println("Please enter the correct INT");
+					}
+					
+
+					break;
+				case "G":
+					if (policeDateArray == null) {
+						System.out.println("Please complete option F(i) to collect your list: ");
+					} else {
+						Comparator<CrimeStopAndSearch> cmp = Comparator.comparing(CrimeStopAndSearch::getDate);
+						ArrayList<CrimeStopAndSearch> gList = changeDataV2.quickSort(policeDateArray, cmp);
+						for (CrimeStopAndSearch temp : gList) {
+							System.out.println(temp.toCSVString());
+						}
+					}
+
+					break;
+
+				case "H":
+					System.out.println("Please pick an ethnicity");
+					String uniqueEthnic = allTheFiles.printAttribute("ethnic");
+					System.out.println("Please pick a gender");
+					String uniqueGender = allTheFiles.printAttribute("gender");
+					allTheFiles.EthnicityAndGenderSearch(uniqueGender, uniqueEthnic);
+					break;
 				}
-				
-				break;
-			
-			case "H":
-				System.out.println("Please pick an ethnicity");
-				String uniqueEthnic = allTheFiles.printAttribute("ethnic");
-				System.out.println("Please pick a gender");
-				String uniqueGender = allTheFiles.printAttribute("gender");
-				allTheFiles.EthnicityAndGenderSearch(uniqueGender, uniqueEthnic);
-				break;
-			}
+
 		} while (!(Menu.equals("Q")));
 		scan.close();
 	}

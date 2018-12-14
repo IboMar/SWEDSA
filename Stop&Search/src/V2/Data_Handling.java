@@ -336,6 +336,7 @@ public class Data_Handling {
 
 			choiceCounter++;
 		}
+		while(userChoice == null) {
 		choiceCounter = 0;
 		Scanner scan = new Scanner(System.in);
 		int pickObjectOfSearch = scan.nextInt();
@@ -348,6 +349,7 @@ public class Data_Handling {
 				}
 			}
 			choiceCounter++;
+		}
 		}
 		return userChoice;
 	}

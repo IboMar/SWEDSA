@@ -54,7 +54,7 @@ public class Main {
 					}
 					} catch (Exception e) {
 						scan.nextLine();
-						System.out.println("Please enter a Correct value INT");
+						System.out.println("Please enter one of the valid numbers");
 					}
 					break;
 				case "C":
@@ -87,7 +87,7 @@ public class Main {
 					}
 					}catch(Exception E) {
 						scan.nextLine();
-						System.out.println("Please enter the correct INT");
+						System.out.println("Please enter one of the valid numbers");
 					}
 					
 

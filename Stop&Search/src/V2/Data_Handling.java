@@ -85,7 +85,7 @@ public class Data_Handling {
 			}
 			while (pickAttribute == null) {
 				i = 0;
-				System.out.println("Please select a valid option");
+				System.out.println("Please enter one of the valid numbers");
 				choice = read.nextInt();
 				read.nextLine();
 				for (String date : uniqueAttributes) {
@@ -354,7 +354,7 @@ public class Data_Handling {
 			}
 			}catch(Exception E) {
 				scan.nextLine();
-				System.out.println("Please enter the correct INT");
+				System.out.println("Please enter one of the valid numbers");
 			}
 			
 		}
